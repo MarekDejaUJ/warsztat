@@ -5,6 +5,9 @@
   --paper: #fffdf8;
   --beige: #f1ece2;
   --beige-deep: #e7e0d3;
+  --sans: "Segoe UI Variable Text", Aptos, "Segoe UI", Arial, sans-serif;
+  --display: "Segoe UI Variable Display", Aptos, "Segoe UI", Arial, sans-serif;
+  --mono: "Courier New", Consolas, "Liberation Mono", monospace;
 }
 
 html {
@@ -14,8 +17,9 @@ html {
 body {
   color: var(--ink);
   background: var(--beige);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--sans);
   font-size: 16px;
+  font-weight: 350;
   line-height: 1.58;
 }
 
@@ -35,7 +39,7 @@ body,
   border: 0;
   border-radius: 0;
   box-shadow: none;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--sans);
 }
 
 .navbar-default .navbar-brand,
@@ -98,7 +102,7 @@ body,
   border: 1px solid var(--ink);
   border-radius: 0;
   box-shadow: none;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--sans);
   font-size: 13px;
 }
 
@@ -124,7 +128,7 @@ body,
   color: var(--ink);
   border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--ink);
-  font: 700 11px/1.35 Arial, Helvetica, sans-serif;
+  font: 650 11px/1.35 var(--sans);
   text-transform: uppercase;
 }
 
@@ -165,7 +169,7 @@ h4,
 h5,
 h6 {
   color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--display);
   line-height: 1.18;
 }
 
@@ -173,7 +177,7 @@ h1 {
   max-width: 46rem;
   margin: 0 0 1.25rem;
   font-size: 2.45rem;
-  font-weight: 500;
+  font-weight: 350;
 }
 
 h2 {
@@ -181,7 +185,7 @@ h2 {
   padding: 0 0 .55rem;
   border-bottom: 1px solid var(--ink);
   font-size: 1.45rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 h3 {
@@ -252,7 +256,7 @@ button:focus-visible {
   border: 0;
   border-left: 1px solid var(--line);
   border-radius: 0;
-  font: 12px/1.35 Arial, Helvetica, sans-serif;
+  font: 12px/1.35 var(--sans);
 }
 
 .tocify .list-group-item {
@@ -351,7 +355,7 @@ code,
 pre,
 kbd,
 samp {
-  font-family: "Courier New", Consolas, "Liberation Mono", monospace;
+  font-family: var(--mono);
 }
 
 code {
@@ -365,8 +369,8 @@ pre {
   margin: 1rem 0 1.45rem;
   padding: 1rem 5.25rem 1rem 1.1rem;
   overflow: auto;
-  color: var(--paper);
-  background: var(--ink);
+  color: var(--ink);
+  background: var(--beige) !important;
   border: 1px solid var(--ink);
   border-radius: 0;
   font-size: 14px;
@@ -375,9 +379,11 @@ pre {
   overflow-wrap: anywhere;
 }
 
-pre code {
-  color: inherit;
-  background: transparent;
+pre code,
+pre code.hljs,
+pre code * {
+  color: var(--ink) !important;
+  background: var(--beige) !important;
   white-space: pre-wrap;
 }
 
@@ -386,19 +392,19 @@ pre code {
   top: .55rem;
   right: .55rem;
   padding: .35rem .6rem;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--paper);
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
   border-radius: 0;
-  font: 700 11px/1.2 Arial, Helvetica, sans-serif;
+  font: 650 11px/1.2 var(--sans);
   text-transform: uppercase;
   cursor: pointer;
 }
 
 .copy-code:focus,
 .copy-code:hover {
-  color: var(--paper);
-  background: var(--ink);
+  color: var(--ink);
+  background: var(--paper);
 }
 
 /* Tabele i pliki */
@@ -416,7 +422,7 @@ th {
   color: var(--paper);
   background: var(--ink);
   border: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--sans);
   font-size: 12px;
   font-weight: 700;
 }
@@ -442,7 +448,7 @@ td {
   background: var(--ink);
   border: 1px solid var(--ink);
   border-radius: 0;
-  font: 700 12px/1.35 Arial, Helvetica, sans-serif;
+  font: 650 12px/1.35 var(--sans);
   text-decoration: none;
 }
 
@@ -460,7 +466,7 @@ td {
   color: var(--muted);
   text-align: left;
   border-top: 1px solid var(--ink);
-  font: 11px/1.4 Arial, Helvetica, sans-serif;
+  font: 11px/1.4 var(--sans);
   text-transform: uppercase;
 }
 
