@@ -1,0 +1,187 @@
+---
+title: "Spotkanie 6: dashboard i wnioski"
+---
+
+<div class="hero">
+<h2>Spotkanie 6 z 6</h2>
+<p>Analiza czasu, dashboard, test t, kontrola współzmiennych i podsumowanie zarządcze.</p>
+</div>
+
+<div class="timebox"><strong>Plan 90 minut:</strong> 10 min przygotowanie, 15 min analiza czasu, 20 min dashboard, 20 min test t, 15 min współzmienne, 10 min executive summary.</div>
+
+<div class="note"><strong>Przygotowanie:</strong> Skoroszyt zawierający tabele i wykresy utworzone podczas spotkania 5.</div>
+
+## Zadanie 6 (Indywidualne): Analiza Czasowa (Grouping by Time)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>📆 Analiza trendów w czasie. Transformacja surowych dat dziennych na miesiące/kwartały w tabeli przestawnej, aby zobaczyć sezonowość.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  Stwórz nową tabelę przestawną w arkuszu Analiza_Przestawna.
+
+2.  Umieść **Data_Zamowienia** w Wierszach, a **Wartosc_Sprzedazy** w Wartościach (Suma).
+
+3.  Excel może automatycznie pogrupować daty. Jeśli nie (widzisz pojedyncze dni):
+
+    - Kliknij Prawym Przyciskiem na datę \> Grupuj.
+
+    - Zaznacz **Miesiące** i **Lata**.
+
+4.  Dodaj **Kategoria_Produktu** do Kolumn.
+
+5.  Stwórz wykres liniowy (Line Chart) obrazujący trendy sprzedaży kategorii w czasie.
+
+6.  **Interpretacja:** Zidentyfikuj miesiąc z najwyższym pikiem sprzedaży ("Współzmienna czasu").
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- Tabela prezentuje dane zagregowane miesięcznie/rocznie, a nie dziennie.
+
+- Wykres liniowy czytelnie pokazuje zmiany w czasie dla różnych kategorii.
+
+## Zadanie 7 (Indywidualne): Interaktywny Dashboard (Fragmentatory)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🖥️ Budowa Dashboardu zarządczego. Połączenie wielu wykresów z interaktywnymi filtrami (Slicers), co pozwala użytkownikowi na samodzielną eksplorację danych.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  Stwórz nowy arkusz o nazwie DASHBOARD.
+
+2.  Przenieś (Wytnij/Wklej) dwa stworzone wcześniej wykresy (Kolumnowy z Ćw. 2 i Liniowy z Zad. 6) do tego arkusza. Ułóż je estetycznie obok siebie.
+
+3.  Kliknij na dowolny wykres przestawny.
+
+4.  Z wstążki (Analiza wykresu przestawnego) wybierz **Wstaw fragmentator** (Insert Slicer).
+
+5.  Zaznacz: **Manager_Regionu** oraz **Ocena_Transakcji**. Kliknij OK.
+
+6.  **Łączenie raportów (Kluczowy krok):**
+
+    - Kliknij prawym przyciskiem na nagłówek fragmentatora "Manager_Regionu".
+
+    - Wybierz **Połączenia raportów...**.
+
+    - Zaznacz wszystkie tabele przestawne widoczne na liście (aby jeden przycisk sterował wszystkimi wykresami naraz).
+
+    - Powtórz to dla drugiego fragmentatora.
+
+7.  Przetestuj: Kliknij na "Kowalską" na fragmentatorze. Oba wykresy powinny się zmienić.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- Powstał arkusz Dashboard z minimum dwoma wykresami.
+
+- Dodano fragmentatory, które są estetycznie ułożone.
+
+- Filtrowanie działa globalnie (zmienia oba wykresy jednocześnie).
+
+## Zadanie 8 (Indywidualne): Testowanie Hipotez (Grupa A vs B)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🧪 Porównanie średniej sprzedaży w grupach A i B za pomocą dwustronnego testu t z nierównymi wariancjami.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  W arkuszu Dane_Czyste_Finalne upewnij się, że masz kolumnę **Grupa_Testowa** (Grupa A/B).
+
+2.  Stwórz tabelę przestawną w nowym miejscu.
+
+3.  Wiersze: **Grupa_Testowa**.
+
+4.  Wartości:
+
+    - **Wartosc_Sprzedazy** (ustaw funkcję: ŚREDNIA).
+
+    - **Wartosc_Sprzedazy** (przeciągnij drugi raz i ustaw funkcję: Odchylenie standardowe).
+
+5.  W arkuszu **Raport_Statystyk** wpisz w komórce **B20** formułę testu t:
+
+```excel
+=T.TEST(FILTRUJ(Dane_Czyste_Finalne!$F$2:$F$101;Dane_Czyste_Finalne!$P$2:$P$101="Grupa A");FILTRUJ(Dane_Czyste_Finalne!$F$2:$F$101;Dane_Czyste_Finalne!$P$2:$P$101="Grupa B");2;3)
+```
+
+Argument `2` oznacza test dwustronny. Argument `3` wybiera test dwóch prób z nierównymi wariancjami.
+
+6.  **Analiza:** Porównaj średnie i odczytaj wartość p.
+
+    - Wartość p poniżej 0,05 wskazuje statystycznie istotną różnicę średnich na przyjętym poziomie istotności.
+
+    - Wartość p równa lub większa od 0,05 oznacza brak podstaw do odrzucenia hipotezy o równych średnich.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- Tabela pokazuje średnią i odchylenie standardowe dla obu grup.
+
+- Komórka B20 zawiera wynik dwustronnego testu `T.TEST`, a interpretacja odpowiada wartości p.
+
+## Zadanie 9 (Indywidualne): Zmienne Zakłócające (Covariates) - Analiza Wielowymiarowa
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🧩 Ocena wpływu liczby zamówień i regionu na porównanie wyników menedżerów.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  Stwórz tabelę przestawną.
+
+2.  Wiersze: **Manager_Regionu**.
+
+3.  Wartości: **Wartosc_Sprzedazy** (Suma).
+
+    - *Obserwacja:* Zobacz, kto ma najniższy wynik. Załóżmy, że Jan Nowak.
+
+4.  **Dodanie Kontekstu (Współzmienna):**
+
+    - Dołóż **Region_ID** (lub Nazwę Regionu) do obszaru **Kolumny**.
+
+    - Dołóż **Liczba z OrderID** (jako licznik) do Wartości.
+
+5.  **Dedukcja:** Przeanalizuj wynik.
+
+    - Jaka jest średnia wartość zamówienia Jana Nowaka?
+
+    - Ile zamówień zarejestrowano w jego regionie?
+
+    - Gdy średnia na zamówienie pozostaje podobna, a suma różni się z powodu liczby zamówień: zidentyfikowałeś wpływ wielkości rynku.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- Uczestnik potrafi rozbić ogólny wynik (Suma Sprzedaży) na czynniki składowe (Średnia wartość x Liczba transakcji).
+
+- Poprawna interpretacja tabeli wielowymiarowej.
+
+## Zadanie 10 (Indywidualne): Raport Końcowy "Executive Summary"
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>📝 Synteza. Stworzenie małej, estetycznej tabeli podsumowującej najważniejsze KPI (Key Performance Indicators) przy użyciu funkcji WEŹDANETABELI (GETPIVOTDATA), co pozwala na precyzyjne umiejscowienie danych poza tabelą przestawną.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  W arkuszu DASHBOARD, obok wykresów, przygotuj ręcznie sformatowaną tabelkę "Kluczowe Wskaźniki".
+
+    - Nagłówki: Całkowita Sprzedaż, Średnia Ocena, Najlepszy Region.
+
+2.  W komórce pod "Całkowita Sprzedaż" wpisz znak =, a następnie kliknij na komórkę z Sumą Końcową w dowolnej tabeli przestawnej obliczającej sprzedaż.
+
+3.  Zauważ, że Excel wstawił funkcję: =WEŹDANETABELI("Wartosc_Sprzedazy"; ...) Zatwierdź Enterem.
+
+4.  To samo zrób dla Średniej Oceny (musisz mieć tabelę przestawną liczącą średnią ocenę).
+
+5.  Sformatuj te komórki dużą czcionką, dodaj kolory. To są "karty wyników" (Scorecards).
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- Wykorzystanie funkcji WEŹDANETABELI do wyciągnięcia konkretnych liczb z tabel przestawnych.
+
+- Stworzenie estetycznego panelu KPI, który nie wygląda jak arkusz kalkulacyjny, lecz jak raport w aplikacji.

@@ -1,0 +1,29 @@
+---
+title: "Materiały do pobrania"
+---
+
+## Dokumenty
+
+<div class="download-grid">
+  <div class="download-card"><h3>Sylabus</h3><p>Karta opisu przedmiotu na rok 2026/2027.</p><a class="btn-course" href="materialy/warsztat-informacyjny-uj-wzzins-11-06689-26.pdf">Pobierz PDF</a></div>
+  <div class="download-card"><h3>Dane bazowe</h3><p>Wersja źródłowa skoroszytu ćwiczeniowego.</p><a class="btn-course" href="materialy/cwiczenia_original.xlsx">Pobierz XLSX</a></div>
+</div>
+
+## Pliki dla grup
+
+| Grupa | Skoroszyt | Prompt |
+|---|---|---|
+| 1 | [cwiczenia_grupa_1.xlsx](materialy/cwiczenia_grupa_1.xlsx) | [prompt-grupa-1.txt](materialy/prompt-grupa-1.txt) |
+| 2 | [cwiczenia_grupa_2.xlsx](materialy/cwiczenia_grupa_2.xlsx) | [prompt-grupa-2.txt](materialy/prompt-grupa-2.txt) |
+| 3 | [cwiczenia_grupa_3.xlsx](materialy/cwiczenia_grupa_3.xlsx) | [prompt-grupa-3.txt](materialy/prompt-grupa-3.txt) |
+| 4 | [cwiczenia_grupa_4.xlsx](materialy/cwiczenia_grupa_4.xlsx) | [prompt-grupa-4.txt](materialy/prompt-grupa-4.txt) |
+
+## Organizacja plików
+
+1. Pobierz jeden skoroszyt przypisany do grupy.
+2. Zapisz kopię roboczą przed pierwszą zmianą.
+3. Pracuj w pliku zapisanym lokalnie lub w OneDrive.
+4. Zachowaj arkusz źródłowy.
+5. Oddaj pracę kanałem wskazanym podczas zajęć.
+
+GitHub Pages służy do udostępniania instrukcji i materiałów. Prace studenckie są przekazywane poza repozytorium.

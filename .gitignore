@@ -1,9 +1,8 @@
-# Ignore all files in root
+# Pliki źródłowe kursu i opublikowana strona
 *
-
-# But don't ignore docs folder and its contents
+!.gitignore
+!README.md
+!site/
+!site/**
 !docs/
 !docs/**
-
-# Don't ignore .gitignore itself
-!.gitignore

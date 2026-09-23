@@ -1,0 +1,163 @@
+---
+title: "Spotkanie 1: generowanie i standaryzacja danych"
+---
+
+<div class="hero">
+<h2>Spotkanie 1 z 6</h2>
+<p>Utworzenie kontrolowanego zbioru z błędami i pierwsza standaryzacja kategorii.</p>
+</div>
+
+<div class="timebox"><strong>Plan 90 minut:</strong> 10 min rozpoczęcie, 35 min generowanie danych, 35 min standaryzacja, 10 min kontrola.</div>
+
+<div class="note"><strong>Przygotowanie:</strong> Excel lub Excel dla sieci Web. Pobierz plik swojej grupy z zakładki Materiały.</div>
+
+## Ćwiczenie 1: Generowanie "Brudnego" Zestawu Danych (Symulacja Rzeczywistości)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🎯 Utworzenie kontrolowanego zbioru zawierającego niespójne daty, teksty, liczby i braki danych.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  Otwórz nowy arkusz i nazwij go **Dane_Surowe**.
+
+  2.  W komórkach od **A1** do **G1** wpisz następujące nagłówki:
+
+      - A1: **OrderID**
+
+      - B1: **Data_Zamowienia**
+
+      - C1: **Email_Klienta**
+
+      - D1: **Region_ID**
+
+      - E1: **Kategoria_Produktu**
+
+      - F1: **Wartosc_Sprzedazy**
+
+      - G1: **Ocena_Transakcji**
+
+  3.  **Kolumna A (OrderID):** W komórce **A2** wpisz formułę:
+
+```excel
+="ORD-" & (1000 + WIERSZ(A1))
+```
+
+- **Wyjaśnienie:** WIERSZ(A1) zwraca liczbę 1. 1000 + 1 daje 1001. Operator & łączy tekst "ORD-" z liczbą 1001, tworząc "ORD-1001". Gdy przeciągniesz formułę w dół, WIERSZ(A1) zmieni się na WIERSZ(A2) (zwróci 2), tworząc "ORD-1002" itd.
+
+4.  **Kolumna B (Data_Zamowienia):** W komórce **B2** wpisz formułę:
+
+```excel
+=WYBIERZ(LOS.ZAKR(1;3); TEKST(DATA(2023;LOS.ZAKR(1;12);LOS.ZAKR(1;28)); "RRRR-MM-DD"); TEKST(DATA(2023;LOS.ZAKR(1;12);LOS.ZAKR(1;28)); "DD.MM.RRRR"); "maj 2023")
+```
+
+- **Wyjaśnienie:** DATA(...) tworzy losową datę z 2023 roku. TEKST(...) zamienia tę datę na tekst w określonym formacie (np. "2023-10-25" lub "25.10.2023"). LOS.ZAKR(1;3) losuje liczbę 1, 2 lub 3. WYBIERZ na podstawie tej liczby wybiera jeden z trzech formatów tekstowych (dwa losowe lub stały tekst "maj 2023"), symulując niespójne dane.
+
+5.  **Kolumna C (Email_Klienta):** W komórce **C2** wpisz formułę:
+
+```excel
+="user." & WIERSZ(A1) & JEŻELI(LOS()<0,8; "@domena.pl"; WYBIERZ(LOS.ZAKR(1;3); "@ domena.pl"; "_brak_malpy_"; "@"))
+```
+
+- **Wyjaśnienie:** LOS() losuje liczbę od 0 do 1. JEŻELI(LOS()\<0,8; ...) oznacza, że w 80% przypadków (\<0,8) formuła wstawi poprawną końcówkę "@domena.pl". W pozostałych 20% przypadków WYBIERZ losowo wstawi jeden z trzech błędów: spację, brak małpy lub samą małpę.
+
+6.  **Kolumna D (Region_ID):** W komórce **D2** wpisz formułę:
+
+```excel
+="R" & LOS.ZAKR(1;3) & WYBIERZ(LOS.ZAKR(1;3); ""; " "; "-Region")
+```
+
+- **Wyjaśnienie:** LOS.ZAKR(1;3) losuje numer regionu (1, 2 lub 3). WYBIERZ losowo dodaje "brud": pusty tekst "" (poprawny), spację " " (błąd) lub błędny tekst "-Region".
+
+7.  **Kolumna E (Kategoria_Produktu):** W komórce **E2** wpisz formułę:
+
+```excel
+=WYBIERZ(LOS.ZAKR(1;5); "RTV"; " RTV"; "rtv"; "AGD"; "Dom")
+```
+
+- **Wyjaśnienie:** WYBIERZ losowo wybiera jedną z 5 niespójnych wartości tekstowych (błędy spacji, wielkości liter).
+
+8.  **Kolumna F (Wartosc_Sprzedazy):** W komórce **F2** wpisz formułę:
+
+```excel
+=JEŻELI(LOS()<0,8; LOS.ZAKR(100; 1000); WYBIERZ(LOS.ZAKR(1;2); "'" & LOS.ZAKR(100;1000); LOS.ZAKR(50;150) & " PLN"))
+```
+
+- **Wyjaśnienie:** W 80% przypadków (LOS()\<0,8) wstawia poprawną liczbę (np. 543). W 20% przypadków losuje błąd: albo liczbę jako tekst (np. '300) albo tekst z walutą (np. "120 PLN").
+
+9.  **Kolumna G (Ocena_Transakcji):** W komórce **G2** wpisz formułę:
+
+```excel
+=JEŻELI(LOS()<0,7; LOS.ZAKR(1;5); WYBIERZ(LOS.ZAKR(1;3); 99; -1; ""))
+```
+
+- **Wyjaśnienie:** W 70% przypadków wstawia poprawną ocenę (1-5). W 30% losuje błąd: wartość odstającą 99, nielogiczną -1 lub pustą komórkę "".
+
+10. **Generowanie Danych:** Zaznacz obszar od **A2** do **G2**. Złap za mały kwadrat w prawym dolnym rogu zaznaczenia i przeciągnij go w dół aż do wiersza **101**.
+
+11. **"Zamrażanie" Danych:**
+
+    - Zaznacz cały wygenerowany obszar danych (od **A2** do **G101**).
+
+    - Naciśnij **Ctrl+C** (Kopiuj).
+
+    - Kliknij prawym przyciskiem myszy na komórkę **A2**.
+
+    - Z menu, które się pojawi, wybierz **Wklej specjalnie \> Wartości**.
+
+    - **Wyjaśnienie:** Ten krok zamienia wszystkie dynamiczne formuły na ich statyczne wyniki (tekst lub liczby). Dzięki temu dane przestaną się zmieniać przy każdej modyfikacji arkusza.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Powstał arkusz Dane_Surowe ze 100 statycznymi rekordami (wiersze 2-101).
+
+  - Wszystkie kolumny zawierają celowe, opisane błędy.
+
+## Ćwiczenie 2: Czyszczenie Krok 1 (Standaryzacja Tekstu i Kategorii)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🧹 Nauczenie się systematycznej standaryzacji danych tekstowych i kategorycznych, co jest fundamentem poprawnej agregacji.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  Kliknij prawym przyciskiem myszy na zakładkę arkusza Dane_Surowe i wybierz "Przenieś lub kopiuj...". Zaznacz pole "Utwórz kopię" i kliknij OK. Zmień nazwę nowej kopii na **Dane_Robocze**. Będziemy pracować tylko na tym arkuszu.
+
+  2.  **Kolumna E (Kategoria_Produktu):** Będziemy czyścić tę kolumnę "w miejscu" przy użyciu kolumny pomocniczej.
+
+  3.  W komórce **H1** wpisz tymczasowy nagłówek TEMP_E.
+
+  4.  W komórce **H2** wpisz formułę:
+
+```excel
+=LITERY.WIELKIE(USUŃ.ZBĘDNE.ODSTĘPY(E2))
+```
+
+- **Wyjaśnienie:** USUŃ.ZBĘDNE.ODSTĘPY(E2) bierze wartość z **E2** (np. " RTV") i usuwa zbędne spacje, zwracając "RTV". LITERY.WIELKIE(...) bierze ten wynik (np. "rtv") i zamienia go na wielkie litery "RTV".
+
+5.  Przeciągnij formułę z **H2** w dół do **H101**.
+
+6.  Zaznacz dane w kolumnie **H** (od **H2** do **H101**), skopiuj je (**Ctrl+C**).
+
+7.  Kliknij prawym przyciskiem na komórkę **E2** i **Wklej jako Wartości**.
+
+8.  Usuń całą kolumnę **H**. Teraz w kolumnie **E** masz tylko wartości "RTV", "AGD", "DOM" (ale nadal niescalone).
+
+9.  Naciśnij **Ctrl+H**. Wpisz DOM w polu "Znajdź" i DOM I RTV w polu "Zamień na". Rozwiń opcje i zaznacz **Dopasuj całą zawartość komórki**, a następnie wybierz "Zamień wszystko".
+
+10. Powtórz krok 9 dla wartości RTV, pozostawiając zaznaczoną opcję **Dopasuj całą zawartość komórki**.
+
+11. **Kolumna D (Region_ID):** Będziemy czyścić tę kolumnę.
+
+12. Naciśnij **Ctrl+H**. "Znajdź": (pojedyncza spacja), "Zamień na": pozostaw puste. Kliknij "Zamień wszystko".
+
+13. Powtórz: "Znajdź": -Region, "Zamień na": pozostaw puste. Kliknij "Zamień wszystko".
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Kolumna Kategoria_Produktu ma teraz tylko spójne wartości (np. "DOM I RTV", "AGD").
+
+  - Kolumna Region_ID ma tylko wartości "R1", "R2", "R3".
+

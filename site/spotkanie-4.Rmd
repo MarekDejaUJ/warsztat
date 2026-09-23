@@ -1,0 +1,285 @@
+---
+title: "Spotkanie 4: raporty i wyszukiwanie"
+---
+
+<div class="hero">
+<h2>Spotkanie 4 z 6</h2>
+<p>Wyszukiwanie dwukierunkowe, agregacja wielokryterialna, prowizje i walidacja.</p>
+</div>
+
+<div class="timebox"><strong>Plan 90 minut:</strong> 10 min INDEKS i PODAJ.POZYCJĘ, 20 min raport agregujący, 15 min prowizja, 15 min segmentacja, 15 min walidacja, 15 min wyszukiwarka.</div>
+
+<div class="note"><strong>Przygotowanie:</strong> Kompletny arkusz Dane_Czyste_Finalne ze spotkania 3.</div>
+
+## Ćwiczenie 5: Zaawansowane Wyszukiwanie (INDEKS + PODAJ.POZYCJĘ)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>👑 Wyszukiwanie wartości w dowolnym kierunku za pomocą funkcji INDEKS i PODAJ.POZYCJĘ.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  Stwórz nowy arkusz **Raport_Statystyk**.
+
+  2.  Chcemy znaleźć OrderID zamówienia o **najwyższej** wartości sprzedaży. WYSZUKAJ.PIONOWO tego nie potrafi (szuka tylko od lewej do prawej).
+
+  3.  W komórce **A1** wpisz: Najwyższa sprzedaż:. W komórce **B1** wpisz formułę:  
+```excel
+=MAX(Dane_Czyste_Finalne!F:F)
+```
+
+      - **Wyjaśnienie:** Funkcja MAX zwraca najwyższą wartość z kolumny F.
+
+  4.  W komórce **A2** wpisz: OrderID dla MAX:. W komórce **B2** wpisz formułę:  
+```excel
+=INDEKS(Dane_Czyste_Finalne!A:A; PODAJ.POZYCJĘ(B1; Dane_Czyste_Finalne!F:F; 0))
+```
+
+      - **Wyjaśnienie (analiza od środka):**
+
+        - B1: Wartość, której szukamy (najwyższa sprzedaż, np. 1000 zł).
+
+        - Dane_Czyste_Finalne!F:F: Kolumna, w której szukamy tej wartości.
+
+        - 0: Oznacza dokładne dopasowanie (jak FAŁSZ w WYSZUKAJ.PIONOWO).
+
+        - PODAJ.POZYCJĘ(B1; F:F; 0): Ta funkcja **nie zwraca wartości**, lecz **numer wiersza**, w którym znalazła 1000 zł (np. wiersz 45).
+
+        - INDEKS(Dane_Czyste_Finalne!A:A; ...): Ta funkcja pobiera wartość z podanej kolumny (kolumna A:A, czyli OrderID)...
+
+        - ... ; 45): ...znajdującą się w wierszu o numerze, który podała jej funkcja PODAJ.POZYCJĘ (czyli w wierszu 45).
+
+        - **Rezultat:** Funkcja zwraca OrderID z komórki A45.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Poprawnie użyłeś funkcji MAX do znalezienia wartości maksymalnej.
+
+  - Zbudowałeś poprawną, zagnieżdżoną formułę INDEKS + PODAJ.POZYCJĘ do znalezienia OrderID na podstawie wartości sprzedaży.
+
+## Zadanie 6 (Indywidualne): Zaawansowane Funkcje Statystyczne (LICZ.WARUNKI, SUMA.WARUNKÓW)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>📊 Stworzenie zaawansowanego raportu agregującego dane na podstawie wielu kryteriów (np. "jaka była sprzedaż dla TEGO managera w TEJ kategorii?").</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  Stwórz nowy arkusz o nazwie **Raport_Sprzedazy**.
+
+  2.  Zbuduj tabelę krzyżową (macierz):
+
+      - Skopiuj unikalne nazwy **Managerów Regionu** (z kolumny N) i wklej je w komórkach A2, A3, A4...
+
+      - Skopiuj unikalne nazwy **Kategorii Produktu** (z kolumny E) i wklej je w komórkach B1, C1...
+
+  3.  W komórce **B2** (na przecięciu pierwszego managera i pierwszej kategorii) wpisz formułę:  
+```excel
+=SUMA.WARUNKÓW(Dane_Czyste_Finalne!$F:$F; Dane_Czyste_Finalne!$N:$N; $A2; Dane_Czyste_Finalne!$E:$E; B$1)
+```
+
+      - **Wyjaśnienie:** SUMA.WARUNKÓW(zakres_sumy; zakres_kryt_1; kryterium_1; zakres_kryt_2; kryterium_2)
+
+        - zakres_sumy: Dane_Czyste_Finalne!\$F:\$F (kolumna Wartosc_Sprzedazy, którą sumujemy).
+
+        - zakres_kryt_1: Dane_Czyste_Finalne!\$N:\$N (kolumna Managerów).
+
+        - kryterium_1: \$A2 (Manager z bieżącego wiersza).
+
+        - zakres_kryt_2: Dane_Czyste_Finalne!\$E:\$E (kolumna Kategorii).
+
+        - kryterium_2: B\$1 (Kategoria z bieżącej kolumny).
+
+      - **Blokowanie (\$):** Użycie \$A2 i B\$1 jest kluczowe, aby móc przeciągnąć formułę na całą tabelę.
+
+  4.  Przeciągnij formułę z **B2** w prawo, a następnie w dół, aby wypełnić całą tabelę.
+
+  5.  Obok stwórz identyczną tabelę, ale użyj funkcji LICZ.WARUNKI, aby policzyć liczbę transakcji. Formuła w (np.) **F2** będzie brzmiała:  
+```excel
+=LICZ.WARUNKI(Dane_Czyste_Finalne!$N:$N; $A2; Dane_Czyste_Finalne!$E:$E; B$1)
+```
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Arkusz Raport_Sprzedazy zawiera dwie poprawne tabele agregujące.
+
+  - Poprawnie zastosowałeś SUMA.WARUNKÓW i LICZ.WARUNKI oraz strategicznie użyłeś mieszanego blokowania komórek (\$A2, B\$1).
+
+## Zadanie 7 (Indywidualne): Dynamiczna Prowizja (WYSZUKAJ.PIONOWO + Funkcje Matematyczne)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>💰 Zbudowanie dynamicznego systemu prowizyjnego, w którym stawka prowizji zależy od kategorii produktu i jest pobierana ze "słownika", a nie wpisana na stałe w formule JEŻELI.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  Stwórz nowy arkusz **Słownik_Prowizji**.
+
+  2.  Wpisz w nim tabelę stawek prowizji dla kategorii:
+
+      - A1: **Kategoria** \| B1: **Stawka_Prowizji**
+
+      - A2: AGD \| B2: 3%
+
+      - A3: DOM I RTV \| B3: 5%
+
+      - (Dodaj inne kategorie, jeśli masz je w danych)
+
+  3.  Wróć do arkusza **Dane_Czyste_Finalne**.
+
+  4.  W komórce **T1** (tę zostawiliśmy wolną) wpisz nagłówek: **Stawka_Prowizji**.
+
+  5.  W komórce **T2** wpisz formułę:  
+```excel
+=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(E2; Słownik_Prowizji!$A$2:$B$3; 2; FAŁSZ); 0)
+```
+
+      - **Wyjaśnienie:** WYSZUKAJ.PIONOWO pobiera stawkę prowizji (np. 5%) na podstawie kategorii w **E2**. JEŻELI.BŁĄD zapewnia, że jeśli kategoria nie ma przypisanej prowizji, stawka wyniesie 0.
+
+  6.  Przeciągnij formułę z **T2** do **T101**.
+
+  7.  W komórce **U1** wpisz nagłówek: Wartosc_Prowizji**.
+
+  8.  W komórce **U2** wpisz prostą formułę matematyczną:  
+```excel
+=F2 * T2
+```
+
+      - **Wyjaśnienie:** Mnoży Wartosc_Sprzedazy (F2) przez dynamicznie pobraną Stawka_Prowizji (T2).
+
+  9.  Przeciągnij formułę z **U2** do **U101** i sformatuj kolumnę jako walutową.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Poprawnie pobrałeś stawki prowizji do kolumny T.
+
+  - Obliczyłeś nową, dynamiczną wartość prowizji w kolumnie U.
+
+  - Zmiana stawki w słowniku aktualizuje wszystkie obliczenia prowizji.
+
+## Zadanie 8 (Indywidualne): Funkcje Logiczne i Statystyczne (Segmentacja Premium)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>💎 Wykorzystanie zagnieżdżonych funkcji logicznych (I) i statystycznych do zidentyfikowania transakcji "Premium" (wysoka wartość I wysoka ocena) i zaraportowania ich.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  W arkuszu **Dane_Czyste_Finalne** w komórce **V1** wpisz nagłówek: **Status_Premium**.
+
+  2.  W komórce **V2** wpisz formułę:  
+```excel
+=JEŻELI(ORAZ(F2 > 500; G2 = 5); "Premium"; "Standard")
+```
+
+      - **Wyjaśnienie:** Funkcja ORAZ(warunek1; warunek2) zwraca PRAWDA tylko wtedy, gdy oba warunki są spełnione. JEŻELI sprawdza, czy transakcja jest jednocześnie powyżej 500 zł (F2 > 500) ORAZ ma ocenę 5 (G2 = 5). Jeśli tak, zwraca "Premium".
+
+  3.  Przeciągnij formułę z **V2** do **V101**.
+
+  4.  W arkuszu **Raport_Sprzedazy** (stworzonym w Zadaniu 6) stwórz nowy, mały raport.
+
+  5.  W komórce **A10** wpisz Manager, w **B10** wpisz Liczba_Transakcji_Premium.
+
+  6.  W komórkach poniżej **A10** wklej unikalne nazwiska managerów.
+
+  7.  W komórce **B11** (obok pierwszego managera) wpisz formułę:  
+
+```excel
+=LICZ.WARUNKI(Dane_Czyste_Finalne!$N:$N; A11; Dane_Czyste_Finalne!$V:$V; "Premium")
+```
+
+- **Wyjaśnienie:** LICZ.WARUNKI zlicza wiersze spełniające dwa kryteria: zgodny `Manager_Regionu` w kolumnie N oraz wartość `Premium` w kolumnie V.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Poprawnie stworzyłeś segment Status_Premium w kolumnie V.
+
+  - Poprawnie zagregowałeś wyniki w raporcie, używając LICZ.WARUNKI.
+
+## Zadanie 9 (Indywidualne): Funkcje Zgodności i Tekstowe (Walidacja Danych)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🔍 Wykorzystanie funkcji zgodności (PORÓWNAJ) do przeprowadzenia walidacji danych i znalezienia "ukrytych" błędów, takich jak zbędne spacje.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  W arkuszu **Dane_Czyste_Finalne** celowo "zepsujemy" jeden rekord, aby zasymulować błąd importu.
+
+  2.  W komórce **A10** (OrderID "ORD-1009") ręcznie dodaj spację na końcu: "ORD-1009 " (i naciśnij Enter).
+
+  3.  W komórce **W1** wpisz nagłówek: **Walidacja_ID**.
+
+  4.  W komórce **W2** wpisz formułę:  
+```excel
+=PORÓWNAJ(A2; USUŃ.ZBĘDNE.ODSTĘPY(A2))
+```
+
+      - **Wyjaśnienie:** USUŃ.ZBĘDNE.ODSTĘPY(A2) tworzy "czystą" wersję ID z komórki A2. Funkcja PORÓWNAJ(tekst1; tekst2) porównuje oba teksty i zwraca PRAWDA tylko wtedy, gdy są *identyczne* (wielkość liter i spacje mają znaczenie).
+
+  5.  Przeciągnij formułę z **W2** do **W101**.
+
+  6.  Zauważysz, że w komórce **W10** formuła zwróciła **FAŁSZ**.
+
+  7.  Użyj **Filtrowania** na kolumnie W, aby wybrać tylko wartości FAŁSZ i zidentyfikować wszystkie rekordy z ukrytymi spacjami.
+
+  8.  (Opcjonalnie): Napraw błąd w **A10**, usuwając spację. Zobaczysz, że formuła w **W10** automatycznie zmieni się na PRAWDA.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Poprawnie użyłeś funkcji PORÓWNAJ i USUŃ.ZBĘDNE.ODSTĘPY do stworzenia reguły walidacyjnej.
+
+  - Potrafisz zidentyfikować rekordy, które nie przeszły walidacji (zwróciły FAŁSZ).
+
+## Zadanie 10 (Indywidualne): Dynamiczna Wyszukiwarka (INDEKS + PODAJ.POZYCJĘ)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🔎 Zbudowanie w pełni interaktywnej "wyszukiwarki" w arkuszu raportu, która pozwala użytkownikowi wpisać OrderID i natychmiast pobrać wszystkie kluczowe informacje o tym zamówieniu.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  Przejdź do arkusza **Raport_Statystyk** (stworzonego w Ćwiczeniu 5).
+
+  2.  W komórce **D1** stwórz etykietę: **Wpisz OrderID:**
+
+  3.  Komórkę **E1** pokoloruj na żółto : będzie to pole, w które użytkownik wpisuje dane. Wpisz tam testowo jedno ID, np. ORD-1005.
+
+  4.  Poniżej stwórz etykiety:
+
+      - D3: **Kategoria:**
+
+      - D4: **Wartość Sprzedaży:**
+
+      - D5: **Manager Regionu:**
+
+  5.  W komórce **E3** (obok "Kategoria:") wpisz formułę:  
+```excel
+=INDEKS(Dane_Czyste_Finalne!E:E; PODAJ.POZYCJĘ($E$1; Dane_Czyste_Finalne!A:A; 0))
+```
+
+      - **Wyjaśnienie:** PODAJ.POZYCJĘ(\$E\$1; A:A; 0) znajduje numer wiersza (np. 6) na podstawie OrderID wpisanego w zablokowanej komórce \$E\$1. INDEKS(E:E; 6) zwraca wartość z kolumny Kategorii (E) z tego szóstego wiersza.
+
+  6.  W komórce **E4** (obok "Wartość Sprzedaży:") wpisz podobną formułę, zmieniając tylko pierwszą kolumnę:  
+```excel
+=INDEKS(Dane_Czyste_Finalne!F:F; PODAJ.POZYCJĘ($E$1; Dane_Czyste_Finalne!A:A; 0))
+```
+
+  7.  W komórce **E5** (obok "Manager Regionu:") wpisz:  
+```excel
+=INDEKS(Dane_Czyste_Finalne!N:N; PODAJ.POZYCJĘ($E$1; Dane_Czyste_Finalne!A:A; 0))
+```
+
+  8.  Przetestuj swoje narzędzie : wpisz inny OrderID w komórce **E1** (np. ORD-1020) i zobacz, jak dane w komórkach E3, E4 i E5 natychmiast się aktualizują.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Stworzyłeś w pełni funkcjonalną wyszukiwarkę opartą na INDEKS i PODAJ.POZYCJĘ.
+
+  - Rozumiesz, jak użycie zablokowanej komórki (\$E\$1) pozwala na sterowanie wieloma formułami jednocześnie.

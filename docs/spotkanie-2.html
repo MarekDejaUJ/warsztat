@@ -11,7 +11,7 @@
 
 
 
-<title>Warsztat informacyjny</title>
+<title>Spotkanie 2: czyszczenie i kompletność danych</title>
 
 <script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -378,128 +378,250 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Warsztat informacyjny</h1>
+<h1 class="title toc-ignore">Spotkanie 2: czyszczenie i kompletność
+danych</h1>
 
 </div>
 
 
 <div class="hero">
 <h2>
-Od surowych danych do uzasadnionego wniosku
+Spotkanie 2 z 6
 </h2>
 <p>
-Siedem spotkań po 90 minut: organizacja pracy, przygotowanie danych,
-funkcje programu Excel, analiza, wizualizacja i raportowanie.
+Konwersja typów, wykrywanie wartości odstających i uzupełnianie braków.
 </p>
 </div>
-<div id="cel-zajęć" class="section level2">
-<h2>Cel zajęć</h2>
-<p>Po zakończeniu cyklu student potrafi przygotować dane do analizy,
-dobrać polskie funkcje programu Excel, zbudować raport i ocenić jakość
-wniosku. Każde ćwiczenie zawiera cel, kolejne kroki oraz kryteria
-sukcesu.</p>
-<div class="quick-grid">
-<div class="quick-card">
+<div class="timebox">
+<strong>Plan 90 minut:</strong> 10 min kontrola danych, 25 min daty i
+liczby, 25 min błędy logiczne, 20 min braki danych, 10 min zapis wersji
+końcowej.
+</div>
+<div class="note">
+<strong>Przygotowanie:</strong> Arkusz Dane_Robocze utworzony podczas
+spotkania 1.
+</div>
+<div
+id="ćwiczenie-3-czyszczenie-krok-2-konwersja-dat-i-tekstu-na-liczby"
+class="section level2">
+<h2>Ćwiczenie 3: Czyszczenie Krok 2 (Konwersja Dat i Tekstu na
+Liczby)</h2>
+<div class="tilt-card purpose">
 <h3>
-Przygotowanie danych
+Cel
 </h3>
 <p>
-Typy danych, standaryzacja, konwersja, braki i wartości odstające.
+🔢 Konwersja tekstu na daty i liczby potrzebne do dalszych obliczeń.
 </p>
 </div>
-<div class="quick-card">
+<div class="tilt-card task">
 <h3>
-Funkcje
+Zadanie
 </h3>
 <p>
-Funkcje tekstowe, logiczne, statystyczne, wyszukiwania i odwołań.
+Wykonaj kolejne kroki.
 </p>
 </div>
-<div class="quick-card">
+<ol style="list-style-type: decimal">
+<li><p>Kontynuuj pracę w arkuszu <strong>Dane_Robocze</strong>.</p></li>
+<li><p><strong>Kolumna B (Data_Zamowienia):</strong></p>
+<ul>
+<li><p>Zaznacz całą kolumnę <strong>B</strong>, klikając na jej
+literę.</p></li>
+<li><p>Idź do zakładki <strong>Dane</strong> na wstążce i kliknij
+<strong>Tekst jako kolumny</strong>.</p></li>
+<li><p>Krok 1: Wybierz “Rozdzielany”, kliknij “Dalej”.</p></li>
+<li><p>Krok 2: Odznacz wszystkie separatory, kliknij “Dalej”.</p></li>
+<li><p>Krok 3: W sekcji “Format danych w kolumnie” wybierz
+<strong>Data</strong> i format <strong>RMD</strong> (dla formatu
+RRRR-MM-DD). Kliknij “Zakończ”.</p></li>
+<li><p>Powtórz proces (Zaznacz <strong>B</strong> &gt; Tekst jako
+kolumny), ale w Kroku 3 wybierz <strong>Data</strong> i format
+<strong>DMR</strong> (dla formatu DD.MM.RRRR).</p></li>
+<li><p>Ręcznie popraw pozostałe błędy (np. “maj 2023” wpisz jako
+2023-05-01) lub Prawy przycisk myszy &gt; Formatuj komórki…</p></li>
+<li><p>Sformatuj całą kolumnę <strong>B</strong> jako datę (np.
+RRRR-MM-DD).</p></li>
+</ul></li>
+<li><p><strong>Kolumna F (Wartosc_Sprzedazy):</strong></p>
+<ul>
+<li><p>W komórce <strong>H1</strong> wpisz tymczasowy nagłówek
+TEMP_F.</p></li>
+<li><p>W komórce <strong>H2</strong> wpisz formułę:</p></li>
+</ul></li>
+</ol>
+<pre class="excel"><code>=WARTOŚĆ(JEŻELI(CZY.LICZBA(F2); F2; PODSTAW(PODSTAW(F2; &quot; PLN&quot;; &quot;&quot;); &quot;&#39;&quot;; &quot;&quot;)))</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> CZY.LICZBA(F2) sprawdza typ wartości.
+Dwie funkcje PODSTAW usuwają oznaczenie waluty i apostrof, a WARTOŚĆ
+konwertuje wynik na liczbę.</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Przeciągnij formułę z <strong>H2</strong> w dół do
+<strong>H101</strong>.</p></li>
+<li><p>Skopiuj wartości z <strong>H2:H101</strong> i <strong>Wklej jako
+Wartości</strong> do <strong>F2:F101</strong>.</p></li>
+<li><p>Usuń kolumnę <strong>H</strong>. Sformatuj całą kolumnę
+<strong>F</strong> jako “Walutowe” lub “Księgowe”.</p></li>
+</ol>
+<div class="tilt-card criteria">
 <h3>
-Analiza
+Kryteria sukcesu
 </h3>
 <p>
-Tabele przestawne, korelacja, test t, przedział ufności i współzmienne.
+Sprawdź rezultat przed przejściem dalej.
 </p>
 </div>
-<div class="quick-card">
+<ul>
+<li><p>Kolumna Data_Zamowienia jest w całości poprawnym typem danych
+“Data”.</p></li>
+<li><p>Kolumna Wartosc_Sprzedazy jest w całości poprawnym typem
+“Liczbowy”, co pozwala na jej sumowanie.</p></li>
+</ul>
+</div>
+<div
+id="ćwiczenie-4-czyszczenie-krok-3-obsługa-błędów-logicznych-i-wartości-odstających"
+class="section level2">
+<h2>Ćwiczenie 4: Czyszczenie Krok 3 (Obsługa Błędów Logicznych i
+Wartości Odstających)</h2>
+<div class="tilt-card purpose">
 <h3>
-Raportowanie
+Cel
 </h3>
 <p>
-Wykresy, dashboard i zwięzłe podsumowanie zarządcze.
+🔍 Nauczenie się identyfikacji i neutralizacji danych, które są
+formalnie poprawne (są liczbą), ale logicznie błędne (tzw. wartości
+odstające lub “outliers”).
 </p>
 </div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
 </div>
+<ol style="list-style-type: decimal">
+<li><p>Kontynuuj pracę w arkuszu <strong>Dane_Robocze</strong>.</p></li>
+<li><p><strong>Kolumna G (Ocena_Transakcji):</strong></p>
+<ul>
+<li><p>Kliknij na komórkę <strong>G1</strong> i wybierz z zakładki
+<strong>Dane &gt; Filtruj</strong>.</p></li>
+<li><p>Kliknij na strzałkę filtra w <strong>G1</strong>. Z listy odznacz
+“(Zaznacz wszystko)”.</p></li>
+<li><p>Zaznacz tylko wartości, które są błędne: 99 oraz -1. Kliknij
+OK.</p></li>
+<li><p>Zaznacz wszystkie widoczne komórki w kolumnie G (poniżej
+nagłówka).</p></li>
+<li><p>Naciśnij klawisz <strong>Delete</strong>. Spowoduje to usunięcie
+błędnych wartości, pozostawiając puste komórki.</p></li>
+<li><p>Wyczyść filtr (kliknij ikonę filtra w <strong>G1</strong> i
+wybierz “Wyczyść filtr…”).</p></li>
+</ul></li>
+<li><p><strong>Kolumna C (Email_Klienta):</strong></p>
+<ul>
+<li><p>Kliknij na strzałkę filtra w <strong>C1</strong>.</p></li>
+<li><p>Wybierz “Filtry tekstu” &gt; “Filtr niestandardowy…”.</p></li>
+<li><p>Ustaw warunek: “nie zawiera” i wpisz @.</p></li>
+<li><p>Poniżej zaznacz opcję <strong>LUB</strong>.</p></li>
+<li><p>Ustaw drugi warunek: “zawiera” i wpisz (pojedynczą spację).
+Kliknij OK.</p></li>
+<li><p>Zaznacz wszystkie widoczne (błędne) komórki w kolumnie C i
+pokoloruj je na żółto (Narzędzia główne &gt; Kolor
+wypełnienia).</p></li>
+<li><p>Wyczyść filtr.</p></li>
+</ul></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
 </div>
-<div id="program" class="section level2">
-<h2>Program</h2>
-<table>
-<colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Spotkanie</th>
-<th>Temat</th>
-<th>Rezultat</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Organizacyjne</td>
-<td>Zasady pracy, TILT, sylabus i asystent Copilot</td>
-<td>Skonfigurowane środowisko i sprawdzony prompt</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>Generowanie i standaryzacja danych</td>
-<td>Arkusz <code>Dane_Robocze</code></td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td>Czyszczenie i kompletność danych</td>
-<td>Arkusz <code>Dane_Czyste_Finalne</code></td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td>Funkcje analityczne</td>
-<td>Kolumny analityczne i walidacyjne</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>Raporty i wyszukiwanie</td>
-<td>Raporty wielokryterialne i wyszukiwarka</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td>Wizualizacja i dedukcja</td>
-<td>Tabele, wykresy i statystyki wnioskowania</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td>Dashboard i wnioski</td>
-<td>Dashboard oraz executive summary</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><p>Kolumna Ocena_Transakcji zawiera już tylko liczby z zakresu 1-5
+oraz puste komórki.</p></li>
+<li><p>Rozumiesz, jak używać filtrów do identyfikacji błędów logicznych
+(99, -1) i formalnych (brak @).</p></li>
+</ul>
 </div>
-<div id="rozpocznij" class="section level2">
-<h2>Rozpocznij</h2>
-<p><a class="btn-course" href="organizacyjne.html">Spotkanie
-organizacyjne</a> <a class="btn-course" href="materialy.html">Pobierz
-materiały</a> <a class="btn-course" href="ocenianie.html">Sprawdź zasady
-oceny</a></p>
+<div
+id="ćwiczenie-5-czyszczenie-krok-4-obsługa-braków-danych---imputacja"
+class="section level2">
+<h2>Ćwiczenie 5: Czyszczenie Krok 4 (Obsługa Braków Danych -
+Imputacja)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+💡 Opanowanie techniki imputacji, czyli świadomego uzupełniania
+brakujących danych (pustych komórek) w celu przygotowania kompletnego
+zestawu do analizy.
+</p>
 </div>
-<div id="efekty-uczenia-się" class="section level2">
-<h2>Efekty uczenia się</h2>
-<p>Materiały wspierają samodzielne i efektywne wykorzystanie arkuszy
-kalkulacyjnych, technologii informacyjnych i generatywnej sztucznej
-inteligencji. Ćwiczenia rozwijają ocenę poprawności, etyczności i
-wartości informacyjnej wyników.</p>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Kontynuuj pracę w arkuszu <strong>Dane_Robocze</strong>.</p></li>
+<li><p><strong>Kolumna G (Ocena_Transakcji):</strong></p>
+<ul>
+<li><p>W pustej komórce obok tabeli (np. w <strong>K1</strong>) oblicz
+medianę dla poprawnych ocen.</p></li>
+<li><p>W komórce <strong>K1</strong> wpisz formułę:</p></li>
+</ul></li>
+</ol>
+<pre class="excel"><code>=MEDIANA(G2:G101)</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> MEDIANA znajduje wartość środkową dla
+zakresu G2:G101. Funkcja ta ignoruje puste komórki. Załóżmy, że wynik w
+<strong>K1</strong> to 3.</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Zaznacz cały zakres danych w kolumnie ocen (od
+<strong>G2</strong> do <strong>G101</strong>).</p></li>
+<li><p>Naciśnij <strong>Ctrl+G</strong> (lub klawisz F5), aby otworzyć
+okno “Przechodzenie do”.</p></li>
+<li><p>Kliknij przycisk <strong>Specjalnie…</strong></p></li>
+<li><p>W nowym oknie wybierz opcję <strong>Puste</strong> i kliknij
+OK.</p></li>
+<li><p>Excel zaznaczy wyłącznie puste komórki w wybranym
+zakresie.</p></li>
+<li><p><strong>Nie klikając nigdzie</strong>, wpisz z klawiatury liczbę
+3 (lub wartość mediany z komórki K1).</p></li>
+<li><p>Naciśnij <strong>Ctrl + Enter</strong>.</p>
+<ul>
+<li><strong>Wyjaśnienie:</strong> Ta kombinacja klawiszy wkleja wpisaną
+wartość (3) do wszystkich zaznaczonych komórek jednocześnie.</li>
+</ul></li>
+<li><p>Usuń wartość z komórki <strong>K1</strong>.</p></li>
+<li><p>Kliknij prawym przyciskiem myszy na zakładkę arkusza Dane_Robocze
+i zmień jej nazwę na <strong>Dane_Czyste_Finalne</strong>.</p></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Kolumna Ocena_Transakcji nie zawiera już żadnych pustych
+komórek.</p></li>
+<li><p>Arkusz <strong>Dane_Czyste_Finalne</strong> przechodzi kontrole
+opisane w ćwiczeniach, a błędne adresy e-mail pozostają oznaczone do
+dalszej walidacji.</p></li>
+</ul>
 </div>
 
 <footer class="course-footer">

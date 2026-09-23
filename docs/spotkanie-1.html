@@ -11,7 +11,7 @@
 
 
 
-<title>Warsztat informacyjny</title>
+<title>Spotkanie 1: generowanie i standaryzacja danych</title>
 
 <script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -378,128 +378,250 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Warsztat informacyjny</h1>
+<h1 class="title toc-ignore">Spotkanie 1: generowanie i standaryzacja
+danych</h1>
 
 </div>
 
 
 <div class="hero">
 <h2>
-Od surowych danych do uzasadnionego wniosku
+Spotkanie 1 z 6
 </h2>
 <p>
-Siedem spotkań po 90 minut: organizacja pracy, przygotowanie danych,
-funkcje programu Excel, analiza, wizualizacja i raportowanie.
+Utworzenie kontrolowanego zbioru z błędami i pierwsza standaryzacja
+kategorii.
 </p>
 </div>
-<div id="cel-zajęć" class="section level2">
-<h2>Cel zajęć</h2>
-<p>Po zakończeniu cyklu student potrafi przygotować dane do analizy,
-dobrać polskie funkcje programu Excel, zbudować raport i ocenić jakość
-wniosku. Każde ćwiczenie zawiera cel, kolejne kroki oraz kryteria
-sukcesu.</p>
-<div class="quick-grid">
-<div class="quick-card">
+<div class="timebox">
+<strong>Plan 90 minut:</strong> 10 min rozpoczęcie, 35 min generowanie
+danych, 35 min standaryzacja, 10 min kontrola.
+</div>
+<div class="note">
+<strong>Przygotowanie:</strong> Excel lub Excel dla sieci Web. Pobierz
+plik swojej grupy z zakładki Materiały.
+</div>
+<div
+id="ćwiczenie-1-generowanie-brudnego-zestawu-danych-symulacja-rzeczywistości"
+class="section level2">
+<h2>Ćwiczenie 1: Generowanie “Brudnego” Zestawu Danych (Symulacja
+Rzeczywistości)</h2>
+<div class="tilt-card purpose">
 <h3>
-Przygotowanie danych
+Cel
 </h3>
 <p>
-Typy danych, standaryzacja, konwersja, braki i wartości odstające.
+🎯 Utworzenie kontrolowanego zbioru zawierającego niespójne daty,
+teksty, liczby i braki danych.
 </p>
 </div>
-<div class="quick-card">
+<div class="tilt-card task">
 <h3>
-Funkcje
+Zadanie
 </h3>
 <p>
-Funkcje tekstowe, logiczne, statystyczne, wyszukiwania i odwołań.
+Wykonaj kolejne kroki.
 </p>
 </div>
-<div class="quick-card">
+<ol style="list-style-type: decimal">
+<li><p>Otwórz nowy arkusz i nazwij go
+<strong>Dane_Surowe</strong>.</p></li>
+<li><p>W komórkach od <strong>A1</strong> do <strong>G1</strong> wpisz
+następujące nagłówki:</p>
+<ul>
+<li><p>A1: <strong>OrderID</strong></p></li>
+<li><p>B1: <strong>Data_Zamowienia</strong></p></li>
+<li><p>C1: <strong>Email_Klienta</strong></p></li>
+<li><p>D1: <strong>Region_ID</strong></p></li>
+<li><p>E1: <strong>Kategoria_Produktu</strong></p></li>
+<li><p>F1: <strong>Wartosc_Sprzedazy</strong></p></li>
+<li><p>G1: <strong>Ocena_Transakcji</strong></p></li>
+</ul></li>
+<li><p><strong>Kolumna A (OrderID):</strong> W komórce
+<strong>A2</strong> wpisz formułę:</p></li>
+</ol>
+<pre class="excel"><code>=&quot;ORD-&quot; &amp; (1000 + WIERSZ(A1))</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> WIERSZ(A1) zwraca liczbę 1. 1000 + 1
+daje 1001. Operator &amp; łączy tekst “ORD-” z liczbą 1001, tworząc
+“ORD-1001”. Gdy przeciągniesz formułę w dół, WIERSZ(A1) zmieni się na
+WIERSZ(A2) (zwróci 2), tworząc “ORD-1002” itd.</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Kolumna B (Data_Zamowienia):</strong> W komórce
+<strong>B2</strong> wpisz formułę:</li>
+</ol>
+<pre class="excel"><code>=WYBIERZ(LOS.ZAKR(1;3); TEKST(DATA(2023;LOS.ZAKR(1;12);LOS.ZAKR(1;28)); &quot;RRRR-MM-DD&quot;); TEKST(DATA(2023;LOS.ZAKR(1;12);LOS.ZAKR(1;28)); &quot;DD.MM.RRRR&quot;); &quot;maj 2023&quot;)</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> DATA(…) tworzy losową datę z 2023
+roku. TEKST(…) zamienia tę datę na tekst w określonym formacie (np.
+“2023-10-25” lub “25.10.2023”). LOS.ZAKR(1;3) losuje liczbę 1, 2 lub 3.
+WYBIERZ na podstawie tej liczby wybiera jeden z trzech formatów
+tekstowych (dwa losowe lub stały tekst “maj 2023”), symulując niespójne
+dane.</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Kolumna C (Email_Klienta):</strong> W komórce
+<strong>C2</strong> wpisz formułę:</li>
+</ol>
+<pre class="excel"><code>=&quot;user.&quot; &amp; WIERSZ(A1) &amp; JEŻELI(LOS()&lt;0,8; &quot;@domena.pl&quot;; WYBIERZ(LOS.ZAKR(1;3); &quot;@ domena.pl&quot;; &quot;_brak_malpy_&quot;; &quot;@&quot;))</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> LOS() losuje liczbę od 0 do 1.
+JEŻELI(LOS()&lt;0,8; …) oznacza, że w 80% przypadków (&lt;0,8) formuła
+wstawi poprawną końcówkę “<span class="citation">@domena.pl</span>”. W
+pozostałych 20% przypadków WYBIERZ losowo wstawi jeden z trzech błędów:
+spację, brak małpy lub samą małpę.</li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li><strong>Kolumna D (Region_ID):</strong> W komórce
+<strong>D2</strong> wpisz formułę:</li>
+</ol>
+<pre class="excel"><code>=&quot;R&quot; &amp; LOS.ZAKR(1;3) &amp; WYBIERZ(LOS.ZAKR(1;3); &quot;&quot;; &quot; &quot;; &quot;-Region&quot;)</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> LOS.ZAKR(1;3) losuje numer regionu (1,
+2 lub 3). WYBIERZ losowo dodaje “brud”: pusty tekst “” (poprawny),
+spację ” ” (błąd) lub błędny tekst “-Region”.</li>
+</ul>
+<ol start="7" style="list-style-type: decimal">
+<li><strong>Kolumna E (Kategoria_Produktu):</strong> W komórce
+<strong>E2</strong> wpisz formułę:</li>
+</ol>
+<pre class="excel"><code>=WYBIERZ(LOS.ZAKR(1;5); &quot;RTV&quot;; &quot; RTV&quot;; &quot;rtv&quot;; &quot;AGD&quot;; &quot;Dom&quot;)</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> WYBIERZ losowo wybiera jedną z 5
+niespójnych wartości tekstowych (błędy spacji, wielkości liter).</li>
+</ul>
+<ol start="8" style="list-style-type: decimal">
+<li><strong>Kolumna F (Wartosc_Sprzedazy):</strong> W komórce
+<strong>F2</strong> wpisz formułę:</li>
+</ol>
+<pre class="excel"><code>=JEŻELI(LOS()&lt;0,8; LOS.ZAKR(100; 1000); WYBIERZ(LOS.ZAKR(1;2); &quot;&#39;&quot; &amp; LOS.ZAKR(100;1000); LOS.ZAKR(50;150) &amp; &quot; PLN&quot;))</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> W 80% przypadków (LOS()&lt;0,8)
+wstawia poprawną liczbę (np. 543). W 20% przypadków losuje błąd: albo
+liczbę jako tekst (np. ’300) albo tekst z walutą (np. “120 PLN”).</li>
+</ul>
+<ol start="9" style="list-style-type: decimal">
+<li><strong>Kolumna G (Ocena_Transakcji):</strong> W komórce
+<strong>G2</strong> wpisz formułę:</li>
+</ol>
+<pre class="excel"><code>=JEŻELI(LOS()&lt;0,7; LOS.ZAKR(1;5); WYBIERZ(LOS.ZAKR(1;3); 99; -1; &quot;&quot;))</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> W 70% przypadków wstawia poprawną
+ocenę (1-5). W 30% losuje błąd: wartość odstającą 99, nielogiczną -1 lub
+pustą komórkę ““.</li>
+</ul>
+<ol start="10" style="list-style-type: decimal">
+<li><p><strong>Generowanie Danych:</strong> Zaznacz obszar od
+<strong>A2</strong> do <strong>G2</strong>. Złap za mały kwadrat w
+prawym dolnym rogu zaznaczenia i przeciągnij go w dół aż do wiersza
+<strong>101</strong>.</p></li>
+<li><p><strong>“Zamrażanie” Danych:</strong></p>
+<ul>
+<li><p>Zaznacz cały wygenerowany obszar danych (od <strong>A2</strong>
+do <strong>G101</strong>).</p></li>
+<li><p>Naciśnij <strong>Ctrl+C</strong> (Kopiuj).</p></li>
+<li><p>Kliknij prawym przyciskiem myszy na komórkę
+<strong>A2</strong>.</p></li>
+<li><p>Z menu, które się pojawi, wybierz <strong>Wklej specjalnie &gt;
+Wartości</strong>.</p></li>
+<li><p><strong>Wyjaśnienie:</strong> Ten krok zamienia wszystkie
+dynamiczne formuły na ich statyczne wyniki (tekst lub liczby). Dzięki
+temu dane przestaną się zmieniać przy każdej modyfikacji
+arkusza.</p></li>
+</ul></li>
+</ol>
+<div class="tilt-card criteria">
 <h3>
-Analiza
+Kryteria sukcesu
 </h3>
 <p>
-Tabele przestawne, korelacja, test t, przedział ufności i współzmienne.
+Sprawdź rezultat przed przejściem dalej.
 </p>
 </div>
-<div class="quick-card">
+<ul>
+<li><p>Powstał arkusz Dane_Surowe ze 100 statycznymi rekordami (wiersze
+2-101).</p></li>
+<li><p>Wszystkie kolumny zawierają celowe, opisane błędy.</p></li>
+</ul>
+</div>
+<div
+id="ćwiczenie-2-czyszczenie-krok-1-standaryzacja-tekstu-i-kategorii"
+class="section level2">
+<h2>Ćwiczenie 2: Czyszczenie Krok 1 (Standaryzacja Tekstu i
+Kategorii)</h2>
+<div class="tilt-card purpose">
 <h3>
-Raportowanie
+Cel
 </h3>
 <p>
-Wykresy, dashboard i zwięzłe podsumowanie zarządcze.
+🧹 Nauczenie się systematycznej standaryzacji danych tekstowych i
+kategorycznych, co jest fundamentem poprawnej agregacji.
 </p>
 </div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
 </div>
+<ol style="list-style-type: decimal">
+<li><p>Kliknij prawym przyciskiem myszy na zakładkę arkusza Dane_Surowe
+i wybierz “Przenieś lub kopiuj…”. Zaznacz pole “Utwórz kopię” i kliknij
+OK. Zmień nazwę nowej kopii na <strong>Dane_Robocze</strong>. Będziemy
+pracować tylko na tym arkuszu.</p></li>
+<li><p><strong>Kolumna E (Kategoria_Produktu):</strong> Będziemy czyścić
+tę kolumnę “w miejscu” przy użyciu kolumny pomocniczej.</p></li>
+<li><p>W komórce <strong>H1</strong> wpisz tymczasowy nagłówek
+TEMP_E.</p></li>
+<li><p>W komórce <strong>H2</strong> wpisz formułę:</p></li>
+</ol>
+<pre class="excel"><code>=LITERY.WIELKIE(USUŃ.ZBĘDNE.ODSTĘPY(E2))</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> USUŃ.ZBĘDNE.ODSTĘPY(E2) bierze wartość
+z <strong>E2</strong> (np. ” RTV”) i usuwa zbędne spacje, zwracając
+“RTV”. LITERY.WIELKIE(…) bierze ten wynik (np. “rtv”) i zamienia go na
+wielkie litery “RTV”.</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Przeciągnij formułę z <strong>H2</strong> w dół do
+<strong>H101</strong>.</p></li>
+<li><p>Zaznacz dane w kolumnie <strong>H</strong> (od
+<strong>H2</strong> do <strong>H101</strong>), skopiuj je
+(<strong>Ctrl+C</strong>).</p></li>
+<li><p>Kliknij prawym przyciskiem na komórkę <strong>E2</strong> i
+<strong>Wklej jako Wartości</strong>.</p></li>
+<li><p>Usuń całą kolumnę <strong>H</strong>. Teraz w kolumnie
+<strong>E</strong> masz tylko wartości “RTV”, “AGD”, “DOM” (ale nadal
+niescalone).</p></li>
+<li><p>Naciśnij <strong>Ctrl+H</strong>. Wpisz DOM w polu “Znajdź” i DOM
+I RTV w polu “Zamień na”. Rozwiń opcje i zaznacz <strong>Dopasuj całą
+zawartość komórki</strong>, a następnie wybierz “Zamień
+wszystko”.</p></li>
+<li><p>Powtórz krok 9 dla wartości RTV, pozostawiając zaznaczoną opcję
+<strong>Dopasuj całą zawartość komórki</strong>.</p></li>
+<li><p><strong>Kolumna D (Region_ID):</strong> Będziemy czyścić tę
+kolumnę.</p></li>
+<li><p>Naciśnij <strong>Ctrl+H</strong>. “Znajdź”: (pojedyncza spacja),
+“Zamień na”: pozostaw puste. Kliknij “Zamień wszystko”.</p></li>
+<li><p>Powtórz: “Znajdź”: -Region, “Zamień na”: pozostaw puste. Kliknij
+“Zamień wszystko”.</p></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
 </div>
-<div id="program" class="section level2">
-<h2>Program</h2>
-<table>
-<colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Spotkanie</th>
-<th>Temat</th>
-<th>Rezultat</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Organizacyjne</td>
-<td>Zasady pracy, TILT, sylabus i asystent Copilot</td>
-<td>Skonfigurowane środowisko i sprawdzony prompt</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>Generowanie i standaryzacja danych</td>
-<td>Arkusz <code>Dane_Robocze</code></td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td>Czyszczenie i kompletność danych</td>
-<td>Arkusz <code>Dane_Czyste_Finalne</code></td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td>Funkcje analityczne</td>
-<td>Kolumny analityczne i walidacyjne</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>Raporty i wyszukiwanie</td>
-<td>Raporty wielokryterialne i wyszukiwarka</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td>Wizualizacja i dedukcja</td>
-<td>Tabele, wykresy i statystyki wnioskowania</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td>Dashboard i wnioski</td>
-<td>Dashboard oraz executive summary</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="rozpocznij" class="section level2">
-<h2>Rozpocznij</h2>
-<p><a class="btn-course" href="organizacyjne.html">Spotkanie
-organizacyjne</a> <a class="btn-course" href="materialy.html">Pobierz
-materiały</a> <a class="btn-course" href="ocenianie.html">Sprawdź zasady
-oceny</a></p>
-</div>
-<div id="efekty-uczenia-się" class="section level2">
-<h2>Efekty uczenia się</h2>
-<p>Materiały wspierają samodzielne i efektywne wykorzystanie arkuszy
-kalkulacyjnych, technologii informacyjnych i generatywnej sztucznej
-inteligencji. Ćwiczenia rozwijają ocenę poprawności, etyczności i
-wartości informacyjnej wyników.</p>
+<ul>
+<li><p>Kolumna Kategoria_Produktu ma teraz tylko spójne wartości (np.
+“DOM I RTV”, “AGD”).</p></li>
+<li><p>Kolumna Region_ID ma tylko wartości “R1”, “R2”, “R3”.</p></li>
+</ul>
 </div>
 
 <footer class="course-footer">

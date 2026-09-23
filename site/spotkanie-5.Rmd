@@ -1,0 +1,308 @@
+---
+title: "Spotkanie 5: wizualizacja i dedukcja"
+---
+
+<div class="hero">
+<h2>Spotkanie 5 z 6</h2>
+<p>Tabele przestawne, wykresy, korelacja, wartość p, histogram i przedział ufności.</p>
+</div>
+
+<div class="timebox"><strong>Plan 90 minut:</strong> 10 min przygotowanie, 25 min tabela przestawna, 15 min wykres, 25 min korelacja, 10 min histogram, 5 min podsumowanie.</div>
+
+<div class="note"><strong>Przygotowanie:</strong> Arkusz Dane_Czyste_Finalne z wypełnionymi kolumnami analitycznymi.</div>
+
+## Ćwiczenie 1: Tabela Przestawna i Tabela Krzyżowa (Agregacja Danych)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>📊 Zrozumienie, jak błyskawicznie agregować tysiące rekordów do czytelnej tabeli krzyżowej, aby odpowiedzieć na pytanie: "Kto i co sprzedaje najlepiej?".</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  Kliknij na dowolną komórkę w tabeli w arkuszu Dane_Czyste_Finalne.
+
+2.  Z wstążki wybierz **Wstaw** \> **Tabela przestawna**.
+
+3.  W oknie dialogowym upewnij się, że zaznaczono "Nowy arkusz" i kliknij OK. Zmień nazwę nowego arkusza na Analiza_Przestawna.
+
+4.  Po prawej stronie w panelu "Pola tabeli przestawnej":
+
+    - Przeciągnij **Manager_Regionu** do obszaru **Wiersze**.
+
+    - Przeciągnij **Kategoria_Produktu** do obszaru **Kolumny**.
+
+    - Przeciągnij **Wartosc_Sprzedazy** do obszaru **Wartości**.
+
+5.  Zauważ, że liczby są niesformatowane. Kliknij prawym przyciskiem na dowolną liczbę w tabeli przestawnej \> **Format liczby** (nie "Formatuj komórki"!) \> **Walutowe** \> OK.
+
+6.  **Interpretacja (Tabela Krzyżowa):** Masz przed sobą tabelę krzyżową pokazującą zależność dwóch zmiennych kategorycznych.
+
+    - *Pytanie do grupy:* Kto jest liderem sprzedaży w kategorii AGD?
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- Powstała tabela przestawna w nowym arkuszu.
+
+- Dane są poprawnie pogrupowane (Manager w wierszach, Kategoria w kolumnach).
+
+- Wartości są sformatowane jako waluta.
+
+## Ćwiczenie 2: Wykres Przestawny i Wizualizacja Porównawcza
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>📈 Nauka prezentacji danych. Ludzkie oko szybciej porównuje długość słupków niż liczby w tabeli. Stworzymy wykres porównujący wyniki managerów.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  Kliknij na stworzoną przed chwilą tabelę przestawną.
+
+2.  Z wstążki (zakładka **Analiza tabeli przestawnej**) wybierz **Wykres przestawny**.
+
+3.  Wybierz typ **Kolumnowy grupowany** i kliknij OK.
+
+4.  **Czyszczenie wykresu:** Wykresy przestawne mają dużo zbędnych przycisków ("szum").
+
+    - Kliknij prawym przyciskiem myszy na jeden z szarych przycisków na wykresie (np. "Kategoria_Produktu").
+
+    - Wybierz **Ukryj wszystkie przyciski pól na wykresie**.
+
+5.  Dodaj tytuł wykresu: Kliknij na "Tytuł wykresu" (lub dodaj go plusem "+") i wpisz: "Sprzedaż wg Managera i Kategorii".
+
+6.  Przenieś legendę na górę (Kliknij na legendę \> Formatuj legendę \> Do góry), aby zwiększyć obszar danych.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- Wykres jest czytelny, pozbawiony zbędnych przycisków filtrów.
+
+- Tytuł jasno opisuje, co przedstawia wykres.
+
+- Wykres dynamicznie reaguje na zmiany w tabeli przestawnej.
+
+## Ćwiczenie 3: Dedukcja - Badanie Korelacji i Istotności Statystycznej (Wartość p)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🕵️‍♂️ Obliczenie korelacji między wartością sprzedaży a oceną, wyznaczenie wartości p i przygotowanie wykresu punktowego.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  **Przygotowanie Raportu:**
+
+    - Przejdź do arkusza Raport_Statystyk.
+
+    - W komórkach A10:A13 wpisz opisy:
+
+      - A10: Korelacja (r)
+
+      - A11: Liczebność próby (n)
+
+      - A12: Statystyka t
+
+      - A13: Istotność (wartość p)
+
+2.  **Obliczenia Statystyczne:**
+
+    - **Korelacja (r):** W B10 wpisz formułę badającą związek między sprzedażą a oceną:
+
+```excel
+=WSP.KORELACJI(Dane_Czyste_Finalne!F:F; Dane_Czyste_Finalne!G:G)
+```
+
+- **Liczebność (n):** W B11 policz, ile mamy rekordów:
+
+```excel
+=ILE.LICZB(Dane_Czyste_Finalne!F:F)
+```
+
+- **Statystyka t:** Przekształć współczynnik korelacji na statystykę t. W komórce B12 wpisz wzór:
+
+```excel
+=B10 * PIERWIASTEK((B11-2)/(1-B10^2))
+```
+
+*(Wyjaśnienie: Jest to standardowy wzór na statystykę t dla współczynnika korelacji Pearsona).*
+
+- **Istotność (wartość p):** W komórce B13 oblicz dwustronną wartość p z rozkładu t:
+
+```excel
+=ROZKŁ.T.2T(MODUŁ.LICZBY(B12); B11-2)
+```
+
+*(Wyjaśnienie: MODUŁ.LICZBY (ABS) jest konieczny, ponieważ funkcja ta przyjmuje tylko dodatnie wartości t. B11-2 to liczba stopni swobody).*
+
+3.  **Tworzenie Wykresu (Metoda manualna - "Z pustego arkusza"):**
+
+    - Będąc w arkuszu Raport_Statystyk, kliknij w dowolną **pustą** komórkę z dala od danych.
+
+    - Wstaw \> Wykresy \> **Punktowy (X, Y)**. Pojawi się puste białe pole.
+
+    - Kliknij prawym przyciskiem myszy na to puste pole i wybierz **Zaznacz dane...**.
+
+    - W oknie, które się pojawi, kliknij przycisk **Dodaj**.
+
+    - Teraz zobaczysz okno **Edytuj serię** (takie jak na Twoim zrzucie ekranu). Wypełnij je następująco:
+
+      - **Nazwa serii:** Wpisz ręcznie "Korelacja Cena vs Ocena" lub kliknij komórkę z tym tekstem.
+
+      - **Wartości X serii:** Kliknij strzałkę, przejdź do arkusza Dane_Czyste_Finalne i zaznacz całą kolumnę **F** (Wartosc_Sprzedazy).
+
+      - **Wartości Y serii:** Kliknij strzałkę, przejdź do arkusza Dane_Czyste_Finalne i zaznacz całą kolumnę **G** (Ocena_Transakcji).
+
+      - Kliknij OK, a potem ponownie OK.
+
+4.  **Interpretacja (Dedukcja):**
+
+    - Spójrz na wynik w komórce B13 (wartość p).
+
+    - Jeśli wartość p \> 0,05 (np. 0,45): **brak podstaw do odrzucenia hipotezy zerowej.** Dane nie dostarczają wystarczających dowodów na korelację w populacji.
+
+    - Jeśli wartość p \< 0,05: **korelacja jest istotna statystycznie.**
+
+5.  **Test hipotezy** $`\mathbf{H}_{\mathbf{0}}`$**:**
+
+> 
+> ``` math
+> r = \frac{\sum_{i = 1}^{n}{(x_{i} - \overset{ˉ}{x})(y_{i} - \overset{ˉ}{y})}}{\sqrt{\sum_{i = 1}^{n}{(x_{i} - \overset{ˉ}{x})^{2}}}\sqrt{\sum_{i = 1}^{n}{(y_{i} - \overset{ˉ}{y})^{2}}}}
+> ```
+>
+> *Test hipotezy* $`H_{0}:\rho = 0`$*:  *
+> $`t = r\sqrt{\frac{n - 2}{1 - r^{2}}}`$*, gdzie* $`df = n - 2`$
+>
+> *Wartość p dwustronna:  *
+> ``` math
+> p = 2\lbrack 1 - F_{t}( \mid t \mid ;\text{ }df = n - 2)\rbrack
+> ```
+>
+> *Wartość p jednostronna (dla* $`H_{1}:\rho > 0`$*):  *
+> ``` math
+> p = 1 - F_{t}(t;\text{ }df = n - 2)
+> ```
+>
+> *Wartość p jednostronna (dla* $`H_{1}:\rho < 0`$*):  *
+> ``` math
+> p = F_{t}(t;\text{ }df = n - 2)
+> ```
+>
+> *Równoważny zapis z użyciem niezupełnej funkcji beta (dwustronnie):  *
+> ``` math
+> p = I_{1 - r^{2}}\text{ }(\frac{n - 2}{2},\frac{1}{2})
+> ```
+
+*Legenda:  *
+$`x_{i},y_{i}`$*: sparowane obserwacje dla przypadku* $`i = 1,\ldots,n`$*  *
+$`n`$*: liczba sparowanych obserwacji  *
+$`\overset{ˉ}{x} = \frac{1}{n}\sum_{i = 1}^{n}x_{i}`$*,* $`\overset{ˉ}{y} = \frac{1}{n}\sum_{i = 1}^{n}y_{i}`$*: średnie z próby  *
+$`r`$*: współczynnik korelacji Pearsona w próbie  *
+$`H_{0}:\rho = 0`$*: hipoteza zerowa, że korelacja w populacji* $`\rho`$*jest równa zero  *
+$`t`$*: statystyka testowa dla* $`H_{0}`$*  *
+$`df = n - 2`$*: liczba stopni swobody dla testu* $`t`$*  *
+$`F_{t}( \cdot ;df)`$*: dystrybuanta rozkładu t-Studenta o* $`df`$*stopniach swobody  *
+$`p`$*: wartość p (dwustronna lub jednostronna, zależnie od wariantu testu)  *
+$`I_{z}(a,b)`$*: zregularizowana niezupełna funkcja beta (alternatywny zapis tej samej wartości p dwustronnej)*
+
+ **Dodawanie Tytułów Osi (Opis Osi):**
+
+- Kliknij ikonę **Zielonego Plusa** (➕) obok wykresu.
+
+- Zaznacz "ptaszkiem" opcję **Tytuły osi**.
+
+- Na wykresie pojawią się pola tekstowe "Tytuł osi" na dole i z lewej strony.
+
+- **Oś pozioma (X):** Kliknij w dolny tytuł, usuń tekst i wpisz: Wartość Sprzedaży (PLN).
+
+- **Oś pionowa (Y):** Kliknij w boczny tytuł, usuń tekst i wpisz: Ocena Transakcji (1-5).
+
+ **Dodawanie Linii Trendu (Linii Korelacji):**
+
+- Kliknij ponownie ikonę **Zielonego Plusa** (➕).
+
+- Najedź myszką na **Linia trendu**, kliknij małą czarną strzałkę obok tej nazwy i wybierz **Więcej opcji...**.
+
+- Po prawej stronie otworzy się panel "Formatowanie linii trendu".
+
+- Upewnij się, że zaznaczona jest opcja **Liniowy**.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- W arkuszu Raport_Statystyk poprawnie obliczono statystykę t oraz wartość p przy użyciu ROZKŁ.T.2T.
+
+- Wykres punktowy został dodany manualnie poprzez okno "Edytuj serię" i poprawnie pobiera dane z innego arkusza (Dane_Czyste_Finalne).
+
+- Potrafisz ocenić istotność wyniku na podstawie progu 0,05.
+
+## Ćwiczenie 4: Rozkład Danych (Histogram i Grupowanie)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>📊 Zrozumienie rozkładu zmiennej. Czy większość naszych zamówień to małe kwoty, czy duże? Użyjemy grupowania w tabeli przestawnej do stworzenia histogramu częstości.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  Wstaw nową Tabelę Przestawną z Dane_Czyste_Finalne do arkusza Analiza_Przestawna
+
+2.  Przeciągnij **Wartosc_Sprzedazy** do obszaru **Wiersze**.
+
+3.  Przeciągnij **Wartosc_Sprzedazy** (ponownie!) do obszaru **Wartości**.
+
+4.  Zmień funkcję agregującą: Kliknij na "Suma z Wartosc_Sprzedazy" w panelu wartości \> Ustawienia pola wartości \> Wybierz **Licznik**.
+
+5.  **Grupowanie (Kluczowy krok dla Histogramu):**
+
+    - Kliknij prawym przyciskiem na dowolną kwotę w kolumnie Wiersze tabeli przestawnej.
+
+    - Wybierz **Grupuj...**.
+
+    - Excel zaproponuje start (zmień na 0) i koniec. W polu "Według" wpisz np. **200**. Kliknij OK.
+
+6.  Excel pogrupuje sprzedaż w przedziały (np. 0-200, 201-400).
+
+7.  Wstaw wykres kolumnowy dla tej tabeli. To jest Twój histogram.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- Tabela przestawna pokazuje przedziały kwotowe (bins) w wierszach.
+
+- Wartości pokazują liczbę wystąpień (częstość) w danym przedziale.
+
+- Wykres obrazuje kształt rozkładu sprzedaży (np. rozkład normalny, prawoskośny).
+
+## Ćwiczenie 5: Istotność i Błąd Statystyczny (Afirmacja)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>⚖️ Nauka szacowania precyzji. Kiedy mówimy "Średnia sprzedaż to 550 zł", musimy wiedzieć, jaki jest margines błędu, aby nasza afirmacja była wiarygodna.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  W arkuszu Dane_Czyste_Finalne oblicz parametry potrzebne do przedziału ufności.
+
+2.  W wolnych komórkach oblicz:
+
+    - =ŚREDNIA(F:F) (Wynik np. 550 zł).
+
+    - =ODCH.STANDARD.PRÓBKI(F:F) (Zmienność danych).
+
+    - =ILE.LICZB(F:F) (Wielkość próby, n=100).
+
+3.  Oblicz **Błąd Statystyczny** (dla poziomu ufności 95%, czyli alfa = 0.05). Użyj formuły:
+
+```excel
+=UFNOŚĆ.NORM(0,05; ODCH.STANDARD.PRÓBKI(F:F); ILE.LICZB(F:F))
+```
+
+*Wyjaśnienie:* Wynik (np. 40 zł) oznacza, że z 95% pewnością prawdziwa średnia w populacji leży w przedziale: Średnia ± Błąd.
+
+4.  **Dedukcja/Interpretacja:** Napisz w komórce obok zdanie podsumowujące (Afirmację): *"Z 95% pewnością średnia wartość sprzedaży mieści się w przedziale od \[Średnia - Błąd\] do \[Średnia + Błąd\]."*
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- Poprawne użycie funkcji UFNOŚĆ.NORM (lub CONFIDENCE.NORM).
+
+- Zrozumienie, że średnia z próby to tylko estymacja, a błąd statystyczny wyznacza granice zaufania do tej liczby.
+

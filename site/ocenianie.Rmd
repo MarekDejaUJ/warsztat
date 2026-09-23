@@ -1,0 +1,34 @@
+---
+title: "Zasady zaliczenia i rubryka"
+---
+
+## Warunki zaliczenia
+
+Zaliczenie ćwiczeń wymaga uczestnictwa, aktywnej pracy i wykonania co najmniej 90% ćwiczeń oraz zadań. Ocenie podlegają terminowość, poprawność rozwiązania, dokumentacja wykonanych operacji i interpretacja wyniku.
+
+## Rubryka zadania
+
+Każde zadanie można ocenić w pięciu obszarach. Rubryka porządkuje informację zwrotną. Maksymalny wynik wynosi 10 punktów.
+
+| Kryterium | 2 punkty | 1 punkt | 0 punktów |
+|---|---|---|---|
+| Poprawność techniczna | Formuły i operacje działają w całym wymaganym zakresie | Występuje drobny błąd możliwy do poprawienia | Wynik jest błędny lub brakuje rozwiązania |
+| Dobór funkcji | Użyto właściwych polskich funkcji i separatorów | Rozwiązanie działa częściowo lub wymaga korekty składni | Funkcja nie odpowiada zadaniu |
+| Kontrola jakości | Sprawdzono wynik i opisano test kontrolny | Kontrola jest częściowa | Brakuje kontroli wyniku |
+| Dokumentacja | Podano zakres, regułę transformacji i liczbę zmienionych rekordów | Brakuje jednego elementu | Brakuje zapisu wykonanych operacji |
+| Interpretacja | Wniosek jest zgodny z wynikiem i zawiera ograniczenia | Wniosek jest ogólny | Wniosek jest sprzeczny z wynikiem lub go brakuje |
+
+## Lista kontrolna przed oddaniem
+
+- [ ] Nazwy arkuszy odpowiadają instrukcji.
+- [ ] Formuły korzystają z polskich nazw funkcji.
+- [ ] Zakresy względne, bezwzględne i mieszane są zapisane poprawnie.
+- [ ] Dane źródłowe pozostały dostępne w skoroszycie.
+- [ ] Wartości liczbowe i daty mają właściwy typ.
+- [ ] Wykresy mają tytuły, opisy osi i czytelną skalę.
+- [ ] Wnioski podają najważniejsze liczby i ograniczenia.
+- [ ] Plik otwiera się bez komunikatu o uszkodzeniu.
+
+## Informacja zwrotna
+
+Komentarz do zadania wskazuje kryterium, miejsce wystąpienia błędu i oczekiwaną korektę. Student poprawia wskazany element w swoim skoroszycie i zachowuje wcześniejszą wersję pliku.

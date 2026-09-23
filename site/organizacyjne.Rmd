@@ -1,0 +1,67 @@
+---
+title: "Spotkanie organizacyjne"
+---
+
+<div class="hero">
+<h2>Organizacja pracy i asystent kursu</h2>
+<p>90 minut na poznanie zasad, pobranie plików, omówienie sylabusa oraz przygotowanie asystenta w Microsoft 365 Copilot.</p>
+</div>
+
+<div class="timebox"><strong>Plan 90 minut:</strong> 15 min cele i sylabus, 10 min pliki, 15 min zasady zaliczenia, 15 min odpowiedzialne użycie narzędzi generatywnych, 25 min konfiguracja asystenta, 10 min test.</div>
+
+## 1. Sylabus i zakres
+
+<div class="tilt-grid">
+  <div class="tilt-card purpose"><h3>Cel</h3><p>Rozpoznasz cele, efekty uczenia się i warunki zaliczenia.</p></div>
+  <div class="tilt-card task"><h3>Zadanie</h3><p>Otwórz sylabus i zaznacz wymagania dotyczące obecności, aktywności oraz wykonania ćwiczeń.</p></div>
+  <div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Potrafisz wskazać zakres zajęć i warunki zaliczenia.</p></div>
+</div>
+
+<a class="btn-course" href="materialy/warsztat-informacyjny-uj-wzzins-11-06689-26.pdf">Otwórz sylabus PDF</a>
+
+Najważniejsze warunki dla ćwiczeń:
+
+- aktywny udział w zajęciach,
+- terminowe i poprawne wykonywanie zadań,
+- wykonanie co najmniej 90% ćwiczeń i zadań,
+- stosowanie zasad wykorzystania narzędzi opartych na sztucznej inteligencji obowiązujących na Uniwersytecie Jagiellońskim.
+
+## 2. Pliki robocze
+
+1. Przejdź do zakładki [Materiały](materialy.html).
+2. Pobierz plik przypisany do grupy.
+3. Zapisz kopię pod nazwą `nazwisko_imie_warsztat.xlsx`.
+4. Sprawdź obecność arkuszy `Arkusz1` i `Słownik_Regionów`.
+5. Zachowuj kolejne etapy pracy w tym samym skoroszycie.
+
+## 3. Utworzenie asystenta w Microsoft 365 Copilot
+
+<div class="note"><strong>Wymagane konto:</strong> zaloguj się adresem w domenie <code>@student.uj.edu.pl</code>. Widoczność funkcji „Nowy agent” zależy od licencji i ustawień środowiska UJ.</div>
+
+1. Otwórz [office.com](https://www.office.com/) i zaloguj się kontem instytucjonalnym.
+2. Uruchom aplikację **Microsoft 365 Copilot**.
+3. W panelu **Agenci** wybierz **Nowy agent**.
+4. Otwórz zakładkę [Prompty](prompty.html) i skopiuj prompt swojej grupy.
+5. Wklej prompt do kreatora agenta.
+6. Nadaj nazwę `Asystent warsztatu informacyjnego`.
+7. Utwórz agenta i rozpocznij rozmowę testową.
+
+W razie braku polecenia **Nowy agent** otwórz **Copilot Chat** i wklej prompt jako pierwszą wiadomość. Instrukcja tworzenia agentów znajduje się w [pomocy Microsoft](https://support.microsoft.com/pl-PL/Microsoft-365-Copilot/build-your-own-agent-with-microsoft-365-copilot).
+
+## 4. Test asystenta
+
+Wklej następujące polecenie:
+
+```text
+Pracuję w polskim programie Excel. Wyjaśnij, jak sprawdzić, czy wartości w kolumnie F są liczbami. Podaj polską nazwę funkcji, przykładową formułę dla komórki F2 i jeden test kontrolny.
+```
+
+Odpowiedź spełnia kryteria, gdy zawiera funkcję `CZY.LICZBA`, formułę z polskimi separatorami oraz sposób sprawdzenia wyniku.
+
+## 5. Zasady pracy z asystentem
+
+- Weryfikuj formuły w skoroszycie przed przeciągnięciem ich na całą kolumnę.
+- Zapisuj regułę każdej transformacji danych.
+- Podawaj zakres komórek i wynik kontroli.
+- Usuwaj dane osobowe przed przekazaniem materiału do narzędzia.
+- Zgłaszaj rozbieżność między odpowiedzią asystenta a wynikiem programu Excel.

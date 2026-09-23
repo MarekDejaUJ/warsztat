@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Spotkanie 5: wizualizacja i dedukcja</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Warsztat informacyjny</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Start</a>
+</li>
+<li>
+  <a href="organizacyjne.html">Organizacja</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Spotkania
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="spotkanie-1.html">1. Generowanie i standaryzacja</a>
+    </li>
+    <li>
+      <a href="spotkanie-2.html">2. Czyszczenie danych</a>
+    </li>
+    <li>
+      <a href="spotkanie-3.html">3. Funkcje analityczne</a>
+    </li>
+    <li>
+      <a href="spotkanie-4.html">4. Raporty i wyszukiwanie</a>
+    </li>
+    <li>
+      <a href="spotkanie-5.html">5. Wizualizacja i dedukcja</a>
+    </li>
+    <li>
+      <a href="spotkanie-6.html">6. Dashboard i wnioski</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="ocenianie.html">Ocena</a>
+</li>
+<li>
+  <a href="prompty.html">Prompty</a>
+</li>
+<li>
+  <a href="materialy.html">Materiały</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown-header">dr Marek Deja</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+<div class="course-identity" role="banner">
+  <span>dr Marek Deja</span>
+  <span>Warsztat informacyjny</span>
+  <span>WZ.ZI-061 · UJ.WZZINS.11.06689.26</span>
+</div>
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Spotkanie 5: wizualizacja i dedukcja</h1>
+
+</div>
+
+
+<div class="hero">
+<h2>
+Spotkanie 5 z 6
+</h2>
+<p>
+Tabele przestawne, wykresy, korelacja, wartość p, histogram i przedział
+ufności.
+</p>
+</div>
+<div class="timebox">
+<strong>Plan 90 minut:</strong> 10 min przygotowanie, 25 min tabela
+przestawna, 15 min wykres, 25 min korelacja, 10 min histogram, 5 min
+podsumowanie.
+</div>
+<div class="note">
+<strong>Przygotowanie:</strong> Arkusz Dane_Czyste_Finalne z
+wypełnionymi kolumnami analitycznymi.
+</div>
+<div
+id="ćwiczenie-1-tabela-przestawna-i-tabela-krzyżowa-agregacja-danych"
+class="section level2">
+<h2>Ćwiczenie 1: Tabela Przestawna i Tabela Krzyżowa (Agregacja
+Danych)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+📊 Zrozumienie, jak błyskawicznie agregować tysiące rekordów do
+czytelnej tabeli krzyżowej, aby odpowiedzieć na pytanie: “Kto i co
+sprzedaje najlepiej?”.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Kliknij na dowolną komórkę w tabeli w arkuszu
+Dane_Czyste_Finalne.</p></li>
+<li><p>Z wstążki wybierz <strong>Wstaw</strong> &gt; <strong>Tabela
+przestawna</strong>.</p></li>
+<li><p>W oknie dialogowym upewnij się, że zaznaczono “Nowy arkusz” i
+kliknij OK. Zmień nazwę nowego arkusza na Analiza_Przestawna.</p></li>
+<li><p>Po prawej stronie w panelu “Pola tabeli przestawnej”:</p>
+<ul>
+<li><p>Przeciągnij <strong>Manager_Regionu</strong> do obszaru
+<strong>Wiersze</strong>.</p></li>
+<li><p>Przeciągnij <strong>Kategoria_Produktu</strong> do obszaru
+<strong>Kolumny</strong>.</p></li>
+<li><p>Przeciągnij <strong>Wartosc_Sprzedazy</strong> do obszaru
+<strong>Wartości</strong>.</p></li>
+</ul></li>
+<li><p>Zauważ, że liczby są niesformatowane. Kliknij prawym przyciskiem
+na dowolną liczbę w tabeli przestawnej &gt; <strong>Format
+liczby</strong> (nie “Formatuj komórki”!) &gt; <strong>Walutowe</strong>
+&gt; OK.</p></li>
+<li><p><strong>Interpretacja (Tabela Krzyżowa):</strong> Masz przed sobą
+tabelę krzyżową pokazującą zależność dwóch zmiennych kategorycznych.</p>
+<ul>
+<li><em>Pytanie do grupy:</em> Kto jest liderem sprzedaży w kategorii
+AGD?</li>
+</ul></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Powstała tabela przestawna w nowym arkuszu.</p></li>
+<li><p>Dane są poprawnie pogrupowane (Manager w wierszach, Kategoria w
+kolumnach).</p></li>
+<li><p>Wartości są sformatowane jako waluta.</p></li>
+</ul>
+</div>
+<div id="ćwiczenie-2-wykres-przestawny-i-wizualizacja-porównawcza"
+class="section level2">
+<h2>Ćwiczenie 2: Wykres Przestawny i Wizualizacja Porównawcza</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+📈 Nauka prezentacji danych. Ludzkie oko szybciej porównuje długość
+słupków niż liczby w tabeli. Stworzymy wykres porównujący wyniki
+managerów.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Kliknij na stworzoną przed chwilą tabelę przestawną.</p></li>
+<li><p>Z wstążki (zakładka <strong>Analiza tabeli przestawnej</strong>)
+wybierz <strong>Wykres przestawny</strong>.</p></li>
+<li><p>Wybierz typ <strong>Kolumnowy grupowany</strong> i kliknij
+OK.</p></li>
+<li><p><strong>Czyszczenie wykresu:</strong> Wykresy przestawne mają
+dużo zbędnych przycisków (“szum”).</p>
+<ul>
+<li><p>Kliknij prawym przyciskiem myszy na jeden z szarych przycisków na
+wykresie (np. “Kategoria_Produktu”).</p></li>
+<li><p>Wybierz <strong>Ukryj wszystkie przyciski pól na
+wykresie</strong>.</p></li>
+</ul></li>
+<li><p>Dodaj tytuł wykresu: Kliknij na “Tytuł wykresu” (lub dodaj go
+plusem “+”) i wpisz: “Sprzedaż wg Managera i Kategorii”.</p></li>
+<li><p>Przenieś legendę na górę (Kliknij na legendę &gt; Formatuj
+legendę &gt; Do góry), aby zwiększyć obszar danych.</p></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Wykres jest czytelny, pozbawiony zbędnych przycisków
+filtrów.</p></li>
+<li><p>Tytuł jasno opisuje, co przedstawia wykres.</p></li>
+<li><p>Wykres dynamicznie reaguje na zmiany w tabeli
+przestawnej.</p></li>
+</ul>
+</div>
+<div
+id="ćwiczenie-3-dedukcja---badanie-korelacji-i-istotności-statystycznej-wartość-p"
+class="section level2">
+<h2>Ćwiczenie 3: Dedukcja - Badanie Korelacji i Istotności Statystycznej
+(Wartość p)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+🕵️‍♂️ Obliczenie korelacji między wartością sprzedaży a oceną, wyznaczenie
+wartości p i przygotowanie wykresu punktowego.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p><strong>Przygotowanie Raportu:</strong></p>
+<ul>
+<li><p>Przejdź do arkusza Raport_Statystyk.</p></li>
+<li><p>W komórkach A10:A13 wpisz opisy:</p>
+<ul>
+<li><p>A10: Korelacja (r)</p></li>
+<li><p>A11: Liczebność próby (n)</p></li>
+<li><p>A12: Statystyka t</p></li>
+<li><p>A13: Istotność (wartość p)</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Obliczenia Statystyczne:</strong></p>
+<ul>
+<li><strong>Korelacja (r):</strong> W B10 wpisz formułę badającą związek
+między sprzedażą a oceną:</li>
+</ul></li>
+</ol>
+<pre class="excel"><code>=WSP.KORELACJI(Dane_Czyste_Finalne!F:F; Dane_Czyste_Finalne!G:G)</code></pre>
+<ul>
+<li><strong>Liczebność (n):</strong> W B11 policz, ile mamy
+rekordów:</li>
+</ul>
+<pre class="excel"><code>=ILE.LICZB(Dane_Czyste_Finalne!F:F)</code></pre>
+<ul>
+<li><strong>Statystyka t:</strong> Przekształć współczynnik korelacji na
+statystykę t. W komórce B12 wpisz wzór:</li>
+</ul>
+<pre class="excel"><code>=B10 * PIERWIASTEK((B11-2)/(1-B10^2))</code></pre>
+<p><em>(Wyjaśnienie: Jest to standardowy wzór na statystykę t dla
+współczynnika korelacji Pearsona).</em></p>
+<ul>
+<li><strong>Istotność (wartość p):</strong> W komórce B13 oblicz
+dwustronną wartość p z rozkładu t:</li>
+</ul>
+<pre class="excel"><code>=ROZKŁ.T.2T(MODUŁ.LICZBY(B12); B11-2)</code></pre>
+<p><em>(Wyjaśnienie: MODUŁ.LICZBY (ABS) jest konieczny, ponieważ funkcja
+ta przyjmuje tylko dodatnie wartości t. B11-2 to liczba stopni
+swobody).</em></p>
+<ol start="3" style="list-style-type: decimal">
+<li><p><strong>Tworzenie Wykresu (Metoda manualna - “Z pustego
+arkusza”):</strong></p>
+<ul>
+<li><p>Będąc w arkuszu Raport_Statystyk, kliknij w dowolną
+<strong>pustą</strong> komórkę z dala od danych.</p></li>
+<li><p>Wstaw &gt; Wykresy &gt; <strong>Punktowy (X, Y)</strong>. Pojawi
+się puste białe pole.</p></li>
+<li><p>Kliknij prawym przyciskiem myszy na to puste pole i wybierz
+<strong>Zaznacz dane…</strong>.</p></li>
+<li><p>W oknie, które się pojawi, kliknij przycisk
+<strong>Dodaj</strong>.</p></li>
+<li><p>Teraz zobaczysz okno <strong>Edytuj serię</strong> (takie jak na
+Twoim zrzucie ekranu). Wypełnij je następująco:</p>
+<ul>
+<li><p><strong>Nazwa serii:</strong> Wpisz ręcznie “Korelacja Cena vs
+Ocena” lub kliknij komórkę z tym tekstem.</p></li>
+<li><p><strong>Wartości X serii:</strong> Kliknij strzałkę, przejdź do
+arkusza Dane_Czyste_Finalne i zaznacz całą kolumnę <strong>F</strong>
+(Wartosc_Sprzedazy).</p></li>
+<li><p><strong>Wartości Y serii:</strong> Kliknij strzałkę, przejdź do
+arkusza Dane_Czyste_Finalne i zaznacz całą kolumnę <strong>G</strong>
+(Ocena_Transakcji).</p></li>
+<li><p>Kliknij OK, a potem ponownie OK.</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Interpretacja (Dedukcja):</strong></p>
+<ul>
+<li><p>Spójrz na wynik w komórce B13 (wartość p).</p></li>
+<li><p>Jeśli wartość p &gt; 0,05 (np. 0,45): <strong>brak podstaw do
+odrzucenia hipotezy zerowej.</strong> Dane nie dostarczają
+wystarczających dowodów na korelację w populacji.</p></li>
+<li><p>Jeśli wartość p &lt; 0,05: <strong>korelacja jest istotna
+statystycznie.</strong></p></li>
+</ul></li>
+<li><p><strong>Test hipotezy</strong> <span
+class="math inline">\(`\mathbf{H}_{\mathbf{0}}`\)</span><strong>:</strong></p></li>
+</ol>
+<blockquote>
+<pre class="math"><code>r = \frac{\sum_{i = 1}^{n}{(x_{i} - \overset{ˉ}{x})(y_{i} - \overset{ˉ}{y})}}{\sqrt{\sum_{i = 1}^{n}{(x_{i} - \overset{ˉ}{x})^{2}}}\sqrt{\sum_{i = 1}^{n}{(y_{i} - \overset{ˉ}{y})^{2}}}}</code></pre>
+<p><em>Test hipotezy</em> <span class="math inline">\(`H_{0}:\rho =
+0`\)</span><em>: </em> <span class="math inline">\(`t = r\sqrt{\frac{n -
+2}{1 - r^{2}}}`\)</span><em>, gdzie</em> <span class="math inline">\(`df
+= n - 2`\)</span></p>
+<p><em>Wartość p dwustronna: </em></p>
+<pre class="math"><code>p = 2\lbrack 1 - F_{t}( \mid t \mid ;\text{ }df = n - 2)\rbrack</code></pre>
+<p><em>Wartość p jednostronna (dla</em> <span
+class="math inline">\(`H_{1}:\rho &gt; 0`\)</span><em>): </em></p>
+<pre class="math"><code>p = 1 - F_{t}(t;\text{ }df = n - 2)</code></pre>
+<p><em>Wartość p jednostronna (dla</em> <span
+class="math inline">\(`H_{1}:\rho &lt; 0`\)</span><em>): </em></p>
+<pre class="math"><code>p = F_{t}(t;\text{ }df = n - 2)</code></pre>
+<p><em>Równoważny zapis z użyciem niezupełnej funkcji beta
+(dwustronnie): </em></p>
+<pre class="math"><code>p = I_{1 - r^{2}}\text{ }(\frac{n - 2}{2},\frac{1}{2})</code></pre>
+</blockquote>
+<p><em>Legenda: </em> <span
+class="math inline">\(`x_{i},y_{i}`\)</span><em>: sparowane obserwacje
+dla przypadku</em> <span class="math inline">\(`i =
+1,\ldots,n`\)</span>* <em> <span
+class="math inline">\(`n`\)</span></em>: liczba sparowanych obserwacji
+<em> <span class="math inline">\(`\overset{ˉ}{x} = \frac{1}{n}\sum_{i =
+1}^{n}x_{i}`\)</span></em>,* <span class="math inline">\(`\overset{ˉ}{y}
+= \frac{1}{n}\sum_{i = 1}^{n}y_{i}`\)</span><em>: średnie z próby </em>
+<span class="math inline">\(`r`\)</span><em>: współczynnik korelacji
+Pearsona w próbie </em> <span class="math inline">\(`H_{0}:\rho =
+0`\)</span><em>: hipoteza zerowa, że korelacja w populacji</em> <span
+class="math inline">\(`\rho`\)</span><em>jest równa zero </em> <span
+class="math inline">\(`t`\)</span><em>: statystyka testowa dla</em>
+<span class="math inline">\(`H_{0}`\)</span>* <em> <span
+class="math inline">\(`df = n - 2`\)</span></em>: liczba stopni swobody
+dla testu* <span class="math inline">\(`t`\)</span>* <em> <span
+class="math inline">\(`F_{t}( \cdot ;df)`\)</span></em>: dystrybuanta
+rozkładu t-Studenta o* <span
+class="math inline">\(`df`\)</span><em>stopniach swobody </em> <span
+class="math inline">\(`p`\)</span><em>: wartość p (dwustronna lub
+jednostronna, zależnie od wariantu testu) </em> <span
+class="math inline">\(`I_{z}(a,b)`\)</span><em>: zregularizowana
+niezupełna funkcja beta (alternatywny zapis tej samej wartości p
+dwustronnej)</em></p>
+<p> <strong>Dodawanie Tytułów Osi (Opis Osi):</strong></p>
+<ul>
+<li><p>Kliknij ikonę <strong>Zielonego Plusa</strong> (➕) obok
+wykresu.</p></li>
+<li><p>Zaznacz “ptaszkiem” opcję <strong>Tytuły osi</strong>.</p></li>
+<li><p>Na wykresie pojawią się pola tekstowe “Tytuł osi” na dole i z
+lewej strony.</p></li>
+<li><p><strong>Oś pozioma (X):</strong> Kliknij w dolny tytuł, usuń
+tekst i wpisz: Wartość Sprzedaży (PLN).</p></li>
+<li><p><strong>Oś pionowa (Y):</strong> Kliknij w boczny tytuł, usuń
+tekst i wpisz: Ocena Transakcji (1-5).</p></li>
+</ul>
+<p> <strong>Dodawanie Linii Trendu (Linii Korelacji):</strong></p>
+<ul>
+<li><p>Kliknij ponownie ikonę <strong>Zielonego Plusa</strong>
+(➕).</p></li>
+<li><p>Najedź myszką na <strong>Linia trendu</strong>, kliknij małą
+czarną strzałkę obok tej nazwy i wybierz <strong>Więcej
+opcji…</strong>.</p></li>
+<li><p>Po prawej stronie otworzy się panel “Formatowanie linii
+trendu”.</p></li>
+<li><p>Upewnij się, że zaznaczona jest opcja
+<strong>Liniowy</strong>.</p></li>
+</ul>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>W arkuszu Raport_Statystyk poprawnie obliczono statystykę t oraz
+wartość p przy użyciu ROZKŁ.T.2T.</p></li>
+<li><p>Wykres punktowy został dodany manualnie poprzez okno “Edytuj
+serię” i poprawnie pobiera dane z innego arkusza
+(Dane_Czyste_Finalne).</p></li>
+<li><p>Potrafisz ocenić istotność wyniku na podstawie progu
+0,05.</p></li>
+</ul>
+</div>
+<div id="ćwiczenie-4-rozkład-danych-histogram-i-grupowanie"
+class="section level2">
+<h2>Ćwiczenie 4: Rozkład Danych (Histogram i Grupowanie)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+📊 Zrozumienie rozkładu zmiennej. Czy większość naszych zamówień to małe
+kwoty, czy duże? Użyjemy grupowania w tabeli przestawnej do stworzenia
+histogramu częstości.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Wstaw nową Tabelę Przestawną z Dane_Czyste_Finalne do arkusza
+Analiza_Przestawna</p></li>
+<li><p>Przeciągnij <strong>Wartosc_Sprzedazy</strong> do obszaru
+<strong>Wiersze</strong>.</p></li>
+<li><p>Przeciągnij <strong>Wartosc_Sprzedazy</strong> (ponownie!) do
+obszaru <strong>Wartości</strong>.</p></li>
+<li><p>Zmień funkcję agregującą: Kliknij na “Suma z Wartosc_Sprzedazy” w
+panelu wartości &gt; Ustawienia pola wartości &gt; Wybierz
+<strong>Licznik</strong>.</p></li>
+<li><p><strong>Grupowanie (Kluczowy krok dla Histogramu):</strong></p>
+<ul>
+<li><p>Kliknij prawym przyciskiem na dowolną kwotę w kolumnie Wiersze
+tabeli przestawnej.</p></li>
+<li><p>Wybierz <strong>Grupuj…</strong>.</p></li>
+<li><p>Excel zaproponuje start (zmień na 0) i koniec. W polu “Według”
+wpisz np. <strong>200</strong>. Kliknij OK.</p></li>
+</ul></li>
+<li><p>Excel pogrupuje sprzedaż w przedziały (np. 0-200,
+201-400).</p></li>
+<li><p>Wstaw wykres kolumnowy dla tej tabeli. To jest Twój
+histogram.</p></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Tabela przestawna pokazuje przedziały kwotowe (bins) w
+wierszach.</p></li>
+<li><p>Wartości pokazują liczbę wystąpień (częstość) w danym
+przedziale.</p></li>
+<li><p>Wykres obrazuje kształt rozkładu sprzedaży (np. rozkład normalny,
+prawoskośny).</p></li>
+</ul>
+</div>
+<div id="ćwiczenie-5-istotność-i-błąd-statystyczny-afirmacja"
+class="section level2">
+<h2>Ćwiczenie 5: Istotność i Błąd Statystyczny (Afirmacja)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+⚖️ Nauka szacowania precyzji. Kiedy mówimy “Średnia sprzedaż to 550 zł”,
+musimy wiedzieć, jaki jest margines błędu, aby nasza afirmacja była
+wiarygodna.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>W arkuszu Dane_Czyste_Finalne oblicz parametry potrzebne do
+przedziału ufności.</p></li>
+<li><p>W wolnych komórkach oblicz:</p>
+<ul>
+<li><p>=ŚREDNIA(F:F) (Wynik np. 550 zł).</p></li>
+<li><p>=ODCH.STANDARD.PRÓBKI(F:F) (Zmienność danych).</p></li>
+<li><p>=ILE.LICZB(F:F) (Wielkość próby, n=100).</p></li>
+</ul></li>
+<li><p>Oblicz <strong>Błąd Statystyczny</strong> (dla poziomu ufności
+95%, czyli alfa = 0.05). Użyj formuły:</p></li>
+</ol>
+<pre class="excel"><code>=UFNOŚĆ.NORM(0,05; ODCH.STANDARD.PRÓBKI(F:F); ILE.LICZB(F:F))</code></pre>
+<p><em>Wyjaśnienie:</em> Wynik (np. 40 zł) oznacza, że z 95% pewnością
+prawdziwa średnia w populacji leży w przedziale: Średnia ± Błąd.</p>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Dedukcja/Interpretacja:</strong> Napisz w komórce obok
+zdanie podsumowujące (Afirmację): <em>“Z 95% pewnością średnia wartość
+sprzedaży mieści się w przedziale od <span
+class="math display">\[Średnia - Błąd\]</span> do <span
+class="math display">\[Średnia + Błąd\]</span>.”</em></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Poprawne użycie funkcji UFNOŚĆ.NORM (lub
+CONFIDENCE.NORM).</p></li>
+<li><p>Zrozumienie, że średnia z próby to tylko estymacja, a błąd
+statystyczny wyznacza granice zaufania do tej liczby.</p></li>
+</ul>
+</div>
+
+<footer class="course-footer">
+  <p>dr Marek Deja · Warsztat informacyjny · WZ.ZI-061 · UJ.WZZINS.11.06689.26</p>
+</footer>
+<script src="script.js"></script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

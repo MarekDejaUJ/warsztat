@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Spotkanie 4: raporty i wyszukiwanie</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Warsztat informacyjny</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Start</a>
+</li>
+<li>
+  <a href="organizacyjne.html">Organizacja</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Spotkania
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="spotkanie-1.html">1. Generowanie i standaryzacja</a>
+    </li>
+    <li>
+      <a href="spotkanie-2.html">2. Czyszczenie danych</a>
+    </li>
+    <li>
+      <a href="spotkanie-3.html">3. Funkcje analityczne</a>
+    </li>
+    <li>
+      <a href="spotkanie-4.html">4. Raporty i wyszukiwanie</a>
+    </li>
+    <li>
+      <a href="spotkanie-5.html">5. Wizualizacja i dedukcja</a>
+    </li>
+    <li>
+      <a href="spotkanie-6.html">6. Dashboard i wnioski</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="ocenianie.html">Ocena</a>
+</li>
+<li>
+  <a href="prompty.html">Prompty</a>
+</li>
+<li>
+  <a href="materialy.html">Materiały</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown-header">dr Marek Deja</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+<div class="course-identity" role="banner">
+  <span>dr Marek Deja</span>
+  <span>Warsztat informacyjny</span>
+  <span>WZ.ZI-061 · UJ.WZZINS.11.06689.26</span>
+</div>
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Spotkanie 4: raporty i wyszukiwanie</h1>
+
+</div>
+
+
+<div class="hero">
+<h2>
+Spotkanie 4 z 6
+</h2>
+<p>
+Wyszukiwanie dwukierunkowe, agregacja wielokryterialna, prowizje i
+walidacja.
+</p>
+</div>
+<div class="timebox">
+<strong>Plan 90 minut:</strong> 10 min INDEKS i PODAJ.POZYCJĘ, 20 min
+raport agregujący, 15 min prowizja, 15 min segmentacja, 15 min
+walidacja, 15 min wyszukiwarka.
+</div>
+<div class="note">
+<strong>Przygotowanie:</strong> Kompletny arkusz Dane_Czyste_Finalne ze
+spotkania 3.
+</div>
+<div id="ćwiczenie-5-zaawansowane-wyszukiwanie-indeks-podaj.pozycję"
+class="section level2">
+<h2>Ćwiczenie 5: Zaawansowane Wyszukiwanie (INDEKS + PODAJ.POZYCJĘ)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+👑 Wyszukiwanie wartości w dowolnym kierunku za pomocą funkcji INDEKS i
+PODAJ.POZYCJĘ.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Stwórz nowy arkusz <strong>Raport_Statystyk</strong>.</p></li>
+<li><p>Chcemy znaleźć OrderID zamówienia o <strong>najwyższej</strong>
+wartości sprzedaży. WYSZUKAJ.PIONOWO tego nie potrafi (szuka tylko od
+lewej do prawej).</p></li>
+<li><p>W komórce <strong>A1</strong> wpisz: Najwyższa sprzedaż:. W
+komórce <strong>B1</strong> wpisz formułę:<br />
+</p></li>
+</ol>
+<pre class="excel"><code>=MAX(Dane_Czyste_Finalne!F:F)</code></pre>
+<pre><code>  - **Wyjaśnienie:** Funkcja MAX zwraca najwyższą wartość z kolumny F.</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>W komórce <strong>A2</strong> wpisz: OrderID dla MAX:. W komórce
+<strong>B2</strong> wpisz formułę:<br />
+</li>
+</ol>
+<pre class="excel"><code>=INDEKS(Dane_Czyste_Finalne!A:A; PODAJ.POZYCJĘ(B1; Dane_Czyste_Finalne!F:F; 0))</code></pre>
+<pre><code>  - **Wyjaśnienie (analiza od środka):**
+
+    - B1: Wartość, której szukamy (najwyższa sprzedaż, np. 1000 zł).
+
+    - Dane_Czyste_Finalne!F:F: Kolumna, w której szukamy tej wartości.
+
+    - 0: Oznacza dokładne dopasowanie (jak FAŁSZ w WYSZUKAJ.PIONOWO).
+
+    - PODAJ.POZYCJĘ(B1; F:F; 0): Ta funkcja **nie zwraca wartości**, lecz **numer wiersza**, w którym znalazła 1000 zł (np. wiersz 45).
+
+    - INDEKS(Dane_Czyste_Finalne!A:A; ...): Ta funkcja pobiera wartość z podanej kolumny (kolumna A:A, czyli OrderID)...
+
+    - ... ; 45): ...znajdującą się w wierszu o numerze, który podała jej funkcja PODAJ.POZYCJĘ (czyli w wierszu 45).
+
+    - **Rezultat:** Funkcja zwraca OrderID z komórki A45.</code></pre>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Poprawnie użyłeś funkcji MAX do znalezienia wartości
+maksymalnej.</p></li>
+<li><p>Zbudowałeś poprawną, zagnieżdżoną formułę INDEKS + PODAJ.POZYCJĘ
+do znalezienia OrderID na podstawie wartości sprzedaży.</p></li>
+</ul>
+</div>
+<div
+id="zadanie-6-indywidualne-zaawansowane-funkcje-statystyczne-licz.warunki-suma.warunków"
+class="section level2">
+<h2>Zadanie 6 (Indywidualne): Zaawansowane Funkcje Statystyczne
+(LICZ.WARUNKI, SUMA.WARUNKÓW)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+📊 Stworzenie zaawansowanego raportu agregującego dane na podstawie
+wielu kryteriów (np. “jaka była sprzedaż dla TEGO managera w TEJ
+kategorii?”).
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Stwórz nowy arkusz o nazwie
+<strong>Raport_Sprzedazy</strong>.</p></li>
+<li><p>Zbuduj tabelę krzyżową (macierz):</p>
+<ul>
+<li><p>Skopiuj unikalne nazwy <strong>Managerów Regionu</strong> (z
+kolumny N) i wklej je w komórkach A2, A3, A4…</p></li>
+<li><p>Skopiuj unikalne nazwy <strong>Kategorii Produktu</strong> (z
+kolumny E) i wklej je w komórkach B1, C1…</p></li>
+</ul></li>
+<li><p>W komórce <strong>B2</strong> (na przecięciu pierwszego managera
+i pierwszej kategorii) wpisz formułę:<br />
+</p></li>
+</ol>
+<pre class="excel"><code>=SUMA.WARUNKÓW(Dane_Czyste_Finalne!$F:$F; Dane_Czyste_Finalne!$N:$N; $A2; Dane_Czyste_Finalne!$E:$E; B$1)</code></pre>
+<pre><code>  - **Wyjaśnienie:** SUMA.WARUNKÓW(zakres_sumy; zakres_kryt_1; kryterium_1; zakres_kryt_2; kryterium_2)
+
+    - zakres_sumy: Dane_Czyste_Finalne!\$F:\$F (kolumna Wartosc_Sprzedazy, którą sumujemy).
+
+    - zakres_kryt_1: Dane_Czyste_Finalne!\$N:\$N (kolumna Managerów).
+
+    - kryterium_1: \$A2 (Manager z bieżącego wiersza).
+
+    - zakres_kryt_2: Dane_Czyste_Finalne!\$E:\$E (kolumna Kategorii).
+
+    - kryterium_2: B\$1 (Kategoria z bieżącej kolumny).
+
+  - **Blokowanie (\$):** Użycie \$A2 i B\$1 jest kluczowe, aby móc przeciągnąć formułę na całą tabelę.</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Przeciągnij formułę z <strong>B2</strong> w prawo, a następnie w
+dół, aby wypełnić całą tabelę.</p></li>
+<li><p>Obok stwórz identyczną tabelę, ale użyj funkcji LICZ.WARUNKI, aby
+policzyć liczbę transakcji. Formuła w (np.) <strong>F2</strong> będzie
+brzmiała:<br />
+</p></li>
+</ol>
+<pre class="excel"><code>=LICZ.WARUNKI(Dane_Czyste_Finalne!$N:$N; $A2; Dane_Czyste_Finalne!$E:$E; B$1)</code></pre>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Arkusz Raport_Sprzedazy zawiera dwie poprawne tabele
+agregujące.</p></li>
+<li><p>Poprawnie zastosowałeś SUMA.WARUNKÓW i LICZ.WARUNKI oraz
+strategicznie użyłeś mieszanego blokowania komórek ($A2, B$1).</p></li>
+</ul>
+</div>
+<div
+id="zadanie-7-indywidualne-dynamiczna-prowizja-wyszukaj.pionowo-funkcje-matematyczne"
+class="section level2">
+<h2>Zadanie 7 (Indywidualne): Dynamiczna Prowizja (WYSZUKAJ.PIONOWO +
+Funkcje Matematyczne)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+💰 Zbudowanie dynamicznego systemu prowizyjnego, w którym stawka
+prowizji zależy od kategorii produktu i jest pobierana ze “słownika”, a
+nie wpisana na stałe w formule JEŻELI.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Stwórz nowy arkusz <strong>Słownik_Prowizji</strong>.</p></li>
+<li><p>Wpisz w nim tabelę stawek prowizji dla kategorii:</p>
+<ul>
+<li><p>A1: <strong>Kategoria</strong> | B1:
+<strong>Stawka_Prowizji</strong></p></li>
+<li><p>A2: AGD | B2: 3%</p></li>
+<li><p>A3: DOM I RTV | B3: 5%</p></li>
+<li><p>(Dodaj inne kategorie, jeśli masz je w danych)</p></li>
+</ul></li>
+<li><p>Wróć do arkusza <strong>Dane_Czyste_Finalne</strong>.</p></li>
+<li><p>W komórce <strong>T1</strong> (tę zostawiliśmy wolną) wpisz
+nagłówek: <strong>Stawka_Prowizji</strong>.</p></li>
+<li><p>W komórce <strong>T2</strong> wpisz formułę:<br />
+</p></li>
+</ol>
+<pre class="excel"><code>=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(E2; Słownik_Prowizji!$A$2:$B$3; 2; FAŁSZ); 0)</code></pre>
+<pre><code>  - **Wyjaśnienie:** WYSZUKAJ.PIONOWO pobiera stawkę prowizji (np. 5%) na podstawie kategorii w **E2**. JEŻELI.BŁĄD zapewnia, że jeśli kategoria nie ma przypisanej prowizji, stawka wyniesie 0.</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Przeciągnij formułę z <strong>T2</strong> do
+<strong>T101</strong>.</p></li>
+<li><p>W komórce <strong>U1</strong> wpisz nagłówek:
+Wartosc_Prowizji**.</p></li>
+<li><p>W komórce <strong>U2</strong> wpisz prostą formułę
+matematyczną:<br />
+</p></li>
+</ol>
+<pre class="excel"><code>=F2 * T2</code></pre>
+<pre><code>  - **Wyjaśnienie:** Mnoży Wartosc_Sprzedazy (F2) przez dynamicznie pobraną Stawka_Prowizji (T2).</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>Przeciągnij formułę z <strong>U2</strong> do <strong>U101</strong> i
+sformatuj kolumnę jako walutową.</li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Poprawnie pobrałeś stawki prowizji do kolumny T.</p></li>
+<li><p>Obliczyłeś nową, dynamiczną wartość prowizji w kolumnie
+U.</p></li>
+<li><p>Zmiana stawki w słowniku aktualizuje wszystkie obliczenia
+prowizji.</p></li>
+</ul>
+</div>
+<div
+id="zadanie-8-indywidualne-funkcje-logiczne-i-statystyczne-segmentacja-premium"
+class="section level2">
+<h2>Zadanie 8 (Indywidualne): Funkcje Logiczne i Statystyczne
+(Segmentacja Premium)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+💎 Wykorzystanie zagnieżdżonych funkcji logicznych (I) i statystycznych
+do zidentyfikowania transakcji “Premium” (wysoka wartość I wysoka ocena)
+i zaraportowania ich.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>W arkuszu <strong>Dane_Czyste_Finalne</strong> w komórce
+<strong>V1</strong> wpisz nagłówek:
+<strong>Status_Premium</strong>.</p></li>
+<li><p>W komórce <strong>V2</strong> wpisz formułę:<br />
+</p></li>
+</ol>
+<pre class="excel"><code>=JEŻELI(ORAZ(F2 &gt; 500; G2 = 5); &quot;Premium&quot;; &quot;Standard&quot;)</code></pre>
+<pre><code>  - **Wyjaśnienie:** Funkcja ORAZ(warunek1; warunek2) zwraca PRAWDA tylko wtedy, gdy oba warunki są spełnione. JEŻELI sprawdza, czy transakcja jest jednocześnie powyżej 500 zł (F2 &gt; 500) ORAZ ma ocenę 5 (G2 = 5). Jeśli tak, zwraca &quot;Premium&quot;.</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Przeciągnij formułę z <strong>V2</strong> do
+<strong>V101</strong>.</p></li>
+<li><p>W arkuszu <strong>Raport_Sprzedazy</strong> (stworzonym w Zadaniu
+6) stwórz nowy, mały raport.</p></li>
+<li><p>W komórce <strong>A10</strong> wpisz Manager, w
+<strong>B10</strong> wpisz Liczba_Transakcji_Premium.</p></li>
+<li><p>W komórkach poniżej <strong>A10</strong> wklej unikalne nazwiska
+managerów.</p></li>
+<li><p>W komórce <strong>B11</strong> (obok pierwszego managera) wpisz
+formułę:</p></li>
+</ol>
+<pre class="excel"><code>=LICZ.WARUNKI(Dane_Czyste_Finalne!$N:$N; A11; Dane_Czyste_Finalne!$V:$V; &quot;Premium&quot;)</code></pre>
+<ul>
+<li><strong>Wyjaśnienie:</strong> LICZ.WARUNKI zlicza wiersze
+spełniające dwa kryteria: zgodny <code>Manager_Regionu</code> w kolumnie
+N oraz wartość <code>Premium</code> w kolumnie V.</li>
+</ul>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Poprawnie stworzyłeś segment Status_Premium w kolumnie
+V.</p></li>
+<li><p>Poprawnie zagregowałeś wyniki w raporcie, używając
+LICZ.WARUNKI.</p></li>
+</ul>
+</div>
+<div
+id="zadanie-9-indywidualne-funkcje-zgodności-i-tekstowe-walidacja-danych"
+class="section level2">
+<h2>Zadanie 9 (Indywidualne): Funkcje Zgodności i Tekstowe (Walidacja
+Danych)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+🔍 Wykorzystanie funkcji zgodności (PORÓWNAJ) do przeprowadzenia
+walidacji danych i znalezienia “ukrytych” błędów, takich jak zbędne
+spacje.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>W arkuszu <strong>Dane_Czyste_Finalne</strong> celowo “zepsujemy”
+jeden rekord, aby zasymulować błąd importu.</p></li>
+<li><p>W komórce <strong>A10</strong> (OrderID “ORD-1009”) ręcznie dodaj
+spację na końcu: “ORD-1009” (i naciśnij Enter).</p></li>
+<li><p>W komórce <strong>W1</strong> wpisz nagłówek:
+<strong>Walidacja_ID</strong>.</p></li>
+<li><p>W komórce <strong>W2</strong> wpisz formułę:<br />
+</p></li>
+</ol>
+<pre class="excel"><code>=PORÓWNAJ(A2; USUŃ.ZBĘDNE.ODSTĘPY(A2))</code></pre>
+<pre><code>  - **Wyjaśnienie:** USUŃ.ZBĘDNE.ODSTĘPY(A2) tworzy &quot;czystą&quot; wersję ID z komórki A2. Funkcja PORÓWNAJ(tekst1; tekst2) porównuje oba teksty i zwraca PRAWDA tylko wtedy, gdy są *identyczne* (wielkość liter i spacje mają znaczenie).</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Przeciągnij formułę z <strong>W2</strong> do
+<strong>W101</strong>.</p></li>
+<li><p>Zauważysz, że w komórce <strong>W10</strong> formuła zwróciła
+<strong>FAŁSZ</strong>.</p></li>
+<li><p>Użyj <strong>Filtrowania</strong> na kolumnie W, aby wybrać tylko
+wartości FAŁSZ i zidentyfikować wszystkie rekordy z ukrytymi
+spacjami.</p></li>
+<li><p>(Opcjonalnie): Napraw błąd w <strong>A10</strong>, usuwając
+spację. Zobaczysz, że formuła w <strong>W10</strong> automatycznie
+zmieni się na PRAWDA.</p></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Poprawnie użyłeś funkcji PORÓWNAJ i USUŃ.ZBĘDNE.ODSTĘPY do
+stworzenia reguły walidacyjnej.</p></li>
+<li><p>Potrafisz zidentyfikować rekordy, które nie przeszły walidacji
+(zwróciły FAŁSZ).</p></li>
+</ul>
+</div>
+<div
+id="zadanie-10-indywidualne-dynamiczna-wyszukiwarka-indeks-podaj.pozycję"
+class="section level2">
+<h2>Zadanie 10 (Indywidualne): Dynamiczna Wyszukiwarka (INDEKS +
+PODAJ.POZYCJĘ)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+🔎 Zbudowanie w pełni interaktywnej “wyszukiwarki” w arkuszu raportu,
+która pozwala użytkownikowi wpisać OrderID i natychmiast pobrać
+wszystkie kluczowe informacje o tym zamówieniu.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Przejdź do arkusza <strong>Raport_Statystyk</strong> (stworzonego
+w Ćwiczeniu 5).</p></li>
+<li><p>W komórce <strong>D1</strong> stwórz etykietę: <strong>Wpisz
+OrderID:</strong></p></li>
+<li><p>Komórkę <strong>E1</strong> pokoloruj na żółto : będzie to pole,
+w które użytkownik wpisuje dane. Wpisz tam testowo jedno ID, np.
+ORD-1005.</p></li>
+<li><p>Poniżej stwórz etykiety:</p>
+<ul>
+<li><p>D3: <strong>Kategoria:</strong></p></li>
+<li><p>D4: <strong>Wartość Sprzedaży:</strong></p></li>
+<li><p>D5: <strong>Manager Regionu:</strong></p></li>
+</ul></li>
+<li><p>W komórce <strong>E3</strong> (obok “Kategoria:”) wpisz
+formułę:<br />
+</p></li>
+</ol>
+<pre class="excel"><code>=INDEKS(Dane_Czyste_Finalne!E:E; PODAJ.POZYCJĘ($E$1; Dane_Czyste_Finalne!A:A; 0))</code></pre>
+<pre><code>  - **Wyjaśnienie:** PODAJ.POZYCJĘ(\$E\$1; A:A; 0) znajduje numer wiersza (np. 6) na podstawie OrderID wpisanego w zablokowanej komórce \$E\$1. INDEKS(E:E; 6) zwraca wartość z kolumny Kategorii (E) z tego szóstego wiersza.</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>W komórce <strong>E4</strong> (obok “Wartość Sprzedaży:”) wpisz
+podobną formułę, zmieniając tylko pierwszą kolumnę:<br />
+</li>
+</ol>
+<pre class="excel"><code>=INDEKS(Dane_Czyste_Finalne!F:F; PODAJ.POZYCJĘ($E$1; Dane_Czyste_Finalne!A:A; 0))</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>W komórce <strong>E5</strong> (obok “Manager Regionu:”) wpisz:<br />
+</li>
+</ol>
+<pre class="excel"><code>=INDEKS(Dane_Czyste_Finalne!N:N; PODAJ.POZYCJĘ($E$1; Dane_Czyste_Finalne!A:A; 0))</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>Przetestuj swoje narzędzie : wpisz inny OrderID w komórce
+<strong>E1</strong> (np. ORD-1020) i zobacz, jak dane w komórkach E3, E4
+i E5 natychmiast się aktualizują.</li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Stworzyłeś w pełni funkcjonalną wyszukiwarkę opartą na INDEKS i
+PODAJ.POZYCJĘ.</p></li>
+<li><p>Rozumiesz, jak użycie zablokowanej komórki ($E$1) pozwala na
+sterowanie wieloma formułami jednocześnie.</p></li>
+</ul>
+</div>
+
+<footer class="course-footer">
+  <p>dr Marek Deja · Warsztat informacyjny · WZ.ZI-061 · UJ.WZZINS.11.06689.26</p>
+</footer>
+<script src="script.js"></script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

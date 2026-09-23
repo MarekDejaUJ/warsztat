@@ -1,0 +1,41 @@
+---
+title: "Warsztat informacyjny"
+---
+
+<div class="hero">
+<h2>Od surowych danych do uzasadnionego wniosku</h2>
+<p>Siedem spotkań po 90 minut: organizacja pracy, przygotowanie danych, funkcje programu Excel, analiza, wizualizacja i raportowanie.</p>
+</div>
+
+## Cel zajęć
+
+Po zakończeniu cyklu student potrafi przygotować dane do analizy, dobrać polskie funkcje programu Excel, zbudować raport i ocenić jakość wniosku. Każde ćwiczenie zawiera cel, kolejne kroki oraz kryteria sukcesu.
+
+<div class="quick-grid">
+  <div class="quick-card"><h3>Przygotowanie danych</h3><p>Typy danych, standaryzacja, konwersja, braki i wartości odstające.</p></div>
+  <div class="quick-card"><h3>Funkcje</h3><p>Funkcje tekstowe, logiczne, statystyczne, wyszukiwania i odwołań.</p></div>
+  <div class="quick-card"><h3>Analiza</h3><p>Tabele przestawne, korelacja, test t, przedział ufności i współzmienne.</p></div>
+  <div class="quick-card"><h3>Raportowanie</h3><p>Wykresy, dashboard i zwięzłe podsumowanie zarządcze.</p></div>
+</div>
+
+## Program
+
+| Spotkanie | Temat | Rezultat |
+|---|---|---|
+| Organizacyjne | Zasady pracy, TILT, sylabus i asystent Copilot | Skonfigurowane środowisko i sprawdzony prompt |
+| 1 | Generowanie i standaryzacja danych | Arkusz `Dane_Robocze` |
+| 2 | Czyszczenie i kompletność danych | Arkusz `Dane_Czyste_Finalne` |
+| 3 | Funkcje analityczne | Kolumny analityczne i walidacyjne |
+| 4 | Raporty i wyszukiwanie | Raporty wielokryterialne i wyszukiwarka |
+| 5 | Wizualizacja i dedukcja | Tabele, wykresy i statystyki wnioskowania |
+| 6 | Dashboard i wnioski | Dashboard oraz executive summary |
+
+## Rozpocznij
+
+<a class="btn-course" href="organizacyjne.html">Spotkanie organizacyjne</a>
+<a class="btn-course" href="materialy.html">Pobierz materiały</a>
+<a class="btn-course" href="ocenianie.html">Sprawdź zasady oceny</a>
+
+## Efekty uczenia się
+
+Materiały wspierają samodzielne i efektywne wykorzystanie arkuszy kalkulacyjnych, technologii informacyjnych i generatywnej sztucznej inteligencji. Ćwiczenia rozwijają ocenę poprawności, etyczności i wartości informacyjnej wyników.

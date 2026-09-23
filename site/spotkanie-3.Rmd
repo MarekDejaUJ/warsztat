@@ -1,0 +1,282 @@
+---
+title: "Spotkanie 3: funkcje analityczne"
+---
+
+<div class="hero">
+<h2>Spotkanie 3 z 6</h2>
+<p>Łączenie tabel, funkcje tekstowe, logiczne, statystyczne i wyrażenia regularne.</p>
+</div>
+
+<div class="timebox"><strong>Plan 90 minut:</strong> 10 min przygotowanie, 20 min wyszukiwanie, 20 min tekst, 15 min obliczenia, 15 min regex, 10 min kontrola.</div>
+
+<div class="note"><strong>Przygotowanie:</strong> Arkusz Dane_Czyste_Finalne oraz arkusz Słownik_Regionów.</div>
+
+## Ćwiczenie 1: Funkcje Wyszukiwania (WYSZUKAJ.PIONOWO)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🎯 Opanowanie funkcji WYSZUKAJ.PIONOWO i łączenie danych z dwóch tabel na podstawie wspólnego identyfikatora.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  Stwórz **nowy arkusz** i nazwij go **Słownik_Regionów**.
+
+  2.  W tym nowym arkuszu stwórz małą tabelę (w zakresie **A1:C4**):
+
+      - A1: **Region_ID** \| B1: **Nazwa_Regionu** \| C1: **Manager_Regionu**
+
+      - A2: R1 \| B2: Północ \| C2: Jan Nowak
+
+      - A3: R2 \| B3: Południe \| C3: Ewa Kowalska
+
+      - A4: R3 \| B4: Zachód \| C4: Piotr Wiśniewski
+
+  3.  Wróć do arkusza **Dane_Czyste_Finalne**.
+
+  4.  W komórce **M1** wpisz nagłówek: **Nazwa_Regionu**.
+
+  5.  W komórce **M2** wpisz formułę:  
+```excel
+=WYSZUKAJ.PIONOWO(LEWY(D2;2); Słownik_Regionów!$A$2:$C$4; 2; FAŁSZ)
+```
+
+      - **Wyjaśnienie:**
+
+        - D2: To jest "klucz główny" : wartość, której szukamy (np. "R1").
+
+        - Słownik_Regionów!\$A\$2:\$C\$4: To jest przeszukiwana tabela (nasz "słownik"). Znaki \$ są kluczowe : "blokują" one zakres, aby nie przesuwał się podczas kopiowania formuły w dół.
+
+        - 2: Oznacza, że po znalezieniu "R1" w pierwszej kolumnie słownika, funkcja ma zwrócić wartość z **drugiej** kolumny tego słownika (czyli "Północ").
+
+        - FAŁSZ: Oznacza, że szukamy **dokładnego** dopasowania. Jest to krytyczne w 99% przypadków biznesowych.
+
+  6.  W komórce **N1** wpisz nagłówek: **Manager_Regionu**.
+
+  7.  W komórce **N2** wpisz podobną formułę, ale tym razem pobierającą dane z **trzeciej** kolumny słownika:  
+```excel
+=WYSZUKAJ.PIONOWO(LEWY(D2;2); Słownik_Regionów!$A$2:$C$4; 3; FAŁSZ)
+```
+
+  8.  Zaznacz obie komórki (**M2** i **N2**) i przeciągnij je w dół do wiersza **101**.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Arkusz Dane_Czyste_Finalne ma dwie nowe kolumny (M i N).
+
+  - Wszystkie Region_ID (R1, R2, R3) zostały poprawnie zamienione na odpowiadające im nazwy regionów i managerów.
+
+## Ćwiczenie 2: Zaawansowane Funkcje Tekstowe (FRAGMENT.TEKSTU, ZNAJDŹ, LEWY)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🔡 Opanowanie zaawansowanych funkcji tekstowych, które pozwalają wyodrębnić precyzyjne fragmenty tekstu o zmiennej długości (np. identyfikator z e-maila).</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  Kontynuuj pracę w arkuszu **Dane_Czyste_Finalne**.
+
+  2.  Nasze maile mają format "user.1@domena.pl", "user.10@domena.pl" itd. Chcemy wyciągnąć sam numer użytkownika.
+
+  3.  W komórce **O1** wpisz nagłówek: **ID_Uzytkownika**.
+
+  4.  W komórce **O2** wpisz formułę:  
+```excel
+=WARTOŚĆ(FRAGMENT.TEKSTU(C2; ZNAJDŹ("."; C2) + 1; ZNAJDŹ("@"; C2) - ZNAJDŹ("."; C2) - 1))
+```
+
+      - **Wyjaśnienie (analiza od środka):**
+
+        - C2: Nasz email (np. "user.10@domena.pl").
+
+        - ZNAJDŹ("."; C2): Znajduje pozycję kropki (wynik: 5).
+
+        - ZNAJDŹ("@"; C2): Znajduje pozycję małpy (wynik: 8).
+
+        - FRAGMENT.TEKSTU(tekst; nr_początkowy; liczba_znaków):
+
+          - tekst: C2.
+
+          - nr_początkowy: ZNAJDŹ("."; C2) + 1 (czyli 5 + 1 = 6). Chcemy zacząć wycinanie *po* kropce.
+
+          - liczba_znaków: ZNAJDŹ("@"; C2) - ZNAJDŹ("."; C2) - 1 (czyli 8 - 5 - 1 = 2). Jest to dystans między małpą a kropką.
+
+        - Całość FRAGMENT.TEKSTU zwraca tekst "10".
+
+        - WARTOŚĆ(...): Zamienia tekst "10" na liczbę 10, aby umożliwić obliczenia.
+
+  5.  Przeciągnij formułę z **O2** w dół do **O101**.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Nowa kolumna ID_Uzytkownika (O) zawiera poprawnie wyodrębnione numery (jako liczby) z adresów e-mail.
+
+  - Rozumiesz, jak zagnieżdżać funkcje ZNAJDŹ wewnątrz FRAGMENT.TEKSTU, aby dynamicznie wycinać tekst.
+
+## Ćwiczenie 3: Funkcje Matematyczne i Statystyczne (MOD, ZAOKR, ŚREDNIA)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🧮 Zastosowanie funkcji matematycznych i statystycznych do segmentacji danych (np. podziału na grupy testowe A/B) oraz obliczania odchyleń od normy.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  Kontynuuj pracę w arkuszu **Dane_Czyste_Finalne**.
+
+  2.  Stwórzmy **Grupę Testową A/B** na podstawie OrderID. Chcemy, aby zamówienia parzyste były w grupie A, a nieparzyste w grupie B.
+
+  3.  W komórce **P1** wpisz nagłówek: **Grupa_Testowa**.
+
+  4.  W komórce **P2** wpisz formułę:  
+```excel
+=JEŻELI(MOD(WARTOŚĆ(PRAWY(A2; 4)); 2) = 0; "Grupa A"; "Grupa B")
+```
+
+      - **Wyjaśnienie:**
+
+        - PRAWY(A2; 4): Wyciąga 4 ostatnie znaki z OrderID (np. "1001").
+
+        - WARTOŚĆ(...): Zamienia tekst "1001" na liczbę 1001.
+
+        - MOD(1001; 2): Funkcja MOD (modulo) oblicza resztę z dzielenia. 1001 / 2 daje 500 i **resztę 1**.
+
+        - JEŻELI(... = 0; ...): Sprawdza, czy reszta z dzielenia jest równa 0 (czyli czy liczba jest parzysta). Jeśli tak, zwraca "Grupa A"; jeśli nie (reszta to 1), zwraca "Grupa B".
+
+  5.  Przeciągnij formułę z **P2** w dół do **P101**.
+
+  6.  Teraz obliczymy odchylenie od średniej sprzedaży. W komórce **R1** wpisz nagłówek: **Odchylenie_Od_Sredniej**.
+
+  7.  W komórce **R2** wpisz formułę:  
+```excel
+=F2 - ŚREDNIA($F$2:$F$101)
+```
+
+      - **Wyjaśnienie:** ŚREDNIA(\$F\$2:\$F\$101) oblicza średnią sprzedaż dla całego zbioru (załóżmy, że to 550 zł). Użycie \$ blokuje ten zakres. Formuła F2 - ... (np. 600 - 550) oblicza, o ile dana sprzedaż jest wyższa lub niższa od średniej.
+
+  8.  Przeciągnij formułę z **R2** w dół do **R101** i sformatuj kolumnę jako walutową.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Poprawnie stworzyłeś kolumnę Grupa_Testowa (P) używając funkcji MOD.
+
+  - Poprawnie stworzyłeś kolumnę Odchylenie_Od_Sredniej (R) używając ŚREDNIA i blokowania komórek.
+
+## Ćwiczenie 4: Funkcje Logiczne i Informacyjne (JEŻELI.BŁĄD, CZY.BŁĄD)
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🛡️ Opanowanie "defensywnego" pisania formuł. Nauczysz się używać JEŻELI.BŁĄD (IFERROR), aby przechwytywać i obsługiwać błędy (np. \#N/D! w WYSZUKAJ.PIONOWO), zamiast pozwalać im "psuć" arkusz.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+  1.  Wróć do arkusza **Słownik_Regionów**. Celowo usuń jeden wpis, np. wiersz dla **R3** (Zaznacz wiersz 4 i usuń go).
+
+  2.  Wróć do arkusza **Dane_Czyste_Finalne**. Zauważ, że w kolumnach **M** i **N** (Nazwa Regionu, Manager) wszystkie wiersze, które miały Region_ID = "R3", teraz pokazują błąd #N/D! (Nie Dotyczy), ponieważ formuła WYSZUKAJ.PIONOWO nie może znaleźć "R3" w słowniku.
+
+  3.  Musimy to naprawić. Zmodyfikujemy formułę w komórce **M2**:  
+```excel
+=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(D2; Słownik_Regionów!$A$2:$C$3; 2; FAŁSZ); "Brak danych")
+```
+
+      - **Wyjaśnienie:** JEŻELI.BŁĄD(formuła; wartość_jeśli_błąd): Excel najpierw próbuje wykonać główną formułę (WYSZUKAJ.PIONOWO). Jeśli formuła zadziała, zwróci jej wynik (np. "Północ"). Jeśli jednak formuła zwróci jakikolwiek błąd (np. #N/D!), funkcja JEŻELI.BŁĄD przechwyci go i zamiast błędu zwróci podany przez nas tekst: "Brak danych".
+
+  4.  Popraw również formułę w komórce **N2**:  
+```excel
+=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(D2; Słownik_Regionów!$A$2:$C$3; 3; FAŁSZ); "Brak danych")
+```
+
+  5.  Zaznacz **M2** i **N2** i przeciągnij je ponownie w dół do **M101**, nadpisując stare formuły.
+
+  6.  Przywróć dane dla R3 w arkuszu Słownik_Regionów (R3, Zachód, Piotr Wiśniewski). Zobaczysz, że formuły automatycznie się zaktualizują.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+  - Formuły w kolumnach M i N są teraz "opakowane" w funkcję JEŻELI.BŁĄD.
+
+  - Rozumiesz, jak ta funkcja chroni arkusz przed błędami generowanymi przez inne funkcje, np. wyszukiwania.
+
+## Ćwiczenie 4a: Wprowadzenie do Wyrażeń Regularnych (REGEXWYODRĘBNIJ, REGEXTEST)
+
+**Ważna uwaga:** Poniższe funkcje (REGEXWYODRĘBNIJ, REGEXTEST) są dostępne tylko w nowszych wersjach programu Excel (Microsoft 365). Jeśli nie masz do nich dostępu, potraktuj to ćwiczenie jako demonstrację koncepcyjną, a w Ćwiczeniu 2 (z funkcjami ZNAJDŹ i FRAGMENT.TEKSTU) zobaczyłeś, jak można osiągnąć podobne wyniki tradycyjnymi metodami.
+
+<div class="tilt-card purpose">
+<h3>Cel</h3>
+<p>🔡 Wyszukiwanie, wyodrębnianie i sprawdzanie wzorców tekstowych za pomocą wyrażeń regularnych. Użyj funkcji REGEXWYODRĘBNIJ do wyodrębnienia danych oraz REGEXTEST do ich walidacji.</p>
+</div>
+
+<div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
+
+1.  Kontynuuj pracę w arkuszu **Dane_Czyste_Finalne**. W Ćwiczeniu 2 użyliśmy skomplikowanej formuły w kolumnie **O** do wyciągnięcia numeru ID. Zobaczmy, jak Regex radzi sobie z wyciągnięciem nazwy użytkownika (wszystkiego przed znakiem @).
+
+2.  W komórce **Q1** wpisz nagłówek: **Email_Username_Regex**.
+
+3.  W komórce **Q2** wpisz formułę:  
+```excel
+=REGEXWYODRĘBNIJ(C2; "^[^@]+")
+```
+
+- **Wyjaśnienie:**
+
+- REGEXWYODRĘBNIJ (C2; ...): Funkcja ta wyodrębnia tekst z komórki **C2**, który pasuje do podanego wzorca.
+
+- "^(\[^@\]+)": To jest wzorzec Regex.
+
+- ^: Oznacza "zacznij od początku tekstu".
+
+- `[^@]+`: dopasuj co najmniej jeden znak różny od `@`.
+
+- @: Wzorzec musi kończyć się literalnym znakiem @.
+
+- **Rezultat:** Formuła wyciąga cały tekst od początku do znaku @ (np. "user.1", "user.10").
+
+1.  Teraz użyjemy Regex do prawdziwej walidacji formatu e-mail. W Ćwiczeniu 4 (z poprzedniego modułu) tylko pokolorowaliśmy błędne maile. Teraz oznaczymy je automatycznie.
+
+1.  W komórce **S1** wpisz nagłówek: **Email_Valid_Regex**.
+
+1.  W komórce **S2** wpisz formułę:  
+```excel
+=REGEXTEST(C2; "^\S+@\S+\.\S+$")
+```
+
+- **Wyjaśnienie:**
+
+- REGEXTEST(C2; ...): Funkcja ta sprawdza, czy tekst w **C2** pasuje do wzorca, zwracając PRAWDA lub FAŁSZ.
+
+- "^\S+@\S+\\\S+\$": To jest standardowy wzorzec walidacji emaila.
+
+- ^: Zacznij od początku tekstu.
+
+- `\S+`: dopasuj co najmniej jeden znak bez spacji w nazwie użytkownika.
+
+- @: Literalny znak @.
+
+- \S+: "Jeden lub więcej znaków bez spacji". (Nazwa domeny).
+
+- \\: Literalny znak kropki (. musi być "ucieczniona" znakiem \\ ponieważ sama kropka w Regex oznacza "dowolny znak").
+
+- \S+: "Jeden lub więcej znaków bez spacji". (Końcówka domeny, np. "pl").
+
+- \$: Oznacza "koniec tekstu".
+
+1.  Zaznacz komórki **Q2** i **S2**, a następnie przeciągnij je w dół do wiersza **101**.
+
+1.  **Obserwacja i Czyszczenie:** Zauważ, że w kolumnie **Q** dla błędnych maili (tych, które pokolorowaliśmy na żółto) pojawił się błąd #N/A (ponieważ wzorzec nie znalazł znaku @). W kolumnie S dla tych samych rekordów poprawnie pojawiła się wartość FAŁSZ.
+
+1.  Teraz, korzystając z wiedzy z Ćwiczenia 4, "opakuj" formułę w **Q2**, aby obsłużyć błędy:  
+```excel
+=JEŻELI.BŁĄD(REGEXWYODRĘBNIJ(C2; "^[^@]+"); "BŁĄD FORMATU")
+```
+
+1.  Przeciągnij poprawioną formułę z **Q2** w dół do **Q101**.
+
+<div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
+
+- Kolumna Email_Username_Regex (Q) poprawnie wyodrębnia nazwę użytkownika (np. "user.1") lub zwraca "BŁĄD FORMATU" dla niepoprawnych maili.
+
+- Kolumna Email_Valid_Regex (S) poprawnie zwraca PRAWDA dla poprawnych formatów i FAŁSZ dla błędnych.
+
+- Rozumiesz koncepcyjną różnicę między REGEXWYODRĘBNIJ (wyciąganie danych) a REGEXTEST (walidacja PRAWDA/FAŁSZ).
+

@@ -11,7 +11,7 @@
 
 
 
-<title>Warsztat informacyjny</title>
+<title>Spotkanie 6: dashboard i wnioski</title>
 
 <script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -378,128 +378,315 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Warsztat informacyjny</h1>
+<h1 class="title toc-ignore">Spotkanie 6: dashboard i wnioski</h1>
 
 </div>
 
 
 <div class="hero">
 <h2>
-Od surowych danych do uzasadnionego wniosku
+Spotkanie 6 z 6
 </h2>
 <p>
-Siedem spotkań po 90 minut: organizacja pracy, przygotowanie danych,
-funkcje programu Excel, analiza, wizualizacja i raportowanie.
+Analiza czasu, dashboard, test t, kontrola współzmiennych i podsumowanie
+zarządcze.
 </p>
 </div>
-<div id="cel-zajęć" class="section level2">
-<h2>Cel zajęć</h2>
-<p>Po zakończeniu cyklu student potrafi przygotować dane do analizy,
-dobrać polskie funkcje programu Excel, zbudować raport i ocenić jakość
-wniosku. Każde ćwiczenie zawiera cel, kolejne kroki oraz kryteria
-sukcesu.</p>
-<div class="quick-grid">
-<div class="quick-card">
+<div class="timebox">
+<strong>Plan 90 minut:</strong> 10 min przygotowanie, 15 min analiza
+czasu, 20 min dashboard, 20 min test t, 15 min współzmienne, 10 min
+executive summary.
+</div>
+<div class="note">
+<strong>Przygotowanie:</strong> Skoroszyt zawierający tabele i wykresy
+utworzone podczas spotkania 5.
+</div>
+<div id="zadanie-6-indywidualne-analiza-czasowa-grouping-by-time"
+class="section level2">
+<h2>Zadanie 6 (Indywidualne): Analiza Czasowa (Grouping by Time)</h2>
+<div class="tilt-card purpose">
 <h3>
-Przygotowanie danych
+Cel
 </h3>
 <p>
-Typy danych, standaryzacja, konwersja, braki i wartości odstające.
+📆 Analiza trendów w czasie. Transformacja surowych dat dziennych na
+miesiące/kwartały w tabeli przestawnej, aby zobaczyć sezonowość.
 </p>
 </div>
-<div class="quick-card">
+<div class="tilt-card task">
 <h3>
-Funkcje
+Zadanie
 </h3>
 <p>
-Funkcje tekstowe, logiczne, statystyczne, wyszukiwania i odwołań.
+Wykonaj kolejne kroki.
 </p>
 </div>
-<div class="quick-card">
+<ol style="list-style-type: decimal">
+<li><p>Stwórz nową tabelę przestawną w arkuszu
+Analiza_Przestawna.</p></li>
+<li><p>Umieść <strong>Data_Zamowienia</strong> w Wierszach, a
+<strong>Wartosc_Sprzedazy</strong> w Wartościach (Suma).</p></li>
+<li><p>Excel może automatycznie pogrupować daty. Jeśli nie (widzisz
+pojedyncze dni):</p>
+<ul>
+<li><p>Kliknij Prawym Przyciskiem na datę &gt; Grupuj.</p></li>
+<li><p>Zaznacz <strong>Miesiące</strong> i
+<strong>Lata</strong>.</p></li>
+</ul></li>
+<li><p>Dodaj <strong>Kategoria_Produktu</strong> do Kolumn.</p></li>
+<li><p>Stwórz wykres liniowy (Line Chart) obrazujący trendy sprzedaży
+kategorii w czasie.</p></li>
+<li><p><strong>Interpretacja:</strong> Zidentyfikuj miesiąc z najwyższym
+pikiem sprzedaży (“Współzmienna czasu”).</p></li>
+</ol>
+<div class="tilt-card criteria">
 <h3>
-Analiza
+Kryteria sukcesu
 </h3>
 <p>
-Tabele przestawne, korelacja, test t, przedział ufności i współzmienne.
+Sprawdź rezultat przed przejściem dalej.
 </p>
 </div>
-<div class="quick-card">
+<ul>
+<li><p>Tabela prezentuje dane zagregowane miesięcznie/rocznie, a nie
+dziennie.</p></li>
+<li><p>Wykres liniowy czytelnie pokazuje zmiany w czasie dla różnych
+kategorii.</p></li>
+</ul>
+</div>
+<div id="zadanie-7-indywidualne-interaktywny-dashboard-fragmentatory"
+class="section level2">
+<h2>Zadanie 7 (Indywidualne): Interaktywny Dashboard
+(Fragmentatory)</h2>
+<div class="tilt-card purpose">
 <h3>
-Raportowanie
+Cel
 </h3>
 <p>
-Wykresy, dashboard i zwięzłe podsumowanie zarządcze.
+🖥️ Budowa Dashboardu zarządczego. Połączenie wielu wykresów z
+interaktywnymi filtrami (Slicers), co pozwala użytkownikowi na
+samodzielną eksplorację danych.
 </p>
 </div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
 </div>
+<ol style="list-style-type: decimal">
+<li><p>Stwórz nowy arkusz o nazwie DASHBOARD.</p></li>
+<li><p>Przenieś (Wytnij/Wklej) dwa stworzone wcześniej wykresy
+(Kolumnowy z Ćw. 2 i Liniowy z Zad. 6) do tego arkusza. Ułóż je
+estetycznie obok siebie.</p></li>
+<li><p>Kliknij na dowolny wykres przestawny.</p></li>
+<li><p>Z wstążki (Analiza wykresu przestawnego) wybierz <strong>Wstaw
+fragmentator</strong> (Insert Slicer).</p></li>
+<li><p>Zaznacz: <strong>Manager_Regionu</strong> oraz
+<strong>Ocena_Transakcji</strong>. Kliknij OK.</p></li>
+<li><p><strong>Łączenie raportów (Kluczowy krok):</strong></p>
+<ul>
+<li><p>Kliknij prawym przyciskiem na nagłówek fragmentatora
+“Manager_Regionu”.</p></li>
+<li><p>Wybierz <strong>Połączenia raportów…</strong>.</p></li>
+<li><p>Zaznacz wszystkie tabele przestawne widoczne na liście (aby jeden
+przycisk sterował wszystkimi wykresami naraz).</p></li>
+<li><p>Powtórz to dla drugiego fragmentatora.</p></li>
+</ul></li>
+<li><p>Przetestuj: Kliknij na “Kowalską” na fragmentatorze. Oba wykresy
+powinny się zmienić.</p></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
 </div>
-<div id="program" class="section level2">
-<h2>Program</h2>
-<table>
-<colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Spotkanie</th>
-<th>Temat</th>
-<th>Rezultat</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Organizacyjne</td>
-<td>Zasady pracy, TILT, sylabus i asystent Copilot</td>
-<td>Skonfigurowane środowisko i sprawdzony prompt</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>Generowanie i standaryzacja danych</td>
-<td>Arkusz <code>Dane_Robocze</code></td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td>Czyszczenie i kompletność danych</td>
-<td>Arkusz <code>Dane_Czyste_Finalne</code></td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td>Funkcje analityczne</td>
-<td>Kolumny analityczne i walidacyjne</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>Raporty i wyszukiwanie</td>
-<td>Raporty wielokryterialne i wyszukiwarka</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td>Wizualizacja i dedukcja</td>
-<td>Tabele, wykresy i statystyki wnioskowania</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td>Dashboard i wnioski</td>
-<td>Dashboard oraz executive summary</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><p>Powstał arkusz Dashboard z minimum dwoma wykresami.</p></li>
+<li><p>Dodano fragmentatory, które są estetycznie ułożone.</p></li>
+<li><p>Filtrowanie działa globalnie (zmienia oba wykresy
+jednocześnie).</p></li>
+</ul>
 </div>
-<div id="rozpocznij" class="section level2">
-<h2>Rozpocznij</h2>
-<p><a class="btn-course" href="organizacyjne.html">Spotkanie
-organizacyjne</a> <a class="btn-course" href="materialy.html">Pobierz
-materiały</a> <a class="btn-course" href="ocenianie.html">Sprawdź zasady
-oceny</a></p>
+<div id="zadanie-8-indywidualne-testowanie-hipotez-grupa-a-vs-b"
+class="section level2">
+<h2>Zadanie 8 (Indywidualne): Testowanie Hipotez (Grupa A vs B)</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+🧪 Porównanie średniej sprzedaży w grupach A i B za pomocą dwustronnego
+testu t z nierównymi wariancjami.
+</p>
 </div>
-<div id="efekty-uczenia-się" class="section level2">
-<h2>Efekty uczenia się</h2>
-<p>Materiały wspierają samodzielne i efektywne wykorzystanie arkuszy
-kalkulacyjnych, technologii informacyjnych i generatywnej sztucznej
-inteligencji. Ćwiczenia rozwijają ocenę poprawności, etyczności i
-wartości informacyjnej wyników.</p>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>W arkuszu Dane_Czyste_Finalne upewnij się, że masz kolumnę
+<strong>Grupa_Testowa</strong> (Grupa A/B).</p></li>
+<li><p>Stwórz tabelę przestawną w nowym miejscu.</p></li>
+<li><p>Wiersze: <strong>Grupa_Testowa</strong>.</p></li>
+<li><p>Wartości:</p>
+<ul>
+<li><p><strong>Wartosc_Sprzedazy</strong> (ustaw funkcję:
+ŚREDNIA).</p></li>
+<li><p><strong>Wartosc_Sprzedazy</strong> (przeciągnij drugi raz i ustaw
+funkcję: Odchylenie standardowe).</p></li>
+</ul></li>
+<li><p>W arkuszu <strong>Raport_Statystyk</strong> wpisz w komórce
+<strong>B20</strong> formułę testu t:</p></li>
+</ol>
+<pre class="excel"><code>=T.TEST(FILTRUJ(Dane_Czyste_Finalne!$F$2:$F$101;Dane_Czyste_Finalne!$P$2:$P$101=&quot;Grupa A&quot;);FILTRUJ(Dane_Czyste_Finalne!$F$2:$F$101;Dane_Czyste_Finalne!$P$2:$P$101=&quot;Grupa B&quot;);2;3)</code></pre>
+<p>Argument <code>2</code> oznacza test dwustronny. Argument
+<code>3</code> wybiera test dwóch prób z nierównymi wariancjami.</p>
+<ol start="6" style="list-style-type: decimal">
+<li><p><strong>Analiza:</strong> Porównaj średnie i odczytaj wartość
+p.</p>
+<ul>
+<li><p>Wartość p poniżej 0,05 wskazuje statystycznie istotną różnicę
+średnich na przyjętym poziomie istotności.</p></li>
+<li><p>Wartość p równa lub większa od 0,05 oznacza brak podstaw do
+odrzucenia hipotezy o równych średnich.</p></li>
+</ul></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Tabela pokazuje średnią i odchylenie standardowe dla obu
+grup.</p></li>
+<li><p>Komórka B20 zawiera wynik dwustronnego testu <code>T.TEST</code>,
+a interpretacja odpowiada wartości p.</p></li>
+</ul>
+</div>
+<div
+id="zadanie-9-indywidualne-zmienne-zakłócające-covariates---analiza-wielowymiarowa"
+class="section level2">
+<h2>Zadanie 9 (Indywidualne): Zmienne Zakłócające (Covariates) - Analiza
+Wielowymiarowa</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+🧩 Ocena wpływu liczby zamówień i regionu na porównanie wyników
+menedżerów.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Stwórz tabelę przestawną.</p></li>
+<li><p>Wiersze: <strong>Manager_Regionu</strong>.</p></li>
+<li><p>Wartości: <strong>Wartosc_Sprzedazy</strong> (Suma).</p>
+<ul>
+<li><em>Obserwacja:</em> Zobacz, kto ma najniższy wynik. Załóżmy, że Jan
+Nowak.</li>
+</ul></li>
+<li><p><strong>Dodanie Kontekstu (Współzmienna):</strong></p>
+<ul>
+<li><p>Dołóż <strong>Region_ID</strong> (lub Nazwę Regionu) do obszaru
+<strong>Kolumny</strong>.</p></li>
+<li><p>Dołóż <strong>Liczba z OrderID</strong> (jako licznik) do
+Wartości.</p></li>
+</ul></li>
+<li><p><strong>Dedukcja:</strong> Przeanalizuj wynik.</p>
+<ul>
+<li><p>Jaka jest średnia wartość zamówienia Jana Nowaka?</p></li>
+<li><p>Ile zamówień zarejestrowano w jego regionie?</p></li>
+<li><p>Gdy średnia na zamówienie pozostaje podobna, a suma różni się z
+powodu liczby zamówień: zidentyfikowałeś wpływ wielkości rynku.</p></li>
+</ul></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Uczestnik potrafi rozbić ogólny wynik (Suma Sprzedaży) na
+czynniki składowe (Średnia wartość x Liczba transakcji).</p></li>
+<li><p>Poprawna interpretacja tabeli wielowymiarowej.</p></li>
+</ul>
+</div>
+<div id="zadanie-10-indywidualne-raport-końcowy-executive-summary"
+class="section level2">
+<h2>Zadanie 10 (Indywidualne): Raport Końcowy “Executive Summary”</h2>
+<div class="tilt-card purpose">
+<h3>
+Cel
+</h3>
+<p>
+📝 Synteza. Stworzenie małej, estetycznej tabeli podsumowującej
+najważniejsze KPI (Key Performance Indicators) przy użyciu funkcji
+WEŹDANETABELI (GETPIVOTDATA), co pozwala na precyzyjne umiejscowienie
+danych poza tabelą przestawną.
+</p>
+</div>
+<div class="tilt-card task">
+<h3>
+Zadanie
+</h3>
+<p>
+Wykonaj kolejne kroki.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>W arkuszu DASHBOARD, obok wykresów, przygotuj ręcznie
+sformatowaną tabelkę “Kluczowe Wskaźniki”.</p>
+<ul>
+<li>Nagłówki: Całkowita Sprzedaż, Średnia Ocena, Najlepszy Region.</li>
+</ul></li>
+<li><p>W komórce pod “Całkowita Sprzedaż” wpisz znak =, a następnie
+kliknij na komórkę z Sumą Końcową w dowolnej tabeli przestawnej
+obliczającej sprzedaż.</p></li>
+<li><p>Zauważ, że Excel wstawił funkcję:
+=WEŹDANETABELI(“Wartosc_Sprzedazy”; …) Zatwierdź Enterem.</p></li>
+<li><p>To samo zrób dla Średniej Oceny (musisz mieć tabelę przestawną
+liczącą średnią ocenę).</p></li>
+<li><p>Sformatuj te komórki dużą czcionką, dodaj kolory. To są “karty
+wyników” (Scorecards).</p></li>
+</ol>
+<div class="tilt-card criteria">
+<h3>
+Kryteria sukcesu
+</h3>
+<p>
+Sprawdź rezultat przed przejściem dalej.
+</p>
+</div>
+<ul>
+<li><p>Wykorzystanie funkcji WEŹDANETABELI do wyciągnięcia konkretnych
+liczb z tabel przestawnych.</p></li>
+<li><p>Stworzenie estetycznego panelu KPI, który nie wygląda jak arkusz
+kalkulacyjny, lecz jak raport w aplikacji.</p></li>
+</ul>
 </div>
 
 <footer class="course-footer">
