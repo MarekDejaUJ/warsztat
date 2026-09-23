@@ -9,7 +9,7 @@ title: "Spotkanie 3: funkcje analityczne"
 
 <div class="timebox"><strong>Plan 90 minut:</strong> 10 min przygotowanie, 20 min wyszukiwanie, 20 min tekst, 15 min obliczenia, 15 min regex, 10 min kontrola.</div>
 
-<div class="note"><strong>Przygotowanie:</strong> Arkusz Dane_Czyste_Finalne oraz arkusz Słownik_Regionów.</div>
+<div class="note"><strong>Przygotowanie:</strong> Otwórz najnowszą wersję skoroszytu. Potrzebne są arkusze Dane_Czyste_Finalne oraz Słownik_Regionów.</div>
 
 ## Ćwiczenie 1: Funkcje Wyszukiwania (WYSZUKAJ.PIONOWO)
 
@@ -20,9 +20,9 @@ title: "Spotkanie 3: funkcje analityczne"
 
 <div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
 
-  1.  Stwórz **nowy arkusz** i nazwij go **Słownik_Regionów**.
+  1.  Otwórz istniejący arkusz **Słownik_Regionów**.
 
-  2.  W tym nowym arkuszu stwórz małą tabelę (w zakresie **A1:C4**):
+  2.  Sprawdź tabelę w zakresie **A1:C4**:
 
       - A1: **Region_ID** \| B1: **Nazwa_Regionu** \| C1: **Manager_Regionu**
 
@@ -178,14 +178,14 @@ title: "Spotkanie 3: funkcje analityczne"
 
   3.  Musimy to naprawić. Zmodyfikujemy formułę w komórce **M2**:  
 ```excel
-=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(D2; Słownik_Regionów!$A$2:$C$3; 2; FAŁSZ); "Brak danych")
+=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(D2; Słownik_Regionów!$A$2:$C$4; 2; FAŁSZ); "Brak danych")
 ```
 
       - **Wyjaśnienie:** JEŻELI.BŁĄD(formuła; wartość_jeśli_błąd): Excel najpierw próbuje wykonać główną formułę (WYSZUKAJ.PIONOWO). Jeśli formuła zadziała, zwróci jej wynik (np. "Północ"). Jeśli jednak formuła zwróci jakikolwiek błąd (np. #N/D!), funkcja JEŻELI.BŁĄD przechwyci go i zamiast błędu zwróci podany przez nas tekst: "Brak danych".
 
   4.  Popraw również formułę w komórce **N2**:  
 ```excel
-=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(D2; Słownik_Regionów!$A$2:$C$3; 3; FAŁSZ); "Brak danych")
+=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(D2; Słownik_Regionów!$A$2:$C$4; 3; FAŁSZ); "Brak danych")
 ```
 
   5.  Zaznacz **M2** i **N2** i przeciągnij je ponownie w dół do **M101**, nadpisując stare formuły.
@@ -215,20 +215,20 @@ title: "Spotkanie 3: funkcje analityczne"
 
 3.  W komórce **Q2** wpisz formułę:  
 ```excel
-=REGEXWYODRĘBNIJ(C2; "^[^@]+")
+=REGEXWYODRĘBNIJ(C2; "^[^@\s]+(?=@)")
 ```
 
 - **Wyjaśnienie:**
 
-- REGEXWYODRĘBNIJ (C2; ...): Funkcja ta wyodrębnia tekst z komórki **C2**, który pasuje do podanego wzorca.
+- REGEXWYODRĘBNIJ (C2; ...): Funkcja wyodrębnia nazwę użytkownika znajdującą się bezpośrednio przed znakiem `@`.
 
-- "^(\[^@\]+)": To jest wzorzec Regex.
+- `^[^@\s]+(?=@)`: To jest wzorzec Regex.
 
 - ^: Oznacza "zacznij od początku tekstu".
 
-- `[^@]+`: dopasuj co najmniej jeden znak różny od `@`.
+- `[^@\s]+`: dopasuj co najmniej jeden znak różny od `@` i spacji.
 
-- @: Wzorzec musi kończyć się literalnym znakiem @.
+- `(?=@)`: sprawdź, czy za dopasowanym tekstem znajduje się znak `@`.
 
 - **Rezultat:** Formuła wyciąga cały tekst od początku do znaku @ (np. "user.1", "user.10").
 
@@ -245,7 +245,7 @@ title: "Spotkanie 3: funkcje analityczne"
 
 - REGEXTEST(C2; ...): Funkcja ta sprawdza, czy tekst w **C2** pasuje do wzorca, zwracając PRAWDA lub FAŁSZ.
 
-- "^\S+@\S+\\\S+\$": To jest standardowy wzorzec walidacji emaila.
+- `^\S+@\S+\.\S+$`: wzorzec sprawdzający pełny adres e-mail.
 
 - ^: Zacznij od początku tekstu.
 
@@ -255,19 +255,19 @@ title: "Spotkanie 3: funkcje analityczne"
 
 - \S+: "Jeden lub więcej znaków bez spacji". (Nazwa domeny).
 
-- \\: Literalny znak kropki (. musi być "ucieczniona" znakiem \\ ponieważ sama kropka w Regex oznacza "dowolny znak").
+- `\.`: literalny znak kropki.
 
 - \S+: "Jeden lub więcej znaków bez spacji". (Końcówka domeny, np. "pl").
 
-- \$: Oznacza "koniec tekstu".
+- `$`: koniec tekstu.
 
 1.  Zaznacz komórki **Q2** i **S2**, a następnie przeciągnij je w dół do wiersza **101**.
 
-1.  **Obserwacja i Czyszczenie:** Zauważ, że w kolumnie **Q** dla błędnych maili (tych, które pokolorowaliśmy na żółto) pojawił się błąd #N/A (ponieważ wzorzec nie znalazł znaku @). W kolumnie S dla tych samych rekordów poprawnie pojawiła się wartość FAŁSZ.
+1.  **Obserwacja i czyszczenie:** W kolumnie **Q** błąd pojawi się w adresach bez znaku `@` albo ze spacją przed tym znakiem. Kolumna **S** zwróci FAŁSZ dla każdego adresu, który nie spełnia pełnego wzorca.
 
 1.  Teraz, korzystając z wiedzy z Ćwiczenia 4, "opakuj" formułę w **Q2**, aby obsłużyć błędy:  
 ```excel
-=JEŻELI.BŁĄD(REGEXWYODRĘBNIJ(C2; "^[^@]+"); "BŁĄD FORMATU")
+=JEŻELI.BŁĄD(REGEXWYODRĘBNIJ(C2; "^[^@\s]+(?=@)"); "BŁĄD FORMATU")
 ```
 
 1.  Przeciągnij poprawioną formułę z **Q2** w dół do **Q101**.
@@ -279,4 +279,6 @@ title: "Spotkanie 3: funkcje analityczne"
 - Kolumna Email_Valid_Regex (S) poprawnie zwraca PRAWDA dla poprawnych formatów i FAŁSZ dla błędnych.
 
 - Rozumiesz koncepcyjną różnicę między REGEXWYODRĘBNIJ (wyciąganie danych) a REGEXTEST (walidacja PRAWDA/FAŁSZ).
+
+Zapisz skoroszyt i prześlij jego aktualną wersję do zadania przypisanego do spotkania 3 w MS Teams.
 

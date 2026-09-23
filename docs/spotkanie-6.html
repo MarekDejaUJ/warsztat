@@ -395,15 +395,14 @@ zarządcze.
 <div class="timebox">
 <strong>Plan 90 minut:</strong> 10 min przygotowanie, 15 min analiza
 czasu, 20 min dashboard, 20 min test t, 15 min współzmienne, 10 min
-executive summary.
+podsumowanie zarządcze.
 </div>
 <div class="note">
-<strong>Przygotowanie:</strong> Skoroszyt zawierający tabele i wykresy
-utworzone podczas spotkania 5.
+<strong>Przygotowanie:</strong> Otwórz najnowszą wersję skoroszytu
+zawierającą tabele i wykresy utworzone podczas spotkania 5.
 </div>
-<div id="zadanie-6-indywidualne-analiza-czasowa-grouping-by-time"
-class="section level2">
-<h2>Zadanie 6 (Indywidualne): Analiza Czasowa (Grouping by Time)</h2>
+<div id="zadanie-6-indywidualne-analiza-czasowa" class="section level2">
+<h2>Zadanie 6 (Indywidualne): Analiza czasowa</h2>
 <div class="tilt-card purpose">
 <h3>
 Cel
@@ -422,9 +421,12 @@ Wykonaj kolejne kroki.
 </p>
 </div>
 <ol style="list-style-type: decimal">
-<li><p>Stwórz nową tabelę przestawną w arkuszu
-Analiza_Przestawna.</p></li>
-<li><p>Umieść <strong>Data_Zamowienia</strong> w Wierszach, a
+<li><p>Skopiuj tabelę przestawną z arkusza
+<strong>Analiza_Przestawna</strong> do nowego arkusza
+<strong>Analiza_Czasowa</strong>. Wklej ją od komórki
+<strong>A1</strong>.</p></li>
+<li><p>Usuń pola z poprzedniego układu. Umieść
+<strong>Data_Zamowienia</strong> w Wierszach, a
 <strong>Wartosc_Sprzedazy</strong> w Wartościach (Suma).</p></li>
 <li><p>Excel może automatycznie pogrupować daty. Jeśli nie (widzisz
 pojedyncze dni):</p>
@@ -478,9 +480,9 @@ Wykonaj kolejne kroki.
 </div>
 <ol style="list-style-type: decimal">
 <li><p>Stwórz nowy arkusz o nazwie DASHBOARD.</p></li>
-<li><p>Przenieś (Wytnij/Wklej) dwa stworzone wcześniej wykresy
-(Kolumnowy z Ćw. 2 i Liniowy z Zad. 6) do tego arkusza. Ułóż je
-estetycznie obok siebie.</p></li>
+<li><p>Przenieś dwa wykresy: kolumnowy z arkusza
+<strong>Analiza_Przestawna</strong> oraz liniowy z arkusza
+<strong>Analiza_Czasowa</strong>. Ułóż je obok siebie.</p></li>
 <li><p>Kliknij na dowolny wykres przestawny.</p></li>
 <li><p>Z wstążki (Analiza wykresu przestawnego) wybierz <strong>Wstaw
 fragmentator</strong> (Insert Slicer).</p></li>
@@ -536,7 +538,10 @@ Wykonaj kolejne kroki.
 <ol style="list-style-type: decimal">
 <li><p>W arkuszu Dane_Czyste_Finalne upewnij się, że masz kolumnę
 <strong>Grupa_Testowa</strong> (Grupa A/B).</p></li>
-<li><p>Stwórz tabelę przestawną w nowym miejscu.</p></li>
+<li><p>Skopiuj tabelę przestawną z arkusza
+<strong>Analiza_Przestawna</strong> do nowego arkusza
+<strong>Porownanie_Grup</strong>. Wklej ją od komórki
+<strong>A1</strong> i usuń pola z poprzedniego układu.</p></li>
 <li><p>Wiersze: <strong>Grupa_Testowa</strong>.</p></li>
 <li><p>Wartości:</p>
 <ul>
@@ -546,7 +551,8 @@ Wykonaj kolejne kroki.
 funkcję: Odchylenie standardowe).</p></li>
 </ul></li>
 <li><p>W arkuszu <strong>Raport_Statystyk</strong> wpisz w komórce
-<strong>B20</strong> formułę testu t:</p></li>
+<strong>A20</strong> etykietę <code>Test t, wartość p</code>, a w
+komórce <strong>B20</strong> formułę:</p></li>
 </ol>
 <pre class="excel"><code>=T.TEST(FILTRUJ(Dane_Czyste_Finalne!$F$2:$F$101;Dane_Czyste_Finalne!$P$2:$P$101=&quot;Grupa A&quot;);FILTRUJ(Dane_Czyste_Finalne!$F$2:$F$101;Dane_Czyste_Finalne!$P$2:$P$101=&quot;Grupa B&quot;);2;3)</code></pre>
 <p>Argument <code>2</code> oznacza test dwustronny. Argument
@@ -577,10 +583,10 @@ a interpretacja odpowiada wartości p.</p></li>
 </ul>
 </div>
 <div
-id="zadanie-9-indywidualne-zmienne-zakłócające-covariates---analiza-wielowymiarowa"
+id="zadanie-9-indywidualne-zmienne-zakłócające-i-analiza-wielowymiarowa"
 class="section level2">
-<h2>Zadanie 9 (Indywidualne): Zmienne Zakłócające (Covariates) - Analiza
-Wielowymiarowa</h2>
+<h2>Zadanie 9 (Indywidualne): Zmienne zakłócające i analiza
+wielowymiarowa</h2>
 <div class="tilt-card purpose">
 <h3>
 Cel
@@ -599,19 +605,26 @@ Wykonaj kolejne kroki.
 </p>
 </div>
 <ol style="list-style-type: decimal">
-<li><p>Stwórz tabelę przestawną.</p></li>
+<li><p>Skopiuj tabelę przestawną z arkusza
+<strong>Analiza_Przestawna</strong> do nowego arkusza
+<strong>Analiza_Regionow</strong>. Wklej ją od komórki
+<strong>A1</strong> i usuń pola z poprzedniego układu.</p></li>
 <li><p>Wiersze: <strong>Manager_Regionu</strong>.</p></li>
-<li><p>Wartości: <strong>Wartosc_Sprzedazy</strong> (Suma).</p>
+<li><p>Dodaj do obszaru Wartości:</p>
 <ul>
-<li><em>Obserwacja:</em> Zobacz, kto ma najniższy wynik. Załóżmy, że Jan
-Nowak.</li>
+<li><p><strong>Wartosc_Sprzedazy</strong> jako Sumę,</p></li>
+<li><p><strong>Wartosc_Sprzedazy</strong> jako Średnią,</p></li>
+<li><p><strong>OrderID</strong> jako Licznik,</p></li>
+<li><p><strong>Ocena_Transakcji</strong> jako Średnią.</p></li>
+<li><p><em>Obserwacja:</em> Zobacz, kto ma najniższy wynik. Załóżmy, że
+Jan Nowak.</p></li>
 </ul></li>
 <li><p><strong>Dodanie Kontekstu (Współzmienna):</strong></p>
 <ul>
 <li><p>Dołóż <strong>Region_ID</strong> (lub Nazwę Regionu) do obszaru
 <strong>Kolumny</strong>.</p></li>
-<li><p>Dołóż <strong>Liczba z OrderID</strong> (jako licznik) do
-Wartości.</p></li>
+<li><p>Sprawdź, czy tabela pokazuje liczbę zamówień dla każdego
+regionu.</p></li>
 </ul></li>
 <li><p><strong>Dedukcja:</strong> Przeanalizuj wynik.</p>
 <ul>
@@ -635,18 +648,16 @@ czynniki składowe (Średnia wartość x Liczba transakcji).</p></li>
 <li><p>Poprawna interpretacja tabeli wielowymiarowej.</p></li>
 </ul>
 </div>
-<div id="zadanie-10-indywidualne-raport-końcowy-executive-summary"
+<div id="zadanie-10-indywidualne-podsumowanie-zarządcze"
 class="section level2">
-<h2>Zadanie 10 (Indywidualne): Raport Końcowy “Executive Summary”</h2>
+<h2>Zadanie 10 (Indywidualne): Podsumowanie zarządcze</h2>
 <div class="tilt-card purpose">
 <h3>
 Cel
 </h3>
 <p>
-📝 Synteza. Stworzenie małej, estetycznej tabeli podsumowującej
-najważniejsze KPI (Key Performance Indicators) przy użyciu funkcji
-WEŹDANETABELI (GETPIVOTDATA), co pozwala na precyzyjne umiejscowienie
-danych poza tabelą przestawną.
+📝 Przygotowanie tabeli z kluczowymi wskaźnikami za pomocą funkcji
+WEŹDANETABELI.
 </p>
 </div>
 <div class="tilt-card task">
@@ -663,13 +674,14 @@ sformatowaną tabelkę “Kluczowe Wskaźniki”.</p>
 <ul>
 <li>Nagłówki: Całkowita Sprzedaż, Średnia Ocena, Najlepszy Region.</li>
 </ul></li>
-<li><p>W komórce pod “Całkowita Sprzedaż” wpisz znak =, a następnie
-kliknij na komórkę z Sumą Końcową w dowolnej tabeli przestawnej
-obliczającej sprzedaż.</p></li>
+<li><p>W komórce pod “Całkowita Sprzedaż” wpisz znak <code>=</code>, a
+następnie kliknij Sumę Końcową w tabeli w arkuszu
+<strong>Analiza_Regionow</strong>.</p></li>
 <li><p>Zauważ, że Excel wstawił funkcję:
 =WEŹDANETABELI(“Wartosc_Sprzedazy”; …) Zatwierdź Enterem.</p></li>
-<li><p>To samo zrób dla Średniej Oceny (musisz mieć tabelę przestawną
-liczącą średnią ocenę).</p></li>
+<li><p>W ten sam sposób pobierz Średnią Ocenę z tabeli w arkuszu
+<strong>Analiza_Regionow</strong>. Nazwę najlepszego regionu odczytaj z
+tabeli i wpisz w trzeciej karcie.</p></li>
 <li><p>Sformatuj te komórki dużą czcionką, dodaj kolory. To są “karty
 wyników” (Scorecards).</p></li>
 </ol>
@@ -684,9 +696,10 @@ Sprawdź rezultat przed przejściem dalej.
 <ul>
 <li><p>Wykorzystanie funkcji WEŹDANETABELI do wyciągnięcia konkretnych
 liczb z tabel przestawnych.</p></li>
-<li><p>Stworzenie estetycznego panelu KPI, który nie wygląda jak arkusz
-kalkulacyjny, lecz jak raport w aplikacji.</p></li>
+<li><p>Panel KPI ma formę czytelnego raportu.</p></li>
 </ul>
+<p>Zapisz skoroszyt i prześlij jego końcową wersję do zadania
+przypisanego do spotkania 6 w MS Teams.</p>
 </div>
 
 <footer class="course-footer">

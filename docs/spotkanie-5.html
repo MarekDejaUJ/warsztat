@@ -398,8 +398,9 @@ przestawna, 15 min wykres, 25 min korelacja, 10 min histogram, 5 min
 podsumowanie.
 </div>
 <div class="note">
-<strong>Przygotowanie:</strong> Arkusz Dane_Czyste_Finalne z
-wypełnionymi kolumnami analitycznymi.
+<strong>Przygotowanie:</strong> Otwórz najnowszą wersję skoroszytu.
+Potrzebny jest arkusz Dane_Czyste_Finalne z wypełnionymi kolumnami
+analitycznymi.
 </div>
 <div
 id="ćwiczenie-1-tabela-przestawna-i-tabela-krzyżowa-agregacja-danych"
@@ -562,12 +563,12 @@ Wykonaj kolejne kroki.
 między sprzedażą a oceną:</li>
 </ul></li>
 </ol>
-<pre class="excel"><code>=WSP.KORELACJI(Dane_Czyste_Finalne!F:F; Dane_Czyste_Finalne!G:G)</code></pre>
+<pre class="excel"><code>=WSP.KORELACJI(Dane_Czyste_Finalne!F2:F101; Dane_Czyste_Finalne!G2:G101)</code></pre>
 <ul>
 <li><strong>Liczebność (n):</strong> W B11 policz, ile mamy
 rekordów:</li>
 </ul>
-<pre class="excel"><code>=ILE.LICZB(Dane_Czyste_Finalne!F:F)</code></pre>
+<pre class="excel"><code>=ILE.LICZB(Dane_Czyste_Finalne!F2:F101)</code></pre>
 <ul>
 <li><strong>Statystyka t:</strong> Przekształć współczynnik korelacji na
 statystykę t. W komórce B12 wpisz wzór:</li>
@@ -587,8 +588,9 @@ swobody).</em></p>
 <li><p><strong>Tworzenie Wykresu (Metoda manualna - “Z pustego
 arkusza”):</strong></p>
 <ul>
-<li><p>Będąc w arkuszu Raport_Statystyk, kliknij w dowolną
-<strong>pustą</strong> komórkę z dala od danych.</p></li>
+<li><p>Będąc w arkuszu Raport_Statystyk, kliknij komórkę
+<strong>D8</strong>. Po utworzeniu wykresu umieść go po prawej stronie
+tabel z wynikami.</p></li>
 <li><p>Wstaw &gt; Wykresy &gt; <strong>Punktowy (X, Y)</strong>. Pojawi
 się puste białe pole.</p></li>
 <li><p>Kliknij prawym przyciskiem myszy na to puste pole i wybierz
@@ -601,10 +603,10 @@ Twoim zrzucie ekranu). Wypełnij je następująco:</p>
 <li><p><strong>Nazwa serii:</strong> Wpisz ręcznie “Korelacja Cena vs
 Ocena” lub kliknij komórkę z tym tekstem.</p></li>
 <li><p><strong>Wartości X serii:</strong> Kliknij strzałkę, przejdź do
-arkusza Dane_Czyste_Finalne i zaznacz całą kolumnę <strong>F</strong>
+arkusza Dane_Czyste_Finalne i zaznacz zakres <strong>F2:F101</strong>
 (Wartosc_Sprzedazy).</p></li>
 <li><p><strong>Wartości Y serii:</strong> Kliknij strzałkę, przejdź do
-arkusza Dane_Czyste_Finalne i zaznacz całą kolumnę <strong>G</strong>
+arkusza Dane_Czyste_Finalne i zaznacz zakres <strong>G2:G101</strong>
 (Ocena_Transakcji).</p></li>
 <li><p>Kliknij OK, a potem ponownie OK.</p></li>
 </ul></li>
@@ -727,9 +729,13 @@ Wykonaj kolejne kroki.
 </p>
 </div>
 <ol style="list-style-type: decimal">
-<li><p>Wstaw nową Tabelę Przestawną z Dane_Czyste_Finalne do arkusza
-Analiza_Przestawna</p></li>
-<li><p>Przeciągnij <strong>Wartosc_Sprzedazy</strong> do obszaru
+<li><p>Skopiuj tabelę przestawną z arkusza
+<strong>Analiza_Przestawna</strong> do nowego arkusza
+<strong>Histogram</strong>. Wklej ją od komórki <strong>A1</strong>.
+Kopia zachowa wspólne źródło danych potrzebne później do obsługi
+fragmentatorów.</p></li>
+<li><p>Usuń pola użyte w poprzednim układzie, a następnie przeciągnij
+<strong>Wartosc_Sprzedazy</strong> do obszaru
 <strong>Wiersze</strong>.</p></li>
 <li><p>Przeciągnij <strong>Wartosc_Sprzedazy</strong> (ponownie!) do
 obszaru <strong>Wartości</strong>.</p></li>
@@ -788,27 +794,37 @@ Wykonaj kolejne kroki.
 </p>
 </div>
 <ol style="list-style-type: decimal">
-<li><p>W arkuszu Dane_Czyste_Finalne oblicz parametry potrzebne do
-przedziału ufności.</p></li>
-<li><p>W wolnych komórkach oblicz:</p>
-<ul>
-<li><p>=ŚREDNIA(F:F) (Wynik np. 550 zł).</p></li>
-<li><p>=ODCH.STANDARD.PRÓBKI(F:F) (Zmienność danych).</p></li>
-<li><p>=ILE.LICZB(F:F) (Wielkość próby, n=100).</p></li>
-</ul></li>
-<li><p>Oblicz <strong>Błąd Statystyczny</strong> (dla poziomu ufności
-95%, czyli alfa = 0.05). Użyj formuły:</p></li>
+<li><p>Przejdź do arkusza <strong>Raport_Statystyk</strong>. Obliczenia
+umieść w zakresie <strong>A15:B18</strong>.</p></li>
+<li><p>W komórkach <strong>A15:A18</strong> wpisz kolejno:
+<code>Średnia</code>, <code>Odchylenie standardowe</code>,
+<code>Liczebność</code> i <code>Błąd oszacowania</code>.</p></li>
+<li><p>W komórce <strong>B15</strong> oblicz średnią:</p></li>
 </ol>
-<pre class="excel"><code>=UFNOŚĆ.NORM(0,05; ODCH.STANDARD.PRÓBKI(F:F); ILE.LICZB(F:F))</code></pre>
-<p><em>Wyjaśnienie:</em> Wynik (np. 40 zł) oznacza, że z 95% pewnością
-prawdziwa średnia w populacji leży w przedziale: Średnia ± Błąd.</p>
+<pre class="excel"><code>=ŚREDNIA(Dane_Czyste_Finalne!F2:F101)</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li><strong>Dedukcja/Interpretacja:</strong> Napisz w komórce obok
-zdanie podsumowujące (Afirmację): <em>“Z 95% pewnością średnia wartość
-sprzedaży mieści się w przedziale od <span
-class="math display">\[Średnia - Błąd\]</span> do <span
-class="math display">\[Średnia + Błąd\]</span>.”</em></li>
+<li>W komórce <strong>B16</strong> oblicz odchylenie standardowe:</li>
 </ol>
+<pre class="excel"><code>=ODCH.STANDARD.PRÓBKI(Dane_Czyste_Finalne!F2:F101)</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>W komórce <strong>B17</strong> policz obserwacje:</li>
+</ol>
+<pre class="excel"><code>=ILE.LICZB(Dane_Czyste_Finalne!F2:F101)</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>W komórce <strong>B18</strong> oblicz błąd oszacowania dla poziomu
+ufności 95%:</li>
+</ol>
+<pre class="excel"><code>=UFNOŚĆ.NORM(0,05; B16; B17)</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>W komórce <strong>A19</strong> oblicz dolną granicę:</li>
+</ol>
+<pre class="excel"><code>=B15-B18</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>W komórce <strong>B19</strong> oblicz górną granicę:</li>
+</ol>
+<pre class="excel"><code>=B15+B18</code></pre>
+<p><em>Interpretacja:</em> Zastosowana procedura tworzy przedziały
+zawierające średnią populacji w 95% analogicznych prób.</p>
 <div class="tilt-card criteria">
 <h3>
 Kryteria sukcesu
@@ -818,11 +834,12 @@ Sprawdź rezultat przed przejściem dalej.
 </p>
 </div>
 <ul>
-<li><p>Poprawne użycie funkcji UFNOŚĆ.NORM (lub
-CONFIDENCE.NORM).</p></li>
+<li><p>Poprawne użycie funkcji UFNOŚĆ.NORM.</p></li>
 <li><p>Zrozumienie, że średnia z próby to tylko estymacja, a błąd
 statystyczny wyznacza granice zaufania do tej liczby.</p></li>
 </ul>
+<p>Zapisz skoroszyt i prześlij jego aktualną wersję do zadania
+przypisanego do spotkania 5 w MS Teams.</p>
 </div>
 
 <footer class="course-footer">

@@ -9,7 +9,7 @@ title: "Spotkanie 1: generowanie i standaryzacja danych"
 
 <div class="timebox"><strong>Plan 90 minut:</strong> 10 min rozpoczęcie, 35 min generowanie danych, 35 min standaryzacja, 10 min kontrola.</div>
 
-<div class="note"><strong>Przygotowanie:</strong> Excel lub Excel dla sieci Web. Pobierz plik swojej grupy z zakładki Materiały.</div>
+<div class="note"><strong>Przygotowanie:</strong> Otwórz skoroszyt swojej grupy. Zachowaj arkusz Arkusz1 jako wzorzec i wykonuj polecenia w nowych arkuszach.</div>
 
 ## Ćwiczenie 1: Generowanie "Brudnego" Zestawu Danych (Symulacja Rzeczywistości)
 
@@ -20,7 +20,7 @@ title: "Spotkanie 1: generowanie i standaryzacja danych"
 
 <div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
 
-  1.  Otwórz nowy arkusz i nazwij go **Dane_Surowe**.
+  1.  W pobranym skoroszycie dodaj nowy arkusz i nazwij go **Dane_Surowe**.
 
   2.  W komórkach od **A1** do **G1** wpisz następujące nagłówki:
 
@@ -160,4 +160,6 @@ title: "Spotkanie 1: generowanie i standaryzacja danych"
   - Kolumna Kategoria_Produktu ma teraz tylko spójne wartości (np. "DOM I RTV", "AGD").
 
   - Kolumna Region_ID ma tylko wartości "R1", "R2", "R3".
+
+Zapisz skoroszyt. Aktualny plik zawiera arkusze `Arkusz1`, `Słownik_Regionów`, `Dane_Surowe` i `Dane_Robocze`. Prześlij go do zadania przypisanego do spotkania 1 w MS Teams.
 

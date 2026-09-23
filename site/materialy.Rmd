@@ -21,9 +21,26 @@ title: "Materiały do pobrania"
 ## Organizacja plików
 
 1. Pobierz jeden skoroszyt przypisany do grupy.
-2. Zapisz kopię roboczą przed pierwszą zmianą.
-3. Pracuj w pliku zapisanym lokalnie lub w OneDrive.
-4. Zachowaj arkusz źródłowy.
-5. Oddaj pracę kanałem wskazanym podczas zajęć.
+2. Zapisz go pod nazwą `nazwisko_imie_warsztat.xlsx`.
+3. Zachowaj arkusz `Arkusz1` jako wzorzec wyników. Oglądaj zawarte w nim dane i formuły. Polecenia wykonuj w arkuszach roboczych tworzonych podczas zajęć.
+4. Podczas spotkania 1 utwórz własny zbiór w arkuszu `Dane_Surowe`.
+5. Kontynuuj pracę w tym samym skoroszycie przez wszystkie spotkania.
 
-GitHub Pages służy do udostępniania instrukcji i materiałów. Prace studenckie są przekazywane poza repozytorium.
+Jeżeli opuścisz spotkanie, użyj arkusza `Arkusz1` do sprawdzenia układu danych i oczekiwanego wyniku. Następnie wykonaj zadanie samodzielnie w swoim arkuszu roboczym. W przypadku braku arkusza `Dane_Surowe` skopiuj zakres `A1:G101` z `Arkusz1` do nowego arkusza i pracuj na kopii.
+
+## Przekazywanie pliku w MS Teams
+
+Na kanale grupy w MS Teams znajdują się zadania przypisane do kolejnych spotkań. Po zajęciach prześlij do odpowiedniego zadania aktualną wersję pliku `.xlsx`. Ten plik będzie podstawą pracy podczas następnego spotkania.
+
+Komputery w pracowni usuwają dane użytkownika po wyłączeniu. Prześlij skoroszyt najpóźniej dzień przed kolejnymi zajęciami.
+
+## Przepływ pracy
+
+| Spotkanie | Arkusz lub etap | Rezultat |
+|---|---|---|
+| 1 | `Dane_Surowe` i `Dane_Robocze` | Własny zbiór oraz pierwsza standaryzacja |
+| 2 | `Dane_Czyste_Finalne` | Poprawne typy danych i uzupełnione oceny |
+| 3 | Kolumny M:S | Dane opisowe, grupy testowe i walidacja adresów e-mail |
+| 4 | Kolumny T:W oraz arkusze raportowe | Prowizje, segmentacja, walidacja i wyszukiwanie |
+| 5 | Arkusze analityczne | Tabele przestawne, wykresy i statystyki |
+| 6 | `DASHBOARD` | Analiza czasu, test t i podsumowanie wyników |

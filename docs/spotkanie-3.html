@@ -398,8 +398,8 @@ wyszukiwanie, 20 min tekst, 15 min obliczenia, 15 min regex, 10 min
 kontrola.
 </div>
 <div class="note">
-<strong>Przygotowanie:</strong> Arkusz Dane_Czyste_Finalne oraz arkusz
-Słownik_Regionów.
+<strong>Przygotowanie:</strong> Otwórz najnowszą wersję skoroszytu.
+Potrzebne są arkusze Dane_Czyste_Finalne oraz Słownik_Regionów.
 </div>
 <div id="ćwiczenie-1-funkcje-wyszukiwania-wyszukaj.pionowo"
 class="section level2">
@@ -422,10 +422,9 @@ Wykonaj kolejne kroki.
 </p>
 </div>
 <ol style="list-style-type: decimal">
-<li><p>Stwórz <strong>nowy arkusz</strong> i nazwij go
+<li><p>Otwórz istniejący arkusz
 <strong>Słownik_Regionów</strong>.</p></li>
-<li><p>W tym nowym arkuszu stwórz małą tabelę (w zakresie
-<strong>A1:C4</strong>):</p>
+<li><p>Sprawdź tabelę w zakresie <strong>A1:C4</strong>:</p>
 <ul>
 <li><p>A1: <strong>Region_ID</strong> | B1:
 <strong>Nazwa_Regionu</strong> | C1:
@@ -661,13 +660,13 @@ znaleźć “R3” w słowniku.</p></li>
 <strong>M2</strong>:<br />
 </p></li>
 </ol>
-<pre class="excel"><code>=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(D2; Słownik_Regionów!$A$2:$C$3; 2; FAŁSZ); &quot;Brak danych&quot;)</code></pre>
+<pre class="excel"><code>=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(D2; Słownik_Regionów!$A$2:$C$4; 2; FAŁSZ); &quot;Brak danych&quot;)</code></pre>
 <pre><code>  - **Wyjaśnienie:** JEŻELI.BŁĄD(formuła; wartość_jeśli_błąd): Excel najpierw próbuje wykonać główną formułę (WYSZUKAJ.PIONOWO). Jeśli formuła zadziała, zwróci jej wynik (np. &quot;Północ&quot;). Jeśli jednak formuła zwróci jakikolwiek błąd (np. #N/D!), funkcja JEŻELI.BŁĄD przechwyci go i zamiast błędu zwróci podany przez nas tekst: &quot;Brak danych&quot;.</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Popraw również formułę w komórce <strong>N2</strong>:<br />
 </li>
 </ol>
-<pre class="excel"><code>=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(D2; Słownik_Regionów!$A$2:$C$3; 3; FAŁSZ); &quot;Brak danych&quot;)</code></pre>
+<pre class="excel"><code>=JEŻELI.BŁĄD(WYSZUKAJ.PIONOWO(D2; Słownik_Regionów!$A$2:$C$4; 3; FAŁSZ); &quot;Brak danych&quot;)</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li><p>Zaznacz <strong>M2</strong> i <strong>N2</strong> i przeciągnij
 je ponownie w dół do <strong>M101</strong>, nadpisując stare
@@ -731,16 +730,17 @@ sobie z wyciągnięciem nazwy użytkownika (wszystkiego przed znakiem
 <li><p>W komórce <strong>Q2</strong> wpisz formułę:<br />
 </p></li>
 </ol>
-<pre class="excel"><code>=REGEXWYODRĘBNIJ(C2; &quot;^[^@]+&quot;)</code></pre>
+<pre class="excel"><code>=REGEXWYODRĘBNIJ(C2; &quot;^[^@\s]+(?=@)&quot;)</code></pre>
 <ul>
 <li><p><strong>Wyjaśnienie:</strong></p></li>
-<li><p>REGEXWYODRĘBNIJ (C2; …): Funkcja ta wyodrębnia tekst z komórki
-<strong>C2</strong>, który pasuje do podanego wzorca.</p></li>
-<li><p>“<sup>([</sup>@]+)”: To jest wzorzec Regex.</p></li>
+<li><p>REGEXWYODRĘBNIJ (C2; …): Funkcja wyodrębnia nazwę użytkownika
+znajdującą się bezpośrednio przed znakiem <code>@</code>.</p></li>
+<li><p><code>^[^@\s]+(?=@)</code>: To jest wzorzec Regex.</p></li>
 <li><p>^: Oznacza “zacznij od początku tekstu”.</p></li>
-<li><p><code>[^@]+</code>: dopasuj co najmniej jeden znak różny od
-<code>@</code>.</p></li>
-<li><p>@: Wzorzec musi kończyć się literalnym znakiem @.</p></li>
+<li><p><code>[^@\s]+</code>: dopasuj co najmniej jeden znak różny od
+<code>@</code> i spacji.</p></li>
+<li><p><code>(?=@)</code>: sprawdź, czy za dopasowanym tekstem znajduje
+się znak <code>@</code>.</p></li>
 <li><p><strong>Rezultat:</strong> Formuła wyciąga cały tekst od początku
 do znaku @ (np. “user.1”, “user.10”).</p></li>
 </ul>
@@ -759,31 +759,30 @@ Teraz oznaczymy je automatycznie.</p></li>
 <li><p>REGEXTEST(C2; …): Funkcja ta sprawdza, czy tekst w
 <strong>C2</strong> pasuje do wzorca, zwracając PRAWDA lub
 FAŁSZ.</p></li>
-<li><p>“^+@+\+$”: To jest standardowy wzorzec walidacji emaila.</p></li>
+<li><p><code>^\S+@\S+\.\S+$</code>: wzorzec sprawdzający pełny adres
+e-mail.</p></li>
 <li><p>^: Zacznij od początku tekstu.</p></li>
 <li><p><code>\S+</code>: dopasuj co najmniej jeden znak bez spacji w
 nazwie użytkownika.</p></li>
 <li><p>@: Literalny znak @.</p></li>
 <li><p>+: “Jeden lub więcej znaków bez spacji”. (Nazwa domeny).</p></li>
-<li><p>\: Literalny znak kropki (. musi być “ucieczniona” znakiem \
-ponieważ sama kropka w Regex oznacza “dowolny znak”).</p></li>
+<li><p><code>\.</code>: literalny znak kropki.</p></li>
 <li><p>+: “Jeden lub więcej znaków bez spacji”. (Końcówka domeny, np.
 “pl”).</p></li>
-<li><p>$: Oznacza “koniec tekstu”.</p></li>
+<li><p><code>$</code>: koniec tekstu.</p></li>
 </ul>
 <ol style="list-style-type: decimal">
 <li><p>Zaznacz komórki <strong>Q2</strong> i <strong>S2</strong>, a
 następnie przeciągnij je w dół do wiersza <strong>101</strong>.</p></li>
-<li><p><strong>Obserwacja i Czyszczenie:</strong> Zauważ, że w kolumnie
-<strong>Q</strong> dla błędnych maili (tych, które pokolorowaliśmy na
-żółto) pojawił się błąd #N/A (ponieważ wzorzec nie znalazł znaku @). W
-kolumnie S dla tych samych rekordów poprawnie pojawiła się wartość
-FAŁSZ.</p></li>
+<li><p><strong>Obserwacja i czyszczenie:</strong> W kolumnie
+<strong>Q</strong> błąd pojawi się w adresach bez znaku <code>@</code>
+albo ze spacją przed tym znakiem. Kolumna <strong>S</strong> zwróci
+FAŁSZ dla każdego adresu, który nie spełnia pełnego wzorca.</p></li>
 <li><p>Teraz, korzystając z wiedzy z Ćwiczenia 4, “opakuj” formułę w
 <strong>Q2</strong>, aby obsłużyć błędy:<br />
 </p></li>
 </ol>
-<pre class="excel"><code>=JEŻELI.BŁĄD(REGEXWYODRĘBNIJ(C2; &quot;^[^@]+&quot;); &quot;BŁĄD FORMATU&quot;)</code></pre>
+<pre class="excel"><code>=JEŻELI.BŁĄD(REGEXWYODRĘBNIJ(C2; &quot;^[^@\s]+(?=@)&quot;); &quot;BŁĄD FORMATU&quot;)</code></pre>
 <ol style="list-style-type: decimal">
 <li>Przeciągnij poprawioną formułę z <strong>Q2</strong> w dół do
 <strong>Q101</strong>.</li>
@@ -805,6 +804,8 @@ poprawnych formatów i FAŁSZ dla błędnych.</p></li>
 <li><p>Rozumiesz koncepcyjną różnicę między REGEXWYODRĘBNIJ (wyciąganie
 danych) a REGEXTEST (walidacja PRAWDA/FAŁSZ).</p></li>
 </ul>
+<p>Zapisz skoroszyt i prześlij jego aktualną wersję do zadania
+przypisanego do spotkania 3 w MS Teams.</p>
 </div>
 
 <footer class="course-footer">

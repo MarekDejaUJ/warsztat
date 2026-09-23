@@ -7,11 +7,11 @@ title: "Spotkanie 6: dashboard i wnioski"
 <p>Analiza czasu, dashboard, test t, kontrola współzmiennych i podsumowanie zarządcze.</p>
 </div>
 
-<div class="timebox"><strong>Plan 90 minut:</strong> 10 min przygotowanie, 15 min analiza czasu, 20 min dashboard, 20 min test t, 15 min współzmienne, 10 min executive summary.</div>
+<div class="timebox"><strong>Plan 90 minut:</strong> 10 min przygotowanie, 15 min analiza czasu, 20 min dashboard, 20 min test t, 15 min współzmienne, 10 min podsumowanie zarządcze.</div>
 
-<div class="note"><strong>Przygotowanie:</strong> Skoroszyt zawierający tabele i wykresy utworzone podczas spotkania 5.</div>
+<div class="note"><strong>Przygotowanie:</strong> Otwórz najnowszą wersję skoroszytu zawierającą tabele i wykresy utworzone podczas spotkania 5.</div>
 
-## Zadanie 6 (Indywidualne): Analiza Czasowa (Grouping by Time)
+## Zadanie 6 (Indywidualne): Analiza czasowa
 
 <div class="tilt-card purpose">
 <h3>Cel</h3>
@@ -20,9 +20,9 @@ title: "Spotkanie 6: dashboard i wnioski"
 
 <div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
 
-1.  Stwórz nową tabelę przestawną w arkuszu Analiza_Przestawna.
+1.  Skopiuj tabelę przestawną z arkusza **Analiza_Przestawna** do nowego arkusza **Analiza_Czasowa**. Wklej ją od komórki **A1**.
 
-2.  Umieść **Data_Zamowienia** w Wierszach, a **Wartosc_Sprzedazy** w Wartościach (Suma).
+2.  Usuń pola z poprzedniego układu. Umieść **Data_Zamowienia** w Wierszach, a **Wartosc_Sprzedazy** w Wartościach (Suma).
 
 3.  Excel może automatycznie pogrupować daty. Jeśli nie (widzisz pojedyncze dni):
 
@@ -53,7 +53,7 @@ title: "Spotkanie 6: dashboard i wnioski"
 
 1.  Stwórz nowy arkusz o nazwie DASHBOARD.
 
-2.  Przenieś (Wytnij/Wklej) dwa stworzone wcześniej wykresy (Kolumnowy z Ćw. 2 i Liniowy z Zad. 6) do tego arkusza. Ułóż je estetycznie obok siebie.
+2.  Przenieś dwa wykresy: kolumnowy z arkusza **Analiza_Przestawna** oraz liniowy z arkusza **Analiza_Czasowa**. Ułóż je obok siebie.
 
 3.  Kliknij na dowolny wykres przestawny.
 
@@ -92,7 +92,7 @@ title: "Spotkanie 6: dashboard i wnioski"
 
 1.  W arkuszu Dane_Czyste_Finalne upewnij się, że masz kolumnę **Grupa_Testowa** (Grupa A/B).
 
-2.  Stwórz tabelę przestawną w nowym miejscu.
+2.  Skopiuj tabelę przestawną z arkusza **Analiza_Przestawna** do nowego arkusza **Porownanie_Grup**. Wklej ją od komórki **A1** i usuń pola z poprzedniego układu.
 
 3.  Wiersze: **Grupa_Testowa**.
 
@@ -102,7 +102,7 @@ title: "Spotkanie 6: dashboard i wnioski"
 
     - **Wartosc_Sprzedazy** (przeciągnij drugi raz i ustaw funkcję: Odchylenie standardowe).
 
-5.  W arkuszu **Raport_Statystyk** wpisz w komórce **B20** formułę testu t:
+5.  W arkuszu **Raport_Statystyk** wpisz w komórce **A20** etykietę `Test t, wartość p`, a w komórce **B20** formułę:
 
 ```excel
 =T.TEST(FILTRUJ(Dane_Czyste_Finalne!$F$2:$F$101;Dane_Czyste_Finalne!$P$2:$P$101="Grupa A");FILTRUJ(Dane_Czyste_Finalne!$F$2:$F$101;Dane_Czyste_Finalne!$P$2:$P$101="Grupa B");2;3)
@@ -122,7 +122,7 @@ Argument `2` oznacza test dwustronny. Argument `3` wybiera test dwóch prób z n
 
 - Komórka B20 zawiera wynik dwustronnego testu `T.TEST`, a interpretacja odpowiada wartości p.
 
-## Zadanie 9 (Indywidualne): Zmienne Zakłócające (Covariates) - Analiza Wielowymiarowa
+## Zadanie 9 (Indywidualne): Zmienne zakłócające i analiza wielowymiarowa
 
 <div class="tilt-card purpose">
 <h3>Cel</h3>
@@ -131,11 +131,19 @@ Argument `2` oznacza test dwustronny. Argument `3` wybiera test dwóch prób z n
 
 <div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
 
-1.  Stwórz tabelę przestawną.
+1.  Skopiuj tabelę przestawną z arkusza **Analiza_Przestawna** do nowego arkusza **Analiza_Regionow**. Wklej ją od komórki **A1** i usuń pola z poprzedniego układu.
 
 2.  Wiersze: **Manager_Regionu**.
 
-3.  Wartości: **Wartosc_Sprzedazy** (Suma).
+3.  Dodaj do obszaru Wartości:
+
+    - **Wartosc_Sprzedazy** jako Sumę,
+
+    - **Wartosc_Sprzedazy** jako Średnią,
+
+    - **OrderID** jako Licznik,
+
+    - **Ocena_Transakcji** jako Średnią.
 
     - *Obserwacja:* Zobacz, kto ma najniższy wynik. Załóżmy, że Jan Nowak.
 
@@ -143,7 +151,7 @@ Argument `2` oznacza test dwustronny. Argument `3` wybiera test dwóch prób z n
 
     - Dołóż **Region_ID** (lub Nazwę Regionu) do obszaru **Kolumny**.
 
-    - Dołóż **Liczba z OrderID** (jako licznik) do Wartości.
+    - Sprawdź, czy tabela pokazuje liczbę zamówień dla każdego regionu.
 
 5.  **Dedukcja:** Przeanalizuj wynik.
 
@@ -159,11 +167,11 @@ Argument `2` oznacza test dwustronny. Argument `3` wybiera test dwóch prób z n
 
 - Poprawna interpretacja tabeli wielowymiarowej.
 
-## Zadanie 10 (Indywidualne): Raport Końcowy "Executive Summary"
+## Zadanie 10 (Indywidualne): Podsumowanie zarządcze
 
 <div class="tilt-card purpose">
 <h3>Cel</h3>
-<p>📝 Synteza. Stworzenie małej, estetycznej tabeli podsumowującej najważniejsze KPI (Key Performance Indicators) przy użyciu funkcji WEŹDANETABELI (GETPIVOTDATA), co pozwala na precyzyjne umiejscowienie danych poza tabelą przestawną.</p>
+<p>📝 Przygotowanie tabeli z kluczowymi wskaźnikami za pomocą funkcji WEŹDANETABELI.</p>
 </div>
 
 <div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
@@ -172,11 +180,11 @@ Argument `2` oznacza test dwustronny. Argument `3` wybiera test dwóch prób z n
 
     - Nagłówki: Całkowita Sprzedaż, Średnia Ocena, Najlepszy Region.
 
-2.  W komórce pod "Całkowita Sprzedaż" wpisz znak =, a następnie kliknij na komórkę z Sumą Końcową w dowolnej tabeli przestawnej obliczającej sprzedaż.
+2.  W komórce pod "Całkowita Sprzedaż" wpisz znak `=`, a następnie kliknij Sumę Końcową w tabeli w arkuszu **Analiza_Regionow**.
 
 3.  Zauważ, że Excel wstawił funkcję: =WEŹDANETABELI("Wartosc_Sprzedazy"; ...) Zatwierdź Enterem.
 
-4.  To samo zrób dla Średniej Oceny (musisz mieć tabelę przestawną liczącą średnią ocenę).
+4.  W ten sam sposób pobierz Średnią Ocenę z tabeli w arkuszu **Analiza_Regionow**. Nazwę najlepszego regionu odczytaj z tabeli i wpisz w trzeciej karcie.
 
 5.  Sformatuj te komórki dużą czcionką, dodaj kolory. To są "karty wyników" (Scorecards).
 
@@ -184,4 +192,6 @@ Argument `2` oznacza test dwustronny. Argument `3` wybiera test dwóch prób z n
 
 - Wykorzystanie funkcji WEŹDANETABELI do wyciągnięcia konkretnych liczb z tabel przestawnych.
 
-- Stworzenie estetycznego panelu KPI, który nie wygląda jak arkusz kalkulacyjny, lecz jak raport w aplikacji.
+- Panel KPI ma formę czytelnego raportu.
+
+Zapisz skoroszyt i prześlij jego końcową wersję do zadania przypisanego do spotkania 6 w MS Teams.

@@ -9,7 +9,7 @@ title: "Spotkanie 4: raporty i wyszukiwanie"
 
 <div class="timebox"><strong>Plan 90 minut:</strong> 10 min INDEKS i PODAJ.POZYCJĘ, 20 min raport agregujący, 15 min prowizja, 15 min segmentacja, 15 min walidacja, 15 min wyszukiwarka.</div>
 
-<div class="note"><strong>Przygotowanie:</strong> Kompletny arkusz Dane_Czyste_Finalne ze spotkania 3.</div>
+<div class="note"><strong>Przygotowanie:</strong> Otwórz najnowszą wersję skoroszytu. Potrzebny jest kompletny arkusz Dane_Czyste_Finalne ze spotkania 3.</div>
 
 ## Ćwiczenie 5: Zaawansowane Wyszukiwanie (INDEKS + PODAJ.POZYCJĘ)
 
@@ -44,13 +44,13 @@ title: "Spotkanie 4: raporty i wyszukiwanie"
 
         - 0: Oznacza dokładne dopasowanie (jak FAŁSZ w WYSZUKAJ.PIONOWO).
 
-        - PODAJ.POZYCJĘ(B1; F:F; 0): Ta funkcja **nie zwraca wartości**, lecz **numer wiersza**, w którym znalazła 1000 zł (np. wiersz 45).
+        - PODAJ.POZYCJĘ(B1; F:F; 0): Ta funkcja zwraca **numer wiersza** zawierającego szukaną wartość sprzedaży.
 
         - INDEKS(Dane_Czyste_Finalne!A:A; ...): Ta funkcja pobiera wartość z podanej kolumny (kolumna A:A, czyli OrderID)...
 
         - ... ; 45): ...znajdującą się w wierszu o numerze, który podała jej funkcja PODAJ.POZYCJĘ (czyli w wierszu 45).
 
-        - **Rezultat:** Funkcja zwraca OrderID z komórki A45.
+        - **Rezultat:** Funkcja zwraca OrderID z wiersza zawierającego najwyższą wartość sprzedaży.
 
 <div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
 
@@ -96,16 +96,16 @@ title: "Spotkanie 4: raporty i wyszukiwanie"
 
   4.  Przeciągnij formułę z **B2** w prawo, a następnie w dół, aby wypełnić całą tabelę.
 
-  5.  Obok stwórz identyczną tabelę, ale użyj funkcji LICZ.WARUNKI, aby policzyć liczbę transakcji. Formuła w (np.) **F2** będzie brzmiała:  
+  5.  Drugą tabelę umieść w zakresie **F1:H4**. W komórce **F1** wpisz `Manager`, w **G1:H1** skopiuj kategorie, a w **F2:F4** menedżerów. W komórce **G2** wpisz formułę i przeciągnij ją na cały obszar wyników:
 ```excel
-=LICZ.WARUNKI(Dane_Czyste_Finalne!$N:$N; $A2; Dane_Czyste_Finalne!$E:$E; B$1)
+=LICZ.WARUNKI(Dane_Czyste_Finalne!$N:$N; $F2; Dane_Czyste_Finalne!$E:$E; G$1)
 ```
 
 <div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
 
   - Arkusz Raport_Sprzedazy zawiera dwie poprawne tabele agregujące.
 
-  - Poprawnie zastosowałeś SUMA.WARUNKÓW i LICZ.WARUNKI oraz strategicznie użyłeś mieszanego blokowania komórek (\$A2, B\$1).
+  - Poprawnie zastosowałeś SUMA.WARUNKÓW i LICZ.WARUNKI oraz mieszane adresy komórek w obu tabelach.
 
 ## Zadanie 7 (Indywidualne): Dynamiczna Prowizja (WYSZUKAJ.PIONOWO + Funkcje Matematyczne)
 
@@ -130,7 +130,7 @@ title: "Spotkanie 4: raporty i wyszukiwanie"
 
   3.  Wróć do arkusza **Dane_Czyste_Finalne**.
 
-  4.  W komórce **T1** (tę zostawiliśmy wolną) wpisz nagłówek: **Stawka_Prowizji**.
+  4.  W komórce **T1** wpisz nagłówek: **Stawka_Prowizji**.
 
   5.  W komórce **T2** wpisz formułę:  
 ```excel
@@ -141,7 +141,7 @@ title: "Spotkanie 4: raporty i wyszukiwanie"
 
   6.  Przeciągnij formułę z **T2** do **T101**.
 
-  7.  W komórce **U1** wpisz nagłówek: Wartosc_Prowizji**.
+  7.  W komórce **U1** wpisz nagłówek: **Wartosc_Prowizji**.
 
   8.  W komórce **U2** wpisz prostą formułę matematyczną:  
 ```excel
@@ -283,3 +283,5 @@ title: "Spotkanie 4: raporty i wyszukiwanie"
   - Stworzyłeś w pełni funkcjonalną wyszukiwarkę opartą na INDEKS i PODAJ.POZYCJĘ.
 
   - Rozumiesz, jak użycie zablokowanej komórki (\$E\$1) pozwala na sterowanie wieloma formułami jednocześnie.
+
+Zapisz skoroszyt i prześlij jego aktualną wersję do zadania przypisanego do spotkania 4 w MS Teams.

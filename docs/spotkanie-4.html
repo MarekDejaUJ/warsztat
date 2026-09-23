@@ -398,8 +398,8 @@ raport agregujący, 15 min prowizja, 15 min segmentacja, 15 min
 walidacja, 15 min wyszukiwarka.
 </div>
 <div class="note">
-<strong>Przygotowanie:</strong> Kompletny arkusz Dane_Czyste_Finalne ze
-spotkania 3.
+<strong>Przygotowanie:</strong> Otwórz najnowszą wersję skoroszytu.
+Potrzebny jest kompletny arkusz Dane_Czyste_Finalne ze spotkania 3.
 </div>
 <div id="ćwiczenie-5-zaawansowane-wyszukiwanie-indeks-podaj.pozycję"
 class="section level2">
@@ -446,13 +446,13 @@ komórce <strong>B1</strong> wpisz formułę:<br />
 
     - 0: Oznacza dokładne dopasowanie (jak FAŁSZ w WYSZUKAJ.PIONOWO).
 
-    - PODAJ.POZYCJĘ(B1; F:F; 0): Ta funkcja **nie zwraca wartości**, lecz **numer wiersza**, w którym znalazła 1000 zł (np. wiersz 45).
+    - PODAJ.POZYCJĘ(B1; F:F; 0): Ta funkcja zwraca **numer wiersza** zawierającego szukaną wartość sprzedaży.
 
     - INDEKS(Dane_Czyste_Finalne!A:A; ...): Ta funkcja pobiera wartość z podanej kolumny (kolumna A:A, czyli OrderID)...
 
     - ... ; 45): ...znajdującą się w wierszu o numerze, który podała jej funkcja PODAJ.POZYCJĘ (czyli w wierszu 45).
 
-    - **Rezultat:** Funkcja zwraca OrderID z komórki A45.</code></pre>
+    - **Rezultat:** Funkcja zwraca OrderID z wiersza zawierającego najwyższą wartość sprzedaży.</code></pre>
 <div class="tilt-card criteria">
 <h3>
 Kryteria sukcesu
@@ -522,12 +522,13 @@ i pierwszej kategorii) wpisz formułę:<br />
 <ol start="4" style="list-style-type: decimal">
 <li><p>Przeciągnij formułę z <strong>B2</strong> w prawo, a następnie w
 dół, aby wypełnić całą tabelę.</p></li>
-<li><p>Obok stwórz identyczną tabelę, ale użyj funkcji LICZ.WARUNKI, aby
-policzyć liczbę transakcji. Formuła w (np.) <strong>F2</strong> będzie
-brzmiała:<br />
-</p></li>
+<li><p>Drugą tabelę umieść w zakresie <strong>F1:H4</strong>. W komórce
+<strong>F1</strong> wpisz <code>Manager</code>, w <strong>G1:H1</strong>
+skopiuj kategorie, a w <strong>F2:F4</strong> menedżerów. W komórce
+<strong>G2</strong> wpisz formułę i przeciągnij ją na cały obszar
+wyników:</p></li>
 </ol>
-<pre class="excel"><code>=LICZ.WARUNKI(Dane_Czyste_Finalne!$N:$N; $A2; Dane_Czyste_Finalne!$E:$E; B$1)</code></pre>
+<pre class="excel"><code>=LICZ.WARUNKI(Dane_Czyste_Finalne!$N:$N; $F2; Dane_Czyste_Finalne!$E:$E; G$1)</code></pre>
 <div class="tilt-card criteria">
 <h3>
 Kryteria sukcesu
@@ -539,8 +540,8 @@ Sprawdź rezultat przed przejściem dalej.
 <ul>
 <li><p>Arkusz Raport_Sprzedazy zawiera dwie poprawne tabele
 agregujące.</p></li>
-<li><p>Poprawnie zastosowałeś SUMA.WARUNKÓW i LICZ.WARUNKI oraz
-strategicznie użyłeś mieszanego blokowania komórek ($A2, B$1).</p></li>
+<li><p>Poprawnie zastosowałeś SUMA.WARUNKÓW i LICZ.WARUNKI oraz mieszane
+adresy komórek w obu tabelach.</p></li>
 </ul>
 </div>
 <div
@@ -577,8 +578,8 @@ Wykonaj kolejne kroki.
 <li><p>(Dodaj inne kategorie, jeśli masz je w danych)</p></li>
 </ul></li>
 <li><p>Wróć do arkusza <strong>Dane_Czyste_Finalne</strong>.</p></li>
-<li><p>W komórce <strong>T1</strong> (tę zostawiliśmy wolną) wpisz
-nagłówek: <strong>Stawka_Prowizji</strong>.</p></li>
+<li><p>W komórce <strong>T1</strong> wpisz nagłówek:
+<strong>Stawka_Prowizji</strong>.</p></li>
 <li><p>W komórce <strong>T2</strong> wpisz formułę:<br />
 </p></li>
 </ol>
@@ -588,7 +589,7 @@ nagłówek: <strong>Stawka_Prowizji</strong>.</p></li>
 <li><p>Przeciągnij formułę z <strong>T2</strong> do
 <strong>T101</strong>.</p></li>
 <li><p>W komórce <strong>U1</strong> wpisz nagłówek:
-Wartosc_Prowizji**.</p></li>
+<strong>Wartosc_Prowizji</strong>.</p></li>
 <li><p>W komórce <strong>U2</strong> wpisz prostą formułę
 matematyczną:<br />
 </p></li>
@@ -815,6 +816,8 @@ PODAJ.POZYCJĘ.</p></li>
 <li><p>Rozumiesz, jak użycie zablokowanej komórki ($E$1) pozwala na
 sterowanie wieloma formułami jednocześnie.</p></li>
 </ul>
+<p>Zapisz skoroszyt i prześlij jego aktualną wersję do zadania
+przypisanego do spotkania 4 w MS Teams.</p>
 </div>
 
 <footer class="course-footer">

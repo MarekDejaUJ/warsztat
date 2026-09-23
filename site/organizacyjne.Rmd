@@ -32,7 +32,10 @@ Najważniejsze warunki dla ćwiczeń:
 2. Pobierz plik przypisany do grupy.
 3. Zapisz kopię pod nazwą `nazwisko_imie_warsztat.xlsx`.
 4. Sprawdź obecność arkuszy `Arkusz1` i `Słownik_Regionów`.
-5. Zachowuj kolejne etapy pracy w tym samym skoroszycie.
+5. Zachowaj `Arkusz1` jako wzorzec. Polecenia wykonuj w nowych arkuszach roboczych.
+6. Zachowuj kolejne etapy pracy w tym samym skoroszycie.
+
+Na kanale grupy w MS Teams otwórz zadanie przypisane do danego spotkania. Prześlij do niego aktualną wersję skoroszytu najpóźniej dzień przed kolejnymi zajęciami. Komputery w pracowni usuwają dane użytkownika po wyłączeniu.
 
 ## 3. Utworzenie asystenta w Microsoft 365 Copilot
 
@@ -41,7 +44,7 @@ Najważniejsze warunki dla ćwiczeń:
 1. Otwórz [office.com](https://www.office.com/) i zaloguj się kontem instytucjonalnym.
 2. Uruchom aplikację **Microsoft 365 Copilot**.
 3. W panelu **Agenci** wybierz **Nowy agent**.
-4. Otwórz zakładkę [Prompty](prompty.html) i skopiuj prompt swojej grupy.
+4. Otwórz zakładkę [Prompty](prompty.html), zapoznaj się ze strukturą przypisaną do grupy i skopiuj cały prompt.
 5. Wklej prompt do kreatora agenta.
 6. Nadaj nazwę `Asystent warsztatu informacyjnego`.
 7. Utwórz agenta i rozpocznij rozmowę testową.

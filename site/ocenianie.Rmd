@@ -31,4 +31,4 @@ Każde zadanie można ocenić w pięciu obszarach. Rubryka porządkuje informacj
 
 ## Informacja zwrotna
 
-Komentarz do zadania wskazuje kryterium, miejsce wystąpienia błędu i oczekiwaną korektę. Student poprawia wskazany element w swoim skoroszycie i zachowuje wcześniejszą wersję pliku.
+Zaliczenie ćwiczeń odbywa się według kryteriów podanych w odpowiednim zadaniu na kanale grupy w MS Teams. Pytania i błędy omawiamy wspólnie podczas zajęć.

@@ -9,7 +9,7 @@ title: "Spotkanie 2: czyszczenie i kompletność danych"
 
 <div class="timebox"><strong>Plan 90 minut:</strong> 10 min kontrola danych, 25 min daty i liczby, 25 min błędy logiczne, 20 min braki danych, 10 min zapis wersji końcowej.</div>
 
-<div class="note"><strong>Przygotowanie:</strong> Arkusz Dane_Robocze utworzony podczas spotkania 1.</div>
+<div class="note"><strong>Przygotowanie:</strong> Otwórz najnowszą wersję skoroszytu. Potrzebny jest arkusz Dane_Robocze utworzony podczas spotkania 1.</div>
 
 ## Ćwiczenie 3: Czyszczenie Krok 2 (Konwersja Dat i Tekstu na Liczby)
 
@@ -159,3 +159,5 @@ title: "Spotkanie 2: czyszczenie i kompletność danych"
   - Kolumna Ocena_Transakcji nie zawiera już żadnych pustych komórek.
 
   - Arkusz **Dane_Czyste_Finalne** przechodzi kontrole opisane w ćwiczeniach, a błędne adresy e-mail pozostają oznaczone do dalszej walidacji.
+
+Zapisz skoroszyt i prześlij jego aktualną wersję do zadania przypisanego do spotkania 2 w MS Teams.

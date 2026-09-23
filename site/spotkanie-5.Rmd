@@ -9,7 +9,7 @@ title: "Spotkanie 5: wizualizacja i dedukcja"
 
 <div class="timebox"><strong>Plan 90 minut:</strong> 10 min przygotowanie, 25 min tabela przestawna, 15 min wykres, 25 min korelacja, 10 min histogram, 5 min podsumowanie.</div>
 
-<div class="note"><strong>Przygotowanie:</strong> Arkusz Dane_Czyste_Finalne z wypełnionymi kolumnami analitycznymi.</div>
+<div class="note"><strong>Przygotowanie:</strong> Otwórz najnowszą wersję skoroszytu. Potrzebny jest arkusz Dane_Czyste_Finalne z wypełnionymi kolumnami analitycznymi.</div>
 
 ## Ćwiczenie 1: Tabela Przestawna i Tabela Krzyżowa (Agregacja Danych)
 
@@ -109,13 +109,13 @@ title: "Spotkanie 5: wizualizacja i dedukcja"
     - **Korelacja (r):** W B10 wpisz formułę badającą związek między sprzedażą a oceną:
 
 ```excel
-=WSP.KORELACJI(Dane_Czyste_Finalne!F:F; Dane_Czyste_Finalne!G:G)
+=WSP.KORELACJI(Dane_Czyste_Finalne!F2:F101; Dane_Czyste_Finalne!G2:G101)
 ```
 
 - **Liczebność (n):** W B11 policz, ile mamy rekordów:
 
 ```excel
-=ILE.LICZB(Dane_Czyste_Finalne!F:F)
+=ILE.LICZB(Dane_Czyste_Finalne!F2:F101)
 ```
 
 - **Statystyka t:** Przekształć współczynnik korelacji na statystykę t. W komórce B12 wpisz wzór:
@@ -136,7 +136,7 @@ title: "Spotkanie 5: wizualizacja i dedukcja"
 
 3.  **Tworzenie Wykresu (Metoda manualna - "Z pustego arkusza"):**
 
-    - Będąc w arkuszu Raport_Statystyk, kliknij w dowolną **pustą** komórkę z dala od danych.
+    - Będąc w arkuszu Raport_Statystyk, kliknij komórkę **D8**. Po utworzeniu wykresu umieść go po prawej stronie tabel z wynikami.
 
     - Wstaw \> Wykresy \> **Punktowy (X, Y)**. Pojawi się puste białe pole.
 
@@ -148,9 +148,9 @@ title: "Spotkanie 5: wizualizacja i dedukcja"
 
       - **Nazwa serii:** Wpisz ręcznie "Korelacja Cena vs Ocena" lub kliknij komórkę z tym tekstem.
 
-      - **Wartości X serii:** Kliknij strzałkę, przejdź do arkusza Dane_Czyste_Finalne i zaznacz całą kolumnę **F** (Wartosc_Sprzedazy).
+      - **Wartości X serii:** Kliknij strzałkę, przejdź do arkusza Dane_Czyste_Finalne i zaznacz zakres **F2:F101** (Wartosc_Sprzedazy).
 
-      - **Wartości Y serii:** Kliknij strzałkę, przejdź do arkusza Dane_Czyste_Finalne i zaznacz całą kolumnę **G** (Ocena_Transakcji).
+      - **Wartości Y serii:** Kliknij strzałkę, przejdź do arkusza Dane_Czyste_Finalne i zaznacz zakres **G2:G101** (Ocena_Transakcji).
 
       - Kliknij OK, a potem ponownie OK.
 
@@ -243,9 +243,9 @@ $`I_{z}(a,b)`$*: zregularizowana niezupełna funkcja beta (alternatywny zapis te
 
 <div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
 
-1.  Wstaw nową Tabelę Przestawną z Dane_Czyste_Finalne do arkusza Analiza_Przestawna
+1.  Skopiuj tabelę przestawną z arkusza **Analiza_Przestawna** do nowego arkusza **Histogram**. Wklej ją od komórki **A1**. Kopia zachowa wspólne źródło danych potrzebne później do obsługi fragmentatorów.
 
-2.  Przeciągnij **Wartosc_Sprzedazy** do obszaru **Wiersze**.
+2.  Usuń pola użyte w poprzednim układzie, a następnie przeciągnij **Wartosc_Sprzedazy** do obszaru **Wiersze**.
 
 3.  Przeciągnij **Wartosc_Sprzedazy** (ponownie!) do obszaru **Wartości**.
 
@@ -280,29 +280,53 @@ $`I_{z}(a,b)`$*: zregularizowana niezupełna funkcja beta (alternatywny zapis te
 
 <div class="tilt-card task"><h3>Zadanie</h3><p>Wykonaj kolejne kroki.</p></div>
 
-1.  W arkuszu Dane_Czyste_Finalne oblicz parametry potrzebne do przedziału ufności.
+1.  Przejdź do arkusza **Raport_Statystyk**. Obliczenia umieść w zakresie **A15:B18**.
 
-2.  W wolnych komórkach oblicz:
+2.  W komórkach **A15:A18** wpisz kolejno: `Średnia`, `Odchylenie standardowe`, `Liczebność` i `Błąd oszacowania`.
 
-    - =ŚREDNIA(F:F) (Wynik np. 550 zł).
-
-    - =ODCH.STANDARD.PRÓBKI(F:F) (Zmienność danych).
-
-    - =ILE.LICZB(F:F) (Wielkość próby, n=100).
-
-3.  Oblicz **Błąd Statystyczny** (dla poziomu ufności 95%, czyli alfa = 0.05). Użyj formuły:
+3.  W komórce **B15** oblicz średnią:
 
 ```excel
-=UFNOŚĆ.NORM(0,05; ODCH.STANDARD.PRÓBKI(F:F); ILE.LICZB(F:F))
+=ŚREDNIA(Dane_Czyste_Finalne!F2:F101)
 ```
 
-*Wyjaśnienie:* Wynik (np. 40 zł) oznacza, że z 95% pewnością prawdziwa średnia w populacji leży w przedziale: Średnia ± Błąd.
+4.  W komórce **B16** oblicz odchylenie standardowe:
 
-4.  **Dedukcja/Interpretacja:** Napisz w komórce obok zdanie podsumowujące (Afirmację): *"Z 95% pewnością średnia wartość sprzedaży mieści się w przedziale od \[Średnia - Błąd\] do \[Średnia + Błąd\]."*
+```excel
+=ODCH.STANDARD.PRÓBKI(Dane_Czyste_Finalne!F2:F101)
+```
+
+5.  W komórce **B17** policz obserwacje:
+
+```excel
+=ILE.LICZB(Dane_Czyste_Finalne!F2:F101)
+```
+
+6.  W komórce **B18** oblicz błąd oszacowania dla poziomu ufności 95%:
+
+```excel
+=UFNOŚĆ.NORM(0,05; B16; B17)
+```
+
+7.  W komórce **A19** oblicz dolną granicę:
+
+```excel
+=B15-B18
+```
+
+8.  W komórce **B19** oblicz górną granicę:
+
+```excel
+=B15+B18
+```
+
+*Interpretacja:* Zastosowana procedura tworzy przedziały zawierające średnią populacji w 95% analogicznych prób.
 
 <div class="tilt-card criteria"><h3>Kryteria sukcesu</h3><p>Sprawdź rezultat przed przejściem dalej.</p></div>
 
-- Poprawne użycie funkcji UFNOŚĆ.NORM (lub CONFIDENCE.NORM).
+- Poprawne użycie funkcji UFNOŚĆ.NORM.
 
 - Zrozumienie, że średnia z próby to tylko estymacja, a błąd statystyczny wyznacza granice zaufania do tej liczby.
+
+Zapisz skoroszyt i prześlij jego aktualną wersję do zadania przypisanego do spotkania 5 w MS Teams.
 
