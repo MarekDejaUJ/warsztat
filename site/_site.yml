@@ -38,7 +38,9 @@ output:
       collapsed: true
       smooth_scroll: true
     code_folding: none
-    css: styles.css
+    css:
+      - styles.css
+      - typography.css
     includes:
       before_body: includes/header.html
       after_body: includes/footer.html
